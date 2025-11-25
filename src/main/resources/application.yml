@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: screen-data-fetcher
+  profiles:
+    active: local
+screener:
+  username: username
+  password: password
