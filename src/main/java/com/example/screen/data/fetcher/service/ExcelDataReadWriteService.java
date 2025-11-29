@@ -1,6 +1,5 @@
 package com.example.screen.data.fetcher.service;
 
-import org.apache.poi.ss.formula.functions.Column;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.Connection;
@@ -24,6 +23,9 @@ public class ExcelDataReadWriteService {
     @Autowired
     private ScreenerDataFetcherService screenerDataFetcherService;
 
+    @Autowired
+    private ChartGeneratorService chartGeneratorService;
+
     @Value("${screener.username}")
     private String userName;
 
@@ -33,11 +35,13 @@ public class ExcelDataReadWriteService {
     public void readColumnData(String excelFilePath, int columnIndex, int sheetIndex) throws IOException {
         System.out.println("...Started Processing....");
         try (FileInputStream fis = new FileInputStream(excelFilePath);
-             final Workbook workbook = new XSSFWorkbook(fis)) {
-             final Sheet sheet = workbook.getSheetAt(0); // get first sheet
-             // fetch all header names only once on which data needs to be extracted
+                final Workbook workbook = new XSSFWorkbook(fis)) {
+            final Sheet sheet = workbook.getSheetAt(0); // get first sheet
+            // fetch all header names only once on which data needs to be extracted
             final Set<String> headerSet = getHeaderNameList(sheet, 4);
             final Set<String> ticketSet = getAllTickers(sheet, 5);
+
+            Map<String, Map<String, String>> tickerMapRatio = new HashMap<>();
 
             System.out.println(headerSet);
             System.out.println(ticketSet);
@@ -51,6 +55,7 @@ public class ExcelDataReadWriteService {
                 System.out.println("------------------------");
                 System.out.println("Fetching data for " + ticker);
                 Map<String, String> ratiosMap = findBasicElementsAndAdvanced(ticker);
+                tickerMapRatio.put(ticker, ratiosMap);
                 // write data in excel as we know the ratiosMap for a particular ticker
                 if (!ratiosMap.isEmpty()) {
                     writeDataForTicker(ticker, ratiosMap, newSheet, areHeadersWritten, rowIndex, serialIndex);
@@ -60,7 +65,32 @@ public class ExcelDataReadWriteService {
                 }
                 System.out.println("------------------------");
             }
-            //autoSizeAndCloseWorkBook(ratiosMap, newSheet);
+
+            Sheet comparisonSheet = workbook.createSheet("Comparison Sheet2");
+
+            String ticker1 = "TCS", ticker2 = "INFY";
+
+            // Fetch data for both tickers
+            Map<String, String> ticker1Data = findBasicElementsAndAdvanced(ticker1);
+            Map<String, String> ticker2Data = findBasicElementsAndAdvanced(ticker2);
+
+            if (ticker1Data.isEmpty() || ticker2Data.isEmpty()) {
+                System.out.println("Could not fetch data for one or both tickers");
+                return;
+            }
+
+            // Create clean comparison sheet with color-coded table
+            chartGeneratorService.createSimpleComparisonSheet((XSSFWorkbook) workbook, ticker1, ticker1Data, ticker2,
+                    ticker2Data);
+
+            // Optionally also generate and embed the chart
+            String chartImagePath = excelFilePath.replace(".xlsx", "_" + ticker1 + "_vs_" + ticker2 + ".png");
+            chartGeneratorService.generateSimpleComparisonBarChart(ticker1, ticker1Data, ticker2, ticker2Data,
+                    chartImagePath);
+
+            chartGeneratorService.embedChartInExcel((XSSFWorkbook) workbook, comparisonSheet, chartImagePath, 18, 0);
+
+            // autoSizeAndCloseWorkBook(ratiosMap, newSheet);
             saveWithOutputStreamAndWrite(workbook, excelFilePath);
             System.out.println("...Completed Processing....");
         } catch (IOException e) {
@@ -73,14 +103,16 @@ public class ExcelDataReadWriteService {
         wb.write(fos);
     }
 
-//    private void autoSizeAndCloseWorkBook(Map<String, String> ratiosMap, Sheet newSheet) {
-//        // Auto-size columns
-//        for (int i = 0; i < ratiosMap.size(); i++) {
-//            newSheet.autoSizeColumn(i);
-//        }
-//    }
+    // private void autoSizeAndCloseWorkBook(Map<String, String> ratiosMap, Sheet
+    // newSheet) {
+    // // Auto-size columns
+    // for (int i = 0; i < ratiosMap.size(); i++) {
+    // newSheet.autoSizeColumn(i);
+    // }
+    // }
 
-    private void writeDataForTicker(String ticker, Map<String, String> ratiosMap, Sheet newSheet, boolean areHeadersWritten, int rowIndex, int serial) {
+    private void writeDataForTicker(String ticker, Map<String, String> ratiosMap, Sheet newSheet,
+            boolean areHeadersWritten, int rowIndex, int serial) {
         if (!areHeadersWritten) {
             writeHeaders(newSheet, ratiosMap);
         }
@@ -144,7 +176,7 @@ public class ExcelDataReadWriteService {
     private Set<String> getAllTickers(Sheet sheet, int indexOfTickers) {
         Set<String> tickerNameSet = new HashSet<>();
 
-        for (int i=indexOfTickers; i<sheet.getLastRowNum(); i++) {
+        for (int i = indexOfTickers; i < sheet.getLastRowNum(); i++) {
             // Get actual row from Excel using getRow(), NOT createRow()
             final Row tickerNameStartRow = sheet.getRow(i);
 
@@ -163,30 +195,35 @@ public class ExcelDataReadWriteService {
         return tickerNameSet;
     }
 
-    private Map<String, String> findBasicElementsAndAdvanced(String ticker) throws IOException {
-        final String screenerBasicRatioUrl = "https://www.screener.in/company/"+ticker+"/consolidated/";
-        Document doc = Jsoup.connect(screenerBasicRatioUrl).get();
-        Map<String, String> ratiosMap = new HashMap<>();
-        fetchRatios(ratiosMap, doc);
-        final String screenerLoginUrl = "https://www.screener.in/login/?next=/dashboard/";
-        String code = fetchTickerCode(doc);
-        String advancedRatioUrl = "https://www.screener.in/api/company/"+code+"/quick_ratios/";
+    public Map<String, String> findBasicElementsAndAdvanced(String ticker) {
+        try {
+            final String screenerBasicRatioUrl = "https://www.screener.in/company/" + ticker + "/consolidated/";
+            Document doc = Jsoup.connect(screenerBasicRatioUrl).get();
+            Map<String, String> ratiosMap = new HashMap<>();
+            fetchRatios(ratiosMap, doc);
+            final String screenerLoginUrl = "https://www.screener.in/login/?next=/dashboard/";
+            String code = fetchTickerCode(doc);
+            String advancedRatioUrl = "https://www.screener.in/api/company/" + code + "/quick_ratios/";
 
-        if (loginCookies == null || loginCookies.isEmpty() ) {
-            fetchLoginCookiesAndRatios(ratiosMap, advancedRatioUrl);
-
-        } else {
-            // call loginCookies only when session is expired
-            doc = Jsoup.connect(advancedRatioUrl).cookies(loginCookies).get();
-            if (doc.title().contains("Login")) {
+            if (loginCookies == null || loginCookies.isEmpty()) {
                 fetchLoginCookiesAndRatios(ratiosMap, advancedRatioUrl);
-            } else {
-                fetchRatios(ratiosMap, doc);
-            }
-        }
 
-        System.out.println("Data for Ticker : "+ ticker + " is : " + ratiosMap);
-        return ratiosMap;
+            } else {
+                // call loginCookies only when session is expired
+                doc = Jsoup.connect(advancedRatioUrl).cookies(loginCookies).get();
+                if (doc.title().contains("Login")) {
+                    fetchLoginCookiesAndRatios(ratiosMap, advancedRatioUrl);
+                } else {
+                    fetchRatios(ratiosMap, doc);
+                }
+            }
+
+            System.out.println("Data for Ticker : " + ticker + " is : " + ratiosMap);
+            return ratiosMap;
+        } catch (Exception e) {
+            System.out.println("Error fetching data for ticker: " + ticker + ". Error: " + e.getMessage());
+            return null;
+        }
     }
 
     private void fetchLoginCookiesAndRatios(Map<String, String> ratiosMap, String advancedRatioUrl) throws IOException {
@@ -259,6 +296,5 @@ public class ExcelDataReadWriteService {
         }
         return warehouseId;
     }
-
 
 }

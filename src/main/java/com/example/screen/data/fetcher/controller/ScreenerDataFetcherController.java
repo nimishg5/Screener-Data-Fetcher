@@ -21,9 +21,32 @@ public class ScreenerDataFetcherController {
 
     @GetMapping(value = "/ticker/{ticker}")
     public ResponseEntity<String> fetchDataForTicker(
-    @PathVariable(value = "ticker", required = true) String ticker) throws IOException {
-        excelDataReadWriteService.readColumnData("/Users/nimishgupta/Documents/Projects/screen-data-fetcher/MainSheet.xlsx", 0, 0);
+            @PathVariable(value = "ticker", required = true) String ticker) throws IOException {
+        excelDataReadWriteService
+                .readColumnData("/Users/nimishgupta/Documents/Projects/screen-data-fetcher/MainSheet.xlsx", 0, 0);
         return new ResponseEntity<>("Data processed successfully", HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/compare")
+    public ResponseEntity<java.util.Map<String, java.util.Map<String, String>>> compareTickers(
+            @RequestParam(value = "tickers") String tickers) throws IOException {
+        String[] tickerArray = tickers.split(",");
+        java.util.Map<String, java.util.Map<String, String>> response = new java.util.LinkedHashMap<>();
+
+        for (String ticker : tickerArray) {
+            String trimmedTicker = ticker.trim();
+            if (!trimmedTicker.isEmpty()) {
+                java.util.Map<String, String> data = excelDataReadWriteService
+                        .findBasicElementsAndAdvanced(trimmedTicker);
+                if (data != null) {
+                    response.put(trimmedTicker, data);
+                } else {
+                    // Put a special marker or null to indicate failure
+                    response.put(trimmedTicker, null);
+                }
+            }
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
