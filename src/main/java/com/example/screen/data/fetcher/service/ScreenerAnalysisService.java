@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class ExcelDataReadWriteService {
+public class ScreenerAnalysisService {
 
     private Map<String, String> loginCookies;
 
@@ -29,8 +29,13 @@ public class ExcelDataReadWriteService {
     @Autowired
     private ChartGeneratorService chartGeneratorService;
 
+    @Autowired
+    private CacheService cacheService;
+
     private String userName;
     private String password;
+
+    private static final long CACHE_EXPIRY_MS = 2L * 24 * 60 * 60 * 1000; // 2 days
 
     public boolean login(String username, String password) {
         this.userName = username;
@@ -447,6 +452,14 @@ public class ExcelDataReadWriteService {
     }
 
     private List<Map<String, String>> fetchCountryNews(String ticker, String country) {
+        String cacheKey = ticker + "_" + country;
+        List<Map<String, String>> cachedNews = cacheService.get(cacheKey);
+
+        if (cachedNews != null) {
+            log.info("Fetching news from cache for {} - {}", ticker, country);
+            return cachedNews;
+        }
+
         List<Map<String, String>> newsList = new ArrayList<>();
         try {
             String query = ticker + " " + country + " business";
@@ -470,6 +483,10 @@ public class ExcelDataReadWriteService {
                 newsList.add(newsItem);
                 count++;
             }
+
+            // Store in cache
+            cacheService.put(cacheKey, newsList, CACHE_EXPIRY_MS);
+
         } catch (Exception e) {
             log.error("Error fetching news for {}: {}", country, e.getMessage());
         }

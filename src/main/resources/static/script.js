@@ -421,52 +421,18 @@ function renderChart(data) {
 }
 
 let geoChartInstances = {};
-let geoResults = [];
+let geoResults = {}; // Changed to object for easier lookup
 
 async function fetchGeoAnalysis() {
     if (tickers.size === 0) return;
 
     const loading = document.getElementById('loading');
-    loading.style.display = 'block';
-    const geoTab = document.getElementById('geoTab');
-    geoTab.innerHTML = ''; // Clear previous content
-
-    try {
-        const promises = Array.from(tickers).map(async (ticker) => {
-            try {
-                const response = await fetch(`/api/v1/data-fetcher/geo-analysis?ticker=${ticker}`);
-                if (!response.ok) throw new Error('Failed');
-                const data = await response.json();
-                return { ticker, data };
-            } catch (e) {
-                console.error(`Error fetching geo for ${ticker}`, e);
-                return { ticker, error: e.message };
-            }
-        });
-
-        geoResults = await Promise.all(promises);
-        renderGeoAnalysis(geoResults);
-    } catch (error) {
-        console.error('Error in geo fetch:', error);
-        geoTab.innerHTML = '<div class="error">Failed to load geo analysis</div>';
-    } finally {
-        loading.style.display = 'none';
-    }
-}
-
-function renderGeoAnalysis(results) {
     const geoTab = document.getElementById('geoTab');
 
-    // Clear old chart instances
-    Object.values(geoChartInstances).forEach(chart => chart.destroy());
-    geoChartInstances = {};
+    // 1. Initialize UI Structure if needed (or clear if we want to ensure order)
+    // We'll rebuild the structure to ensure it matches the current `tickers` set order
+    geoTab.innerHTML = '';
 
-    if (results.length === 0) {
-        geoTab.innerHTML = '<div style="color: #94a3b8;">No data available.</div>';
-        return;
-    }
-
-    // 1. Create Sub-tabs Container
     const subTabsContainer = document.createElement('div');
     subTabsContainer.className = 'sub-tabs';
     subTabsContainer.style.display = 'flex';
@@ -476,11 +442,22 @@ function renderGeoAnalysis(results) {
     subTabsContainer.style.paddingBottom = '1rem';
     geoTab.appendChild(subTabsContainer);
 
-    // 2. Create Content Container
     const contentContainer = document.createElement('div');
     geoTab.appendChild(contentContainer);
 
-    results.forEach(({ ticker, data, error }, index) => {
+    // Check if we have ANY data cached to decide on global loader
+    const hasAnyCachedData = Array.from(tickers).some(t => geoResults[t]);
+    if (!hasAnyCachedData) {
+        loading.style.display = 'block';
+    } else {
+        loading.style.display = 'none';
+    }
+
+    // 2. Process each ticker
+    const tickerArray = Array.from(tickers);
+
+    // Create tabs and content placeholders
+    tickerArray.forEach((ticker, index) => {
         // Create Tab Button
         const btn = document.createElement('button');
         btn.textContent = ticker;
@@ -493,89 +470,149 @@ function renderGeoAnalysis(results) {
         const contentDiv = document.createElement('div');
         contentDiv.id = `geo-content-${ticker}`;
         contentDiv.className = 'geo-sub-content';
-        contentDiv.style.display = 'none'; // Hidden by default
-
-        if (error) {
-            contentDiv.innerHTML = `<div class="error">Failed to load data for ${ticker}</div>`;
-        } else {
-            // Container for Chart and News
-            const container = document.createElement('div');
-            container.style.display = 'flex';
-            container.style.flexWrap = 'wrap';
-            container.style.gap = '2rem';
-
-            // Chart Section
-            const chartDiv = document.createElement('div');
-            chartDiv.style.flex = '1';
-            chartDiv.style.minWidth = '300px';
-
-            const chartTitle = document.createElement('h3');
-            chartTitle.textContent = 'Revenue Split by Geography';
-            chartDiv.appendChild(chartTitle);
-
-            const canvasContainer = document.createElement('div');
-            canvasContainer.className = 'chart-container';
-            canvasContainer.style.height = '400px';
-            const canvas = document.createElement('canvas');
-            canvas.id = `geoChart_${ticker}`;
-            canvasContainer.appendChild(canvas);
-            chartDiv.appendChild(canvasContainer);
-
-            // News Section
-            const newsDiv = document.createElement('div');
-            newsDiv.style.flex = '1';
-            newsDiv.style.minWidth = '300px';
-
-            const newsTitle = document.createElement('h3');
-            newsTitle.textContent = 'Recent Impact News';
-            newsDiv.appendChild(newsTitle);
-
-            const newsContainer = document.createElement('div');
-            newsContainer.style.display = 'flex';
-            newsContainer.style.flexDirection = 'column';
-            newsContainer.style.gap = '1rem';
-
-            const countryNews = data.news || {};
-            if (Object.keys(countryNews).length === 0) {
-                newsContainer.innerHTML = '<div style="color: #94a3b8;">No recent news found.</div>';
-            } else {
-                for (const [country, newsList] of Object.entries(countryNews)) {
-                    if (!newsList || newsList.length === 0) continue;
-
-                    const countryHeader = document.createElement('h4');
-                    countryHeader.textContent = country;
-                    countryHeader.style.color = '#60a5fa';
-                    countryHeader.style.marginTop = '1rem';
-                    newsContainer.appendChild(countryHeader);
-
-                    newsList.forEach(item => {
-                        const newsItem = document.createElement('div');
-                        newsItem.style.padding = '1rem';
-                        newsItem.style.backgroundColor = '#334155';
-                        newsItem.style.borderRadius = '0.5rem';
-                        newsItem.style.marginBottom = '0.5rem';
-                        newsItem.innerHTML = `
-                            <div style="font-weight: 600; margin-bottom: 0.25rem;">
-                                <a href="${item.link}" target="_blank" style="color: #e2e8f0; text-decoration: none;">${item.title}</a>
-                            </div>
-                            <div style="font-size: 0.875rem; color: #94a3b8;">${item.pubDate}</div>
-                        `;
-                        newsContainer.appendChild(newsItem);
-                    });
-                }
-            }
-            newsDiv.appendChild(newsContainer);
-
-            container.appendChild(chartDiv);
-            container.appendChild(newsDiv);
-            contentDiv.appendChild(container);
-        }
+        contentDiv.style.display = 'none';
         contentContainer.appendChild(contentDiv);
     });
 
     // Activate first tab
-    if (results.length > 0) {
-        switchSubTab(results[0].ticker);
+    if (tickerArray.length > 0) {
+        switchSubTab(tickerArray[0]);
+    }
+
+    // 3. Fetch/Render Data
+    tickerArray.forEach(async (ticker) => {
+        const contentDiv = document.getElementById(`geo-content-${ticker}`);
+
+        if (geoResults[ticker]) {
+            // Data exists in cache, render immediately
+            renderTickerData(ticker, geoResults[ticker], contentDiv);
+        } else {
+            // No data, show local loader
+            contentDiv.innerHTML = `
+                <div class="loading-local" style="text-align: center; padding: 2rem; color: #94a3b8;">
+                    <div class="loader" style="width: 30px; height: 30px; border-width: 3px;"></div>
+                    <div>Loading ${ticker}...</div>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(`/api/v1/data-fetcher/geo-analysis?ticker=${ticker}`);
+                if (!response.ok) throw new Error('Failed');
+                const data = await response.json();
+
+                // Update cache
+                geoResults[ticker] = { data };
+
+                // Render
+                renderTickerData(ticker, { data }, contentDiv);
+
+                // Hide global loader if it was visible (first successful fetch)
+                loading.style.display = 'none';
+
+            } catch (e) {
+                console.error(`Error fetching geo for ${ticker}`, e);
+                geoResults[ticker] = { error: e.message };
+                renderTickerData(ticker, { error: e.message }, contentDiv);
+
+                // Hide global loader even on error if it's the only one? 
+                // Better to just hide it if we are done with at least one.
+                loading.style.display = 'none';
+            }
+        }
+    });
+}
+
+function renderTickerData(ticker, result, container) {
+    // Clear old chart instance for this ticker if it exists
+    if (geoChartInstances[ticker]) {
+        geoChartInstances[ticker].destroy();
+        delete geoChartInstances[ticker];
+    }
+
+    container.innerHTML = ''; // Clear loader or old content
+
+    if (result.error) {
+        container.innerHTML = `<div class="error">Failed to load data for ${ticker}</div>`;
+        return;
+    }
+
+    const data = result.data;
+
+    // Container for Chart and News
+    const flexContainer = document.createElement('div');
+    flexContainer.style.display = 'flex';
+    flexContainer.style.flexWrap = 'wrap';
+    flexContainer.style.gap = '2rem';
+
+    // Chart Section
+    const chartDiv = document.createElement('div');
+    chartDiv.style.flex = '1';
+    chartDiv.style.minWidth = '300px';
+
+    const chartTitle = document.createElement('h3');
+    chartTitle.textContent = 'Revenue Split by Geography';
+    chartDiv.appendChild(chartTitle);
+
+    const canvasContainer = document.createElement('div');
+    canvasContainer.className = 'chart-container';
+    canvasContainer.style.height = '400px';
+    const canvas = document.createElement('canvas');
+    canvas.id = `geoChart_${ticker}`;
+    canvasContainer.appendChild(canvas);
+    chartDiv.appendChild(canvasContainer);
+
+    // News Section
+    const newsDiv = document.createElement('div');
+    newsDiv.style.flex = '1';
+    newsDiv.style.minWidth = '300px';
+
+    const newsTitle = document.createElement('h3');
+    newsTitle.textContent = 'Recent Impact News';
+    newsDiv.appendChild(newsTitle);
+
+    const newsContainer = document.createElement('div');
+    newsContainer.style.display = 'flex';
+    newsContainer.style.flexDirection = 'column';
+    newsContainer.style.gap = '1rem';
+
+    const countryNews = data.news || {};
+    if (Object.keys(countryNews).length === 0) {
+        newsContainer.innerHTML = '<div style="color: #94a3b8;">No recent news found.</div>';
+    } else {
+        for (const [country, newsList] of Object.entries(countryNews)) {
+            if (!newsList || newsList.length === 0) continue;
+
+            const countryHeader = document.createElement('h4');
+            countryHeader.textContent = country;
+            countryHeader.style.color = '#60a5fa';
+            countryHeader.style.marginTop = '1rem';
+            newsContainer.appendChild(countryHeader);
+
+            newsList.forEach(item => {
+                const newsItem = document.createElement('div');
+                newsItem.style.padding = '1rem';
+                newsItem.style.backgroundColor = '#334155';
+                newsItem.style.borderRadius = '0.5rem';
+                newsItem.style.marginBottom = '0.5rem';
+                newsItem.innerHTML = `
+                    <div style="font-weight: 600; margin-bottom: 0.25rem;">
+                        <a href="${item.link}" target="_blank" style="color: #e2e8f0; text-decoration: none;">${item.title}</a>
+                    </div>
+                    <div style="font-size: 0.875rem; color: #94a3b8;">${item.pubDate}</div>
+                `;
+                newsContainer.appendChild(newsItem);
+            });
+        }
+    }
+    newsDiv.appendChild(newsContainer);
+
+    flexContainer.appendChild(chartDiv);
+    flexContainer.appendChild(newsDiv);
+    container.appendChild(flexContainer);
+
+    // Render chart if this tab is currently visible
+    if (container.style.display !== 'none') {
+        renderPieChart(`geoChart_${ticker}`, data.revenueSplit, ticker);
     }
 }
 
@@ -592,11 +629,11 @@ function switchSubTab(ticker) {
     if (activeContent) {
         activeContent.style.display = 'block';
 
-        // Render chart if not already rendered
-        if (!geoChartInstances[ticker]) {
-            const result = geoResults.find(r => r.ticker === ticker);
-            if (result && !result.error) {
-                renderPieChart(`geoChart_${ticker}`, result.data.revenueSplit, ticker);
+        // Check if we need to render the chart (if data is loaded but chart not drawn yet)
+        if (geoResults[ticker] && !geoResults[ticker].error && !geoChartInstances[ticker]) {
+            // Ensure element exists before drawing
+            if (document.getElementById(`geoChart_${ticker}`)) {
+                renderPieChart(`geoChart_${ticker}`, geoResults[ticker].data.revenueSplit, ticker);
             }
         }
     }

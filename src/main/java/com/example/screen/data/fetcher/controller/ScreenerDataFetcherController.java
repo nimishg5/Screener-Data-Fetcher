@@ -1,6 +1,6 @@
 package com.example.screen.data.fetcher.controller;
 
-import com.example.screen.data.fetcher.service.ExcelDataReadWriteService;
+import com.example.screen.data.fetcher.service.ScreenerAnalysisService;
 import com.example.screen.data.fetcher.service.ScreenerDataFetcherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +20,13 @@ public class ScreenerDataFetcherController {
     private ScreenerDataFetcherService screenerDataFetcherService;
 
     @Autowired
-    private ExcelDataReadWriteService excelDataReadWriteService;
+    private ScreenerAnalysisService screenerAnalysisService;
 
     @GetMapping(value = "/ticker/{ticker}")
     public ResponseEntity<String> fetchDataForTicker(
             @PathVariable(value = "ticker", required = true) String ticker) throws IOException {
         log.info("Received request to fetch data for ticker: {}", ticker);
-        excelDataReadWriteService
+        screenerAnalysisService
                 .readColumnData("/Users/nimishgupta/Documents/Projects/screen-data-fetcher/MainSheet.xlsx", 0, 0);
         return new ResponseEntity<>("Data processed successfully", HttpStatus.OK);
     }
@@ -35,7 +35,7 @@ public class ScreenerDataFetcherController {
     public ResponseEntity<java.util.Map<String, String>> login(@RequestBody java.util.Map<String, String> credentials) {
         String username = credentials.get("username");
         log.info("Login request received for user: {}", username);
-        if (excelDataReadWriteService.login(username, credentials.get("password"))) {
+        if (screenerAnalysisService.login(username, credentials.get("password"))) {
             log.info("Login successful for user: {}", username);
             java.util.Map<String, String> response = new java.util.HashMap<>();
             response.put("message", "Login successful");
@@ -50,7 +50,7 @@ public class ScreenerDataFetcherController {
     @PostMapping(value = "/logout")
     public ResponseEntity<String> logout() {
         log.info("Logout request received");
-        excelDataReadWriteService.logout();
+        screenerAnalysisService.logout();
         return new ResponseEntity<>("Logout successful", HttpStatus.OK);
     }
 
@@ -64,7 +64,7 @@ public class ScreenerDataFetcherController {
         for (String ticker : tickerArray) {
             String trimmedTicker = ticker.trim();
             if (!trimmedTicker.isEmpty()) {
-                java.util.Map<String, String> data = excelDataReadWriteService
+                java.util.Map<String, String> data = screenerAnalysisService
                         .findBasicElementsAndAdvanced(trimmedTicker);
                 if (data != null) {
                     response.put(trimmedTicker, data);
@@ -80,7 +80,7 @@ public class ScreenerDataFetcherController {
     @GetMapping(value = "/geo-analysis")
     public ResponseEntity<java.util.Map<String, Object>> getGeoAnalysis(@RequestParam(value = "ticker") String ticker) {
         log.info("Geo analysis request received for ticker: {}", ticker);
-        java.util.Map<String, Object> data = excelDataReadWriteService.getGeoAnalysis(ticker);
+        java.util.Map<String, Object> data = screenerAnalysisService.getGeoAnalysis(ticker);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
