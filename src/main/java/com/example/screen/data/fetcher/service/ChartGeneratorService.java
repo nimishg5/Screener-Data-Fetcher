@@ -17,7 +17,10 @@ import java.awt.Font;
 import java.io.*;
 import java.util.*;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ChartGeneratorService {
 
     /**
@@ -25,8 +28,9 @@ public class ChartGeneratorService {
      * Shows only top 10 most important metrics for clarity
      */
     public void generateSimpleComparisonBarChart(String ticker1, Map<String, String> ticker1Data,
-                                                 String ticker2, Map<String, String> ticker2Data,
-                                                 String outputPath) throws IOException {
+            String ticker2, Map<String, String> ticker2Data,
+            String outputPath) throws IOException {
+        log.info("Generating comparison bar chart for {} vs {}", ticker1, ticker2);
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -35,7 +39,8 @@ public class ChartGeneratorService {
         int maxMetrics = 10;
 
         for (String metric : ticker1Data.keySet()) {
-            if (metricCount >= maxMetrics) break;
+            if (metricCount >= maxMetrics)
+                break;
 
             if (ticker2Data.containsKey(metric)) {
                 try {
@@ -61,11 +66,10 @@ public class ChartGeneratorService {
                 "Metrics",
                 "Values",
                 dataset,
-                PlotOrientation.HORIZONTAL,  // Horizontal for better readability
-                true,  // Include legend
+                PlotOrientation.HORIZONTAL, // Horizontal for better readability
+                true, // Include legend
                 true,
-                false
-        );
+                false);
 
         // Customize the plot
         CategoryPlot plot = chart.getCategoryPlot();
@@ -80,13 +84,13 @@ public class ChartGeneratorService {
 
         // Customize renderer
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
-        renderer.setSeriesPaint(0, new Color(52, 168, 224));   // Light blue for ticker1
-        renderer.setSeriesPaint(1, new Color(255, 127, 39));   // Orange for ticker2
+        renderer.setSeriesPaint(0, new Color(52, 168, 224)); // Light blue for ticker1
+        renderer.setSeriesPaint(1, new Color(255, 127, 39)); // Orange for ticker2
         renderer.setMaximumBarWidth(0.7);
 
         // Save chart with larger dimensions for clarity
         ChartUtils.saveChartAsPNG(new File(outputPath), chart, 1200, 600);
-        System.out.println("Chart saved to: " + outputPath);
+        log.info("Chart saved to: {}", outputPath);
     }
 
     /**
@@ -94,7 +98,8 @@ public class ChartGeneratorService {
      * Much cleaner and easier to understand than embedded charts
      */
     public void createSimpleComparisonSheet(XSSFWorkbook workbook, String ticker1, Map<String, String> ticker1Data,
-                                            String ticker2, Map<String, String> ticker2Data) {
+            String ticker2, Map<String, String> ticker2Data) {
+        log.info("Creating comparison sheet for {} vs {}", ticker1, ticker2);
 
         Sheet comparisonSheet = workbook.createSheet("Comparison");
 
@@ -111,7 +116,7 @@ public class ChartGeneratorService {
 
         // Create header row
         Row headerRow = comparisonSheet.createRow(2);
-        String[] headers = {"Metric", ticker1, ticker2, "Difference", "% Change"};
+        String[] headers = { "Metric", ticker1, ticker2, "Difference", "% Change" };
         CellStyle headerStyle = workbook.createCellStyle();
         org.apache.poi.ss.usermodel.Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -131,7 +136,8 @@ public class ChartGeneratorService {
         int metricCount = 0;
 
         for (String metric : ticker1Data.keySet()) {
-            if (metricCount >= 15) break;  // Limit to 15 metrics
+            if (metricCount >= 15)
+                break; // Limit to 15 metrics
 
             if (ticker2Data.containsKey(metric)) {
                 Row dataRow = comparisonSheet.createRow(rowNum);
@@ -189,7 +195,8 @@ public class ChartGeneratorService {
      * Embeds chart image into Excel sheet
      */
     public void embedChartInExcel(XSSFWorkbook workbook, Sheet sheet, String imagePath,
-                                  int startRow, int startCol) throws IOException {
+            int startRow, int startCol) throws IOException {
+        log.info("Embedding chart into Excel sheet");
 
         FileInputStream imageStream = new FileInputStream(new File(imagePath));
         byte[] imageBytes = imageStream.readAllBytes();

@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping(value = "/api/v1/data-fetcher")
+@Slf4j
 public class ScreenerDataFetcherController {
 
     @Autowired
@@ -22,24 +25,31 @@ public class ScreenerDataFetcherController {
     @GetMapping(value = "/ticker/{ticker}")
     public ResponseEntity<String> fetchDataForTicker(
             @PathVariable(value = "ticker", required = true) String ticker) throws IOException {
+        log.info("Received request to fetch data for ticker: {}", ticker);
         excelDataReadWriteService
                 .readColumnData("/Users/nimishgupta/Documents/Projects/screen-data-fetcher/MainSheet.xlsx", 0, 0);
         return new ResponseEntity<>("Data processed successfully", HttpStatus.OK);
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestBody java.util.Map<String, String> credentials) {
+    public ResponseEntity<java.util.Map<String, String>> login(@RequestBody java.util.Map<String, String> credentials) {
         String username = credentials.get("username");
-        String password = credentials.get("password");
-        if (excelDataReadWriteService.login(username, password)) {
-            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+        log.info("Login request received for user: {}", username);
+        if (excelDataReadWriteService.login(username, credentials.get("password"))) {
+            log.info("Login successful for user: {}", username);
+            java.util.Map<String, String> response = new java.util.HashMap<>();
+            response.put("message", "Login successful");
+            response.put("username", username);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Login failed", HttpStatus.UNAUTHORIZED);
+            log.warn("Login failed for user: {}", username);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PostMapping(value = "/logout")
     public ResponseEntity<String> logout() {
+        log.info("Logout request received");
         excelDataReadWriteService.logout();
         return new ResponseEntity<>("Logout successful", HttpStatus.OK);
     }
@@ -47,6 +57,7 @@ public class ScreenerDataFetcherController {
     @GetMapping(value = "/compare")
     public ResponseEntity<java.util.Map<String, java.util.Map<String, String>>> compareTickers(
             @RequestParam(value = "tickers") String tickers) throws IOException {
+        log.info("Compare request received for tickers: {}", tickers);
         String[] tickerArray = tickers.split(",");
         java.util.Map<String, java.util.Map<String, String>> response = new java.util.LinkedHashMap<>();
 
@@ -58,12 +69,19 @@ public class ScreenerDataFetcherController {
                 if (data != null) {
                     response.put(trimmedTicker, data);
                 } else {
-                    // Put a special marker or null to indicate failure
+                    log.warn("No data found for ticker: {}", trimmedTicker);
                     response.put(trimmedTicker, null);
                 }
             }
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/geo-analysis")
+    public ResponseEntity<java.util.Map<String, Object>> getGeoAnalysis(@RequestParam(value = "ticker") String ticker) {
+        log.info("Geo analysis request received for ticker: {}", ticker);
+        java.util.Map<String, Object> data = excelDataReadWriteService.getGeoAnalysis(ticker);
+        return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
 }

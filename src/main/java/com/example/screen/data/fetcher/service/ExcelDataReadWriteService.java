@@ -15,7 +15,10 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ExcelDataReadWriteService {
 
     private Map<String, String> loginCookies;
@@ -45,7 +48,7 @@ public class ExcelDataReadWriteService {
     }
 
     public void readColumnData(String excelFilePath, int columnIndex, int sheetIndex) throws IOException {
-        System.out.println("...Started Processing....");
+        log.info("...Started Processing....");
         try (FileInputStream fis = new FileInputStream(excelFilePath);
                 final Workbook workbook = new XSSFWorkbook(fis)) {
             final Sheet sheet = workbook.getSheetAt(0); // get first sheet
@@ -55,8 +58,8 @@ public class ExcelDataReadWriteService {
 
             Map<String, Map<String, String>> tickerMapRatio = new HashMap<>();
 
-            System.out.println(headerSet);
-            System.out.println(ticketSet);
+            log.debug("Header Set: {}", headerSet);
+            log.debug("Ticker Set: {}", ticketSet);
 
             boolean areHeadersWritten = false;
             String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH.mm.ss").format(new Date());
@@ -64,8 +67,8 @@ public class ExcelDataReadWriteService {
             int rowIndex = 1;
             int serialIndex = 1;
             for (String ticker : ticketSet) {
-                System.out.println("------------------------");
-                System.out.println("Fetching data for " + ticker);
+                log.info("------------------------");
+                log.info("Fetching data for {}", ticker);
                 Map<String, String> ratiosMap = findBasicElementsAndAdvanced(ticker);
                 tickerMapRatio.put(ticker, ratiosMap);
                 // write data in excel as we know the ratiosMap for a particular ticker
@@ -75,8 +78,9 @@ public class ExcelDataReadWriteService {
                     rowIndex++;
                     serialIndex++;
                 }
-                System.out.println("------------------------");
+                serialIndex++;
             }
+            log.info("------------------------");
 
             Sheet comparisonSheet = workbook.createSheet("Comparison Sheet2");
 
@@ -87,7 +91,7 @@ public class ExcelDataReadWriteService {
             Map<String, String> ticker2Data = findBasicElementsAndAdvanced(ticker2);
 
             if (ticker1Data.isEmpty() || ticker2Data.isEmpty()) {
-                System.out.println("Could not fetch data for one or both tickers");
+                log.warn("Could not fetch data for one or both tickers");
                 return;
             }
 
@@ -104,9 +108,11 @@ public class ExcelDataReadWriteService {
 
             // autoSizeAndCloseWorkBook(ratiosMap, newSheet);
             saveWithOutputStreamAndWrite(workbook, excelFilePath);
-            System.out.println("...Completed Processing....");
-        } catch (IOException e) {
-            e.printStackTrace();
+            log.info("...Completed Processing....");
+        } catch (
+
+        IOException e) {
+            log.error("Error processing Excel file", e);
         }
     }
 
@@ -166,12 +172,12 @@ public class ExcelDataReadWriteService {
         // Get actual row from Excel using getRow(), NOT createRow()
         final Row headerRow = sheet.getRow(indexOfHeaders);
         if (headerRow == null) {
-            System.out.println("Header row is empty or missing!");
+            log.warn("Header row is empty or missing!");
             return headerNameSet;
         }
 
         int lastCellNum = headerRow.getLastCellNum();
-        System.out.println("Header cells count = " + lastCellNum);
+        log.debug("Header cells count = {}", lastCellNum);
 
         for (int cellIndex = 0; cellIndex < lastCellNum; cellIndex++) {
             final Cell cell = headerRow.getCell(cellIndex);
@@ -230,10 +236,10 @@ public class ExcelDataReadWriteService {
                 }
             }
 
-            System.out.println("Data for Ticker : " + ticker + " is : " + ratiosMap);
+            log.debug("Data for Ticker : {} is : {}", ticker, ratiosMap);
             return ratiosMap;
         } catch (Exception e) {
-            System.out.println("Error fetching data for ticker: " + ticker + ". Error: " + e.getMessage());
+            log.error("Error fetching data for ticker: {}. Error: {}", ticker, e.getMessage());
             return null;
         }
     }
@@ -268,7 +274,7 @@ public class ExcelDataReadWriteService {
                 ratiosMap.put(key, value);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error fetching ratios", e);
         }
     }
 
@@ -276,7 +282,7 @@ public class ExcelDataReadWriteService {
         try {
 
             //
-            System.out.println("Fetching token from screener url");
+            log.debug("Fetching token from screener url");
             // 1) GET login page to receive CSRF
             Connection.Response loginForm = Jsoup.connect("https://www.screener.in/login/")
                     .method(Connection.Method.GET)
@@ -284,7 +290,7 @@ public class ExcelDataReadWriteService {
                     .execute();
 
             String csrfToken = loginForm.cookie("csrftoken");
-            System.out.println("CSRF = " + csrfToken);
+            log.debug("CSRF = {}", csrfToken);
 
             // 2) POST login using same cookies
             Connection.Response loginResponse = Jsoup.connect("https://www.screener.in/login/")
@@ -298,19 +304,19 @@ public class ExcelDataReadWriteService {
                     .followRedirects(true)
                     .execute();
 
-            System.out.println("Login Response URL: " + loginResponse.url());
+            log.debug("Login Response URL: {}", loginResponse.url());
 
             // Check if we are still on the login page (login failed)
             if (loginResponse.url().toString().contains("/login")) {
-                System.out.println("Login failed: Invalid credentials");
+                log.warn("Login failed: Invalid credentials");
                 return Collections.emptyMap();
             }
 
-            System.out.println("LOGIN COOKIES = " + loginResponse.cookies());
+            log.info("Login successful. Cookies obtained.");
 
             return loginResponse.cookies();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error during login", e);
         }
 
         return Collections.emptyMap();
@@ -322,9 +328,151 @@ public class ExcelDataReadWriteService {
         String warehouseId = "";
         if (div != null) {
             warehouseId = div.attr("data-warehouse-id");
-            System.out.println("Warehouse ID = " + warehouseId);
         }
         return warehouseId;
     }
 
+    private Map<String, Double> parseRevenueSplit(String text) {
+        Map<String, Double> split = new HashMap<>();
+        try {
+            // Normalize text
+            String lowerText = text; // Keep case for display but use lower for checks if needed
+
+            // Pattern 1: "Name : Value%" (e.g., "BFSI : 32.6%")
+            // Pattern 2: "Name - Value%"
+            // Pattern 3: "Name (Value%)"
+
+            // We'll try a generic regex that captures a name followed by a separator and a
+            // percentage
+            // ([A-Za-z &,-]+) -> Name (letters, spaces, &, , -)
+            // \s*[:\(-]\s* -> Separator (: or - or ()
+            // (\d+(?:\.\d+)?)% -> Percentage
+
+            java.util.regex.Pattern p = java.util.regex.Pattern
+                    .compile("([A-Za-z &,-]+?)\\s*[:\\(-]\\s*(\\d+(?:\\.\\d+)?)%");
+            java.util.regex.Matcher m = p.matcher(text);
+
+            while (m.find()) {
+                String name = m.group(1).trim();
+                // Clean up name (remove leading "Revenue Breakup" etc if captured)
+                if (name.contains("Revenue Breakup")) {
+                    name = name.substring(name.lastIndexOf("Revenue Breakup") + 15).trim();
+                }
+                // Remove common noise words from start
+                name = name.replaceAll("^(and|of|in)\\s+", "");
+
+                if (name.length() > 50 || name.length() < 2)
+                    continue; // Ignore likely invalid matches
+
+                double val = Double.parseDouble(m.group(2));
+                split.put(name, val);
+            }
+
+            // If the generic pattern didn't work, try the specific "exports" one
+            if (split.isEmpty() && text.toLowerCase().contains("export")) {
+                java.util.regex.Pattern pExport = java.util.regex.Pattern.compile("export.*?(\\d+(?:\\.\\d+)?)%");
+                java.util.regex.Matcher mExport = pExport.matcher(text.toLowerCase());
+                if (mExport.find()) {
+                    double exportPct = Double.parseDouble(mExport.group(1));
+                    split.put("Exports", exportPct);
+                    split.put("Domestic", 100.0 - exportPct);
+                }
+            }
+
+        } catch (Exception e) {
+            log.error("Error parsing revenue split: {}", e.getMessage());
+        }
+        return split;
+    }
+
+    public Map<String, Object> getGeoAnalysis(String ticker) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            // 1. Fetch Revenue Split
+            String screenerUrl = "https://www.screener.in/company/" + ticker + "/consolidated/";
+            Document doc = Jsoup.connect(screenerUrl).get();
+            Element aboutSection = doc.selectFirst(".company-profile .about p");
+            String aboutText = aboutSection != null ? aboutSection.text() : "";
+
+            log.debug("About Text for {}: {}", ticker, aboutText);
+
+            Map<String, Double> revenueSplit = parseRevenueSplit(aboutText);
+            result.put("revenueSplit", revenueSplit);
+
+            // 2. Fetch News
+            // Determine which countries/regions to fetch news for
+            Set<String> regionsToFetch = new HashSet<>();
+
+            // Check if keys are likely countries/regions
+            boolean hasGeoKeys = false;
+            String[] commonRegions = { "USA", "America", "Europe", "UK", "India", "China", "Asia", "Global", "Domestic",
+                    "Exports" };
+
+            for (String key : revenueSplit.keySet()) {
+                for (String region : commonRegions) {
+                    if (key.toLowerCase().contains(region.toLowerCase())) {
+                        hasGeoKeys = true;
+                        // Map "Domestic" to "India" (assuming Indian company context for Screener.in)
+                        if (key.equalsIgnoreCase("Domestic"))
+                            regionsToFetch.add("India");
+                        else if (key.equalsIgnoreCase("Exports"))
+                            regionsToFetch.add("Global");
+                        else
+                            regionsToFetch.add(key);
+                        break;
+                    }
+                }
+            }
+
+            if (!hasGeoKeys) {
+                // If keys are industries (BFSI, etc.) or empty, default to India & Global
+                regionsToFetch.add("India");
+                regionsToFetch.add("Global");
+            }
+
+            Map<String, List<Map<String, String>>> countryNews = new HashMap<>();
+            for (String region : regionsToFetch) {
+                if (region.equalsIgnoreCase("Rest of World") || region.equalsIgnoreCase("Others"))
+                    continue;
+                List<Map<String, String>> news = fetchCountryNews(ticker, region);
+                countryNews.put(region, news);
+            }
+            result.put("news", countryNews);
+
+        } catch (Exception e) {
+            log.error("Error in getGeoAnalysis", e);
+            result.put("error", e.getMessage());
+        }
+        return result;
+    }
+
+    private List<Map<String, String>> fetchCountryNews(String ticker, String country) {
+        List<Map<String, String>> newsList = new ArrayList<>();
+        try {
+            String query = ticker + " " + country + " business";
+
+            String rssUrl = "https://news.google.com/rss/search?q=" + java.net.URLEncoder.encode(query, "UTF-8")
+                    + "&hl=en-IN&gl=IN&ceid=IN:en";
+            Document doc = Jsoup.connect(rssUrl)
+                    .header("User-Agent",
+                            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+                    .get();
+            Elements items = doc.select("item");
+
+            int count = 0;
+            for (Element item : items) {
+                if (count >= 5)
+                    break; // Limit to 5 news items
+                Map<String, String> newsItem = new HashMap<>();
+                newsItem.put("title", item.select("title").text());
+                newsItem.put("link", item.select("link").text());
+                newsItem.put("pubDate", item.select("pubDate").text());
+                newsList.add(newsItem);
+                count++;
+            }
+        } catch (Exception e) {
+            log.error("Error fetching news for {}: {}", country, e.getMessage());
+        }
+        return newsList;
+    }
 }

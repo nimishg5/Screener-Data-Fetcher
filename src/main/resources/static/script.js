@@ -79,6 +79,11 @@ function switchTab(tabName) {
     if (tabName === 'chart' && currentData) {
         renderChart(currentData);
     }
+
+    // Fetch geo analysis if switching to geo tab
+    if (tabName === 'geo') {
+        fetchGeoAnalysis();
+    }
 }
 
 function updateChartType() {
@@ -415,6 +420,237 @@ function renderChart(data) {
     chartInstance = new Chart(ctx, config);
 }
 
+let geoChartInstances = {};
+let geoResults = [];
+
+async function fetchGeoAnalysis() {
+    if (tickers.size === 0) return;
+
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block';
+    const geoTab = document.getElementById('geoTab');
+    geoTab.innerHTML = ''; // Clear previous content
+
+    try {
+        const promises = Array.from(tickers).map(async (ticker) => {
+            try {
+                const response = await fetch(`/api/v1/data-fetcher/geo-analysis?ticker=${ticker}`);
+                if (!response.ok) throw new Error('Failed');
+                const data = await response.json();
+                return { ticker, data };
+            } catch (e) {
+                console.error(`Error fetching geo for ${ticker}`, e);
+                return { ticker, error: e.message };
+            }
+        });
+
+        geoResults = await Promise.all(promises);
+        renderGeoAnalysis(geoResults);
+    } catch (error) {
+        console.error('Error in geo fetch:', error);
+        geoTab.innerHTML = '<div class="error">Failed to load geo analysis</div>';
+    } finally {
+        loading.style.display = 'none';
+    }
+}
+
+function renderGeoAnalysis(results) {
+    const geoTab = document.getElementById('geoTab');
+
+    // Clear old chart instances
+    Object.values(geoChartInstances).forEach(chart => chart.destroy());
+    geoChartInstances = {};
+
+    if (results.length === 0) {
+        geoTab.innerHTML = '<div style="color: #94a3b8;">No data available.</div>';
+        return;
+    }
+
+    // 1. Create Sub-tabs Container
+    const subTabsContainer = document.createElement('div');
+    subTabsContainer.className = 'sub-tabs';
+    subTabsContainer.style.display = 'flex';
+    subTabsContainer.style.gap = '1rem';
+    subTabsContainer.style.marginBottom = '1.5rem';
+    subTabsContainer.style.borderBottom = '1px solid #334155';
+    subTabsContainer.style.paddingBottom = '1rem';
+    geoTab.appendChild(subTabsContainer);
+
+    // 2. Create Content Container
+    const contentContainer = document.createElement('div');
+    geoTab.appendChild(contentContainer);
+
+    results.forEach(({ ticker, data, error }, index) => {
+        // Create Tab Button
+        const btn = document.createElement('button');
+        btn.textContent = ticker;
+        btn.className = 'sub-tab-btn';
+        btn.dataset.ticker = ticker;
+        btn.onclick = () => switchSubTab(ticker);
+        subTabsContainer.appendChild(btn);
+
+        // Create Content Div
+        const contentDiv = document.createElement('div');
+        contentDiv.id = `geo-content-${ticker}`;
+        contentDiv.className = 'geo-sub-content';
+        contentDiv.style.display = 'none'; // Hidden by default
+
+        if (error) {
+            contentDiv.innerHTML = `<div class="error">Failed to load data for ${ticker}</div>`;
+        } else {
+            // Container for Chart and News
+            const container = document.createElement('div');
+            container.style.display = 'flex';
+            container.style.flexWrap = 'wrap';
+            container.style.gap = '2rem';
+
+            // Chart Section
+            const chartDiv = document.createElement('div');
+            chartDiv.style.flex = '1';
+            chartDiv.style.minWidth = '300px';
+
+            const chartTitle = document.createElement('h3');
+            chartTitle.textContent = 'Revenue Split by Geography';
+            chartDiv.appendChild(chartTitle);
+
+            const canvasContainer = document.createElement('div');
+            canvasContainer.className = 'chart-container';
+            canvasContainer.style.height = '400px';
+            const canvas = document.createElement('canvas');
+            canvas.id = `geoChart_${ticker}`;
+            canvasContainer.appendChild(canvas);
+            chartDiv.appendChild(canvasContainer);
+
+            // News Section
+            const newsDiv = document.createElement('div');
+            newsDiv.style.flex = '1';
+            newsDiv.style.minWidth = '300px';
+
+            const newsTitle = document.createElement('h3');
+            newsTitle.textContent = 'Recent Impact News';
+            newsDiv.appendChild(newsTitle);
+
+            const newsContainer = document.createElement('div');
+            newsContainer.style.display = 'flex';
+            newsContainer.style.flexDirection = 'column';
+            newsContainer.style.gap = '1rem';
+
+            const countryNews = data.news || {};
+            if (Object.keys(countryNews).length === 0) {
+                newsContainer.innerHTML = '<div style="color: #94a3b8;">No recent news found.</div>';
+            } else {
+                for (const [country, newsList] of Object.entries(countryNews)) {
+                    if (!newsList || newsList.length === 0) continue;
+
+                    const countryHeader = document.createElement('h4');
+                    countryHeader.textContent = country;
+                    countryHeader.style.color = '#60a5fa';
+                    countryHeader.style.marginTop = '1rem';
+                    newsContainer.appendChild(countryHeader);
+
+                    newsList.forEach(item => {
+                        const newsItem = document.createElement('div');
+                        newsItem.style.padding = '1rem';
+                        newsItem.style.backgroundColor = '#334155';
+                        newsItem.style.borderRadius = '0.5rem';
+                        newsItem.style.marginBottom = '0.5rem';
+                        newsItem.innerHTML = `
+                            <div style="font-weight: 600; margin-bottom: 0.25rem;">
+                                <a href="${item.link}" target="_blank" style="color: #e2e8f0; text-decoration: none;">${item.title}</a>
+                            </div>
+                            <div style="font-size: 0.875rem; color: #94a3b8;">${item.pubDate}</div>
+                        `;
+                        newsContainer.appendChild(newsItem);
+                    });
+                }
+            }
+            newsDiv.appendChild(newsContainer);
+
+            container.appendChild(chartDiv);
+            container.appendChild(newsDiv);
+            contentDiv.appendChild(container);
+        }
+        contentContainer.appendChild(contentDiv);
+    });
+
+    // Activate first tab
+    if (results.length > 0) {
+        switchSubTab(results[0].ticker);
+    }
+}
+
+function switchSubTab(ticker) {
+    // Update buttons
+    document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+        if (btn.dataset.ticker === ticker) btn.classList.add('active');
+        else btn.classList.remove('active');
+    });
+
+    // Show content
+    document.querySelectorAll('.geo-sub-content').forEach(div => div.style.display = 'none');
+    const activeContent = document.getElementById(`geo-content-${ticker}`);
+    if (activeContent) {
+        activeContent.style.display = 'block';
+
+        // Render chart if not already rendered
+        if (!geoChartInstances[ticker]) {
+            const result = geoResults.find(r => r.ticker === ticker);
+            if (result && !result.error) {
+                renderPieChart(`geoChart_${ticker}`, result.data.revenueSplit, ticker);
+            }
+        }
+    }
+}
+
+function renderPieChart(canvasId, revenueSplit, ticker) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    revenueSplit = revenueSplit || {};
+    const labels = Object.keys(revenueSplit);
+    const values = Object.values(revenueSplit);
+
+    if (labels.length === 0) {
+        labels.push('No Data Available');
+        values.push(100);
+    }
+
+    const chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: [
+                    'rgba(34, 211, 238, 0.8)',
+                    'rgba(244, 114, 182, 0.8)',
+                    'rgba(163, 230, 53, 0.8)',
+                    'rgba(251, 146, 60, 0.8)',
+                    'rgba(192, 132, 252, 0.8)'
+                ],
+                borderColor: '#1e293b',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { color: '#cbd5e1' }
+                },
+                datalabels: {
+                    color: '#fff',
+                    formatter: (value, ctx) => {
+                        if (ctx.chart.data.labels[ctx.dataIndex] === 'No Data Available') return '';
+                        return value.toFixed(1) + '%';
+                    }
+                }
+            }
+        }
+    });
+    geoChartInstances[ticker] = chart;
+}
+
 async function login() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
@@ -444,8 +680,16 @@ async function login() {
         });
 
         if (response.ok) {
+            const data = await response.json();
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('appSection').style.display = 'block';
+
+            // Show welcome message
+            const welcomeMsg = document.getElementById('welcomeMsg');
+            if (welcomeMsg) {
+                welcomeMsg.textContent = `Welcome, ${data.username}`;
+                welcomeMsg.style.display = 'block';
+            }
         } else {
             const msg = 'Login failed. Please check your credentials.';
             loginError.textContent = msg;
