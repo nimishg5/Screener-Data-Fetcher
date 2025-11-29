@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -26,11 +26,23 @@ public class ExcelDataReadWriteService {
     @Autowired
     private ChartGeneratorService chartGeneratorService;
 
-    @Value("${screener.username}")
     private String userName;
-
-    @Value("${screener.password}")
     private String password;
+
+    public boolean login(String username, String password) {
+        this.userName = username;
+        this.password = password;
+        this.loginCookies = fetchLoginResponseCookies();
+        return !this.loginCookies.isEmpty();
+    }
+
+    public void logout() {
+        this.userName = null;
+        this.password = null;
+        if (this.loginCookies != null) {
+            this.loginCookies.clear();
+        }
+    }
 
     public void readColumnData(String excelFilePath, int columnIndex, int sheetIndex) throws IOException {
         System.out.println("...Started Processing....");
@@ -242,7 +254,17 @@ public class ExcelDataReadWriteService {
             for (Element element : elements) {
                 String key = element.select("span.name").text().trim();
                 // Extract only the number inside <span class="number">
-                String value = element.select("span.value .number").text().trim();
+                Elements numberElements = element.select("span.value .number");
+                String value;
+                if (numberElements.size() > 1) {
+                    List<String> values = new ArrayList<>();
+                    for (Element num : numberElements) {
+                        values.add(num.text().trim());
+                    }
+                    value = String.join(" / ", values);
+                } else {
+                    value = numberElements.text().trim();
+                }
                 ratiosMap.put(key, value);
             }
         } catch (Exception e) {
@@ -275,6 +297,14 @@ public class ExcelDataReadWriteService {
                     .method(Connection.Method.POST)
                     .followRedirects(true)
                     .execute();
+
+            System.out.println("Login Response URL: " + loginResponse.url());
+
+            // Check if we are still on the login page (login failed)
+            if (loginResponse.url().toString().contains("/login")) {
+                System.out.println("Login failed: Invalid credentials");
+                return Collections.emptyMap();
+            }
 
             System.out.println("LOGIN COOKIES = " + loginResponse.cookies());
 

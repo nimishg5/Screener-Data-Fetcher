@@ -27,6 +27,23 @@ public class ScreenerDataFetcherController {
         return new ResponseEntity<>("Data processed successfully", HttpStatus.OK);
     }
 
+    @PostMapping(value = "/login")
+    public ResponseEntity<String> login(@RequestBody java.util.Map<String, String> credentials) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        if (excelDataReadWriteService.login(username, password)) {
+            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Login failed", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PostMapping(value = "/logout")
+    public ResponseEntity<String> logout() {
+        excelDataReadWriteService.logout();
+        return new ResponseEntity<>("Logout successful", HttpStatus.OK);
+    }
+
     @GetMapping(value = "/compare")
     public ResponseEntity<java.util.Map<String, java.util.Map<String, String>>> compareTickers(
             @RequestParam(value = "tickers") String tickers) throws IOException {
