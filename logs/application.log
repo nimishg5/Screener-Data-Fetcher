@@ -1,0 +1,596 @@
+2025-11-29 23:00:11 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 96300 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:00:11 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:00:11 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:00:11 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:00:11 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:00:11 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:00:11 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:00:11 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 524 ms
+2025-11-29 23:00:11 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:00:11 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:00:11 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:00:11 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-11-29 23:00:11 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-29 23:00:11 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-11-29 23:00:34 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 96748 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:00:34 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:00:34 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:00:34 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:00:34 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:00:34 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:00:34 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:00:34 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 544 ms
+2025-11-29 23:00:35 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:00:35 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:00:35 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:00:35 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 23:00:35 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 1.028 seconds (process running for 1.275)
+2025-11-29 23:00:35 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-11-29 23:00:53 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 23:00:53 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 23:00:53 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-29 23:00:53 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-11-29 23:00:53 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:00:53 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = xk84P7pzE4p7fPjynog0GcZ4j9SzINfY
+2025-11-29 23:00:53 [http-nio-8080-exec-1] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:352)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:304)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:232)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-11-29 23:00:53 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for TCS: Information Technology
+2025-11-29 23:00:53 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {Industry=Information Technology, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, Book Value=294, ROCE=64.6, ROE=52.4, High / Low=4,495 / 2,867, Market Cap=11,35,175, Face Value=1.00}
+2025-11-29 23:00:53 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:00:53 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = GCLDMGrx7cwW7wqsE8PrqzPreo9VC1Cc
+2025-11-29 23:00:53 [http-nio-8080-exec-1] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:352)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:304)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:232)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-11-29 23:00:54 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for INFY: Information Technology
+2025-11-29 23:00:54 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {Industry=Information Technology, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, Book Value=249, ROCE=37.5, ROE=28.8, High / Low=2,007 / 1,307, Market Cap=6,48,163, Face Value=5.00}
+2025-11-29 23:01:27 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 97067 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:01:27 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:01:27 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:01:28 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:01:28 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:01:28 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:01:28 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:01:28 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 479 ms
+2025-11-29 23:01:28 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:01:28 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:01:28 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:01:28 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-11-29 23:01:28 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-29 23:01:28 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-11-29 23:01:46 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 97514 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:01:46 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:01:46 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:01:47 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:01:47 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:01:47 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:01:47 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:01:47 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 467 ms
+2025-11-29 23:01:47 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:01:47 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:01:47 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:01:47 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 23:01:47 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 1.039 seconds (process running for 1.277)
+2025-11-29 23:01:47 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-11-29 23:02:19 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 23:02:19 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 23:02:19 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-29 23:02:19 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: nimishfaadu@gmail.com
+2025-11-29 23:02:20 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: []
+2025-11-29 23:02:21 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Logout request received
+2025-11-29 23:02:33 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-11-29 23:02:33 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:02:33 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = 2QvCwyrs5BCQjFOnCX9VtmDzESHlJhih
+2025-11-29 23:02:33 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-11-29 23:02:33 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-11-29 23:02:33 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-11-29 23:02:35 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-11-29 23:02:36 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Could not extract Industry for TCS, defaulting to Others
+2025-11-29 23:02:36 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:02:36 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Could not extract Industry for INFY, defaulting to Others
+2025-11-29 23:02:36 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:02:48 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: RE
+2025-11-29 23:02:48 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 2726, "name": "Reliance Industries Ltd", "url": "/company/RELIANCE/consolidated/"}, {"id": 2809, "name": "REC Ltd", "url": "/company/RECLTD/consolidated/"}, {"id": 2708, "name": "Redington Ltd", "url": "/company/REDINGTON/consolidated/"}, {"id": 2719, "name": "Relaxo Footwears Ltd", "url": "/company/RELAXO/"}, {"id": 2731, "name": "Religare Enterprises Ltd", "url": "/company/RELIGARE/consolidated/"}, {"id": 1284457, "name": "Redtape Ltd", "url": "/company/REDTAPE/consolidated/"}, {"id": 2727, "name": "Reliance Infrastructure Ltd", "url": "/company/RELINFRA/consolidated/"}, {"id": 2743, "name": "Responsive Industries Ltd", "url": "/company/RESPONIND/consolidated/"}]
+2025-11-29 23:02:49 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: REl
+2025-11-29 23:02:49 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 2726, "name": "Reliance Industries Ltd", "url": "/company/RELIANCE/consolidated/"}, {"id": 2719, "name": "Relaxo Footwears Ltd", "url": "/company/RELAXO/"}, {"id": 2731, "name": "Religare Enterprises Ltd", "url": "/company/RELIGARE/consolidated/"}, {"id": 2727, "name": "Reliance Infrastructure Ltd", "url": "/company/RELINFRA/consolidated/"}, {"id": 1274172, "name": "Reliable Data Services Ltd", "url": "/company/RELIABLE/consolidated/"}, {"id": 2723, "name": "Reliance Chemotex Industries Ltd", "url": "/company/RELCHEMQ/"}, {"id": 1273285, "name": "Relicab Cable Manufacturing Ltd", "url": "/company/539760/"}, {"id": 2720, "name": "Reliable Ventures India Ltd", "url": "/company/532124/"}]
+2025-11-29 23:02:52 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY,RELIANCE
+2025-11-29 23:02:52 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Could not extract Industry for TCS, defaulting to Others
+2025-11-29 23:02:52 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:02:52 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Could not extract Industry for INFY, defaulting to Others
+2025-11-29 23:02:52 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:02:53 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Could not extract Industry for RELIANCE, defaulting to Others
+2025-11-29 23:02:53 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : RELIANCE is : {10Yrs PE=23.4, Book Value=648, Piotroski score=4.00, PEG Ratio=5.15, Chg in FII Hold 3Yr=-4.93, Net profit=97,416, Industry PE=11.7, Public holding=10.9, Industry=Others, Chg in DII Hold=0.53, Debt=3,74,593, Change in Prom Hold=-0.06, Pledged percentage=0.00, Profit growth=12.8, Chg in FII Hold=-0.56, Face Value=10.0, Reserves=8,63,748, Chg in DII Hold 3Yr=5.34, ROE=8.40, Current ratio=1.10, Current Price=1,568, Stock P/E=27.7, Dividend Yield=0.35, ROCE=9.69, Down from 52w high=0.87, Debt to equity=0.43, High / Low=1,581 / 1,115, Market Cap=21,21,214}
+2025-11-29 23:02:59 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS
+2025-11-29 23:02:59 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: RELIANCE
+2025-11-29 23:02:59 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY
+2025-11-29 23:02:59 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for RELIANCE: Reliance was founded by Dhirubhai Ambani and is now promoted and managed by his elder son, Mukesh Dhirubhai Ambani. Ambani's family has about 50% shareholding in the conglomerate.
+2025-11-29 23:02:59 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for INFY: Infosys Ltd provides consulting, technology, outsourcing and next-generation digital services to enable clients to execute strategies for their digital transformation.[1] It is the 2nd largest Information Technology company in India behind TCS.[2]
+2025-11-29 23:03:00 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for TCS: Tata Consultancy Services is the flagship company and a part of Tata group. It is an IT services, consulting and business solutions organization that has been partnering with many of the world's largest businesses in their transformation journeys for over 50 years. TCS offers a consulting-led, cognitive powered, integrated portfolio of business, technology and engineering services and solutions. [1]
+2025-11-29 23:05:12 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 97907 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:05:12 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:05:12 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:05:12 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:05:12 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:05:12 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:05:12 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:05:12 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 463 ms
+2025-11-29 23:05:12 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:05:13 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:05:13 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:05:13 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-11-29 23:05:13 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-29 23:05:13 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-11-29 23:05:32 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 98355 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:05:32 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:05:32 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:05:32 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:05:32 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:05:32 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:05:32 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:05:32 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 474 ms
+2025-11-29 23:05:33 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:05:33 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:05:33 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:05:33 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 23:05:33 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 1.06 seconds (process running for 1.329)
+2025-11-29 23:05:33 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-11-29 23:05:50 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 23:05:50 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 23:05:50 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-29 23:05:50 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: RELIANCE
+2025-11-29 23:05:52 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:05:52 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = 0BUt5K4M86ffNp4WGhyVCmK9JYOX0m9u
+2025-11-29 23:05:52 [http-nio-8080-exec-1] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:353)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:305)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:232)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-11-29 23:05:52 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for RELIANCE: Energy
+2025-11-29 23:05:52 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : RELIANCE is : {Industry=Energy, Current Price=1,568, Stock P/E=27.7, Dividend Yield=0.35, Book Value=648, ROCE=9.69, ROE=8.40, High / Low=1,581 / 1,115, Market Cap=21,21,214, Face Value=10.0}
+2025-11-29 23:06:58 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-11-29 23:06:58 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:06:58 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = zgXGZ0reySe9DV8yqSOMzArnEss7C0bn
+2025-11-29 23:06:59 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-11-29 23:06:59 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-11-29 23:06:59 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-11-29 23:07:02 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: re
+2025-11-29 23:07:02 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 2726, "name": "Reliance Industries Ltd", "url": "/company/RELIANCE/consolidated/"}, {"id": 2809, "name": "REC Ltd", "url": "/company/RECLTD/consolidated/"}, {"id": 2708, "name": "Redington Ltd", "url": "/company/REDINGTON/consolidated/"}, {"id": 2719, "name": "Relaxo Footwears Ltd", "url": "/company/RELAXO/"}, {"id": 2731, "name": "Religare Enterprises Ltd", "url": "/company/RELIGARE/consolidated/"}, {"id": 1284457, "name": "Redtape Ltd", "url": "/company/REDTAPE/consolidated/"}, {"id": 2727, "name": "Reliance Infrastructure Ltd", "url": "/company/RELINFRA/consolidated/"}, {"id": 2743, "name": "Responsive Industries Ltd", "url": "/company/RESPONIND/consolidated/"}]
+2025-11-29 23:07:03 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: rel
+2025-11-29 23:07:04 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 2726, "name": "Reliance Industries Ltd", "url": "/company/RELIANCE/consolidated/"}, {"id": 2719, "name": "Relaxo Footwears Ltd", "url": "/company/RELAXO/"}, {"id": 2731, "name": "Religare Enterprises Ltd", "url": "/company/RELIGARE/consolidated/"}, {"id": 2727, "name": "Reliance Infrastructure Ltd", "url": "/company/RELINFRA/consolidated/"}, {"id": 1274172, "name": "Reliable Data Services Ltd", "url": "/company/RELIABLE/consolidated/"}, {"id": 2723, "name": "Reliance Chemotex Industries Ltd", "url": "/company/RELCHEMQ/"}, {"id": 1273285, "name": "Relicab Cable Manufacturing Ltd", "url": "/company/539760/"}, {"id": 2720, "name": "Reliable Ventures India Ltd", "url": "/company/532124/"}]
+2025-11-29 23:07:06 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY,RELIANCE
+2025-11-29 23:07:07 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-11-29 23:07:07 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-11-29 23:07:07 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:07:07 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-11-29 23:07:07 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-11-29 23:07:07 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:07:07 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for RELIANCE, trying text search
+2025-11-29 23:07:07 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for RELIANCE
+2025-11-29 23:07:07 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : RELIANCE is : {10Yrs PE=23.4, Book Value=648, Piotroski score=4.00, PEG Ratio=5.15, Chg in FII Hold 3Yr=-4.93, Net profit=97,416, Industry PE=11.7, Public holding=10.9, Industry=Others, Chg in DII Hold=0.53, Debt=3,74,593, Change in Prom Hold=-0.06, Pledged percentage=0.00, Profit growth=12.8, Chg in FII Hold=-0.56, Face Value=10.0, Reserves=8,63,748, Chg in DII Hold 3Yr=5.34, ROE=8.40, Current ratio=1.10, Current Price=1,568, Stock P/E=27.7, Dividend Yield=0.35, ROCE=9.69, Down from 52w high=0.87, Debt to equity=0.43, High / Low=1,581 / 1,115, Market Cap=21,21,214}
+2025-11-29 23:07:15 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS
+2025-11-29 23:07:15 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: RELIANCE
+2025-11-29 23:07:15 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY
+2025-11-29 23:07:15 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for RELIANCE: Reliance was founded by Dhirubhai Ambani and is now promoted and managed by his elder son, Mukesh Dhirubhai Ambani. Ambani's family has about 50% shareholding in the conglomerate.
+2025-11-29 23:07:15 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for INFY: Infosys Ltd provides consulting, technology, outsourcing and next-generation digital services to enable clients to execute strategies for their digital transformation.[1] It is the 2nd largest Information Technology company in India behind TCS.[2]
+2025-11-29 23:07:16 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for TCS: Tata Consultancy Services is the flagship company and a part of Tata group. It is an IT services, consulting and business solutions organization that has been partnering with many of the world's largest businesses in their transformation journeys for over 50 years. TCS offers a consulting-led, cognitive powered, integrated portfolio of business, technology and engineering services and solutions. [1]
+2025-11-29 23:07:43 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: sb
+2025-11-29 23:07:43 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1274150, "name": "SBI Life Insurance Company Ltd", "url": "/company/SBILIFE/"}, {"id": 1274738, "name": "SBI Cards & Payment Services Ltd", "url": "/company/SBICARD/"}, {"id": 1284438, "name": "SBFC Finance Ltd", "url": "/company/SBFC/"}, {"id": 1274676, "name": "SBC Exports Ltd", "url": "/company/SBC/consolidated/"}, {"id": 3188, "name": "State Bank of India", "url": "/company/SBIN/consolidated/"}, {"id": 2920, "name": "SBEC Sugar Ltd", "url": "/company/532102/consolidated/"}, {"id": 1268668, "name": "SBEC Systems (India) Ltd", "url": "/company/517360/consolidated/"}, {"id": 1274915, "name": "SBL Infratech Ltd", "url": "/company/543366/"}]
+2025-11-29 23:07:44 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: sbi
+2025-11-29 23:07:44 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1274150, "name": "SBI Life Insurance Company Ltd", "url": "/company/SBILIFE/"}, {"id": 1274738, "name": "SBI Cards & Payment Services Ltd", "url": "/company/SBICARD/"}, {"id": 3188, "name": "State Bank of India", "url": "/company/SBIN/consolidated/"}, {"id": 1829, "name": "Krebs Biochemicals & Industries Ltd", "url": "/company/KREBSBIO/"}, {"id": 1267666, "name": "SBI Home Finance Ltd", "url": "/company/SBIHOMEFIN/"}, {"id": 1284871, "name": "SBI Nifty50 Equal Weight ETF", "url": "/company/SBINEQWETF/"}, {"id": 1285435, "name": "SBI BSE PSU Bank ETF", "url": "/company/SBIBPB/"}, {"id": 1274805, "name": "SBI ETF PRIVATE BANK", "url": "/company/SBIETFPB/"}]
+2025-11-29 23:07:50 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: hdfc
+2025-11-29 23:07:50 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1298, "name": "HDFC Bank Ltd", "url": "/company/HDFCBANK/consolidated/"}, {"id": 1274197, "name": "HDFC Life Insurance Company Ltd", "url": "/company/HDFCLIFE/consolidated/"}, {"id": 1274395, "name": "HDFC Asset Management Company Ltd", "url": "/company/HDFCAMC/"}, {"id": 1274779, "name": "HDFC Nifty Banking ETF", "url": "/company/HDFCNIFBAN/"}, {"id": 1273158, "name": "HDFC Nifty 50 ETF", "url": "/company/HDFCNIFTY/"}, {"id": 1284314, "name": "HDFC Nifty Small Cap 250 ETF", "url": "/company/HDFCSML250/"}, {"id": 1273159, "name": "HDFC S&P BSE Sensex ETF", "url": "/company/HDFCSENSEX/"}, {"id": 1275366, "name": "HDFC Nifty Private Bank ETF", "url": "/company/HDFCPVTBAN/"}]
+2025-11-29 23:07:53 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: SBIN,HDFCBANK
+2025-11-29 23:07:53 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for SBIN, trying text search
+2025-11-29 23:07:53 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for SBIN
+2025-11-29 23:07:53 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : SBIN is : {10Yrs PE=11.8, Book Value=617, Piotroski score=7.00, PEG Ratio=0.38, Chg in FII Hold 3Yr=-0.38, Net profit=83,845, Industry PE=8.10, Public holding=7.13, Industry=Others, Chg in DII Hold=2.11, Debt=63,05,863, Change in Prom Hold=-1.92, Pledged percentage=0.00, Profit growth=2.65, Chg in FII Hold=0.24, Face Value=1.00, Reserves=5,68,389, Chg in DII Hold 3Yr=2.26, ROE=17.2, Current ratio=1.14, Current Price=979, Stock P/E=11.5, Dividend Yield=1.62, ROCE=6.47, Down from 52w high=2.01, Debt to equity=11.1, High / Low=999 / 680, Market Cap=9,03,677}
+2025-11-29 23:07:53 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for HDFCBANK, trying text search
+2025-11-29 23:07:53 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for HDFCBANK
+2025-11-29 23:07:53 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : HDFCBANK is : {10Yrs PE=24.2, Book Value=351, Piotroski score=5.00, PEG Ratio=0.93, Chg in FII Hold 3Yr=16.2, Net profit=75,079, Industry PE=15.3, Public holding=15.3, Industry=Others, Chg in DII Hold=0.30, Debt=33,97,677, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.60, Chg in FII Hold=-0.46, Face Value=1.00, Reserves=5,37,608, Chg in DII Hold 3Yr=8.54, ROE=14.4, Current ratio=1.89, Current Price=1,008, Stock P/E=21.4, Dividend Yield=1.09, ROCE=7.51, Down from 52w high=1.26, Debt to equity=6.30, High / Low=1,020 / 812, Market Cap=15,49,942}
+2025-11-29 23:08:38 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: SBIN
+2025-11-29 23:08:38 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: HDFCBANK
+2025-11-29 23:08:38 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for HDFCBANK: HDFC Bank Limited (also known as HDFC) is an Indian banking and financial services company headquartered in Mumbai. It is India's largest private sector bank by assets and the world's tenth-largest bank by market capitalization as of May 2024. As of April 2024, HDFC Bank has a market capitalization of $145 billion, making it the third-largest company on the Indian stock exchanges. [1]
+2025-11-29 23:08:38 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for SBIN: State Bank of India is a Fortune 500 company. It is an Indian Multinational, Public Sector banking and financial services statutory body headquartered in Mumbai. It is the largest and oldest bank in India with over 200 years of history.[1]
+2025-11-29 23:13:08 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 98802 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:13:08 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:13:08 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:13:09 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:13:09 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:13:09 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:13:09 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:13:09 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 486 ms
+2025-11-29 23:13:09 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:13:09 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:13:09 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:13:09 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-11-29 23:13:09 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-29 23:13:09 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-11-29 23:13:31 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 99251 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:13:31 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:13:31 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:13:31 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:13:31 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:13:31 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:13:31 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:13:31 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 580 ms
+2025-11-29 23:13:32 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:13:32 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:13:32 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:13:32 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 23:13:32 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 1.051 seconds (process running for 1.291)
+2025-11-29 23:13:32 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-11-29 23:14:03 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 23:14:03 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 23:14:03 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-29 23:14:21 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-11-29 23:14:21 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:14:22 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = Aq5zyKwZ1nYVjvazjWJyzygvmchcfMUJ
+2025-11-29 23:14:22 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-11-29 23:14:22 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-11-29 23:14:22 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-11-29 23:14:27 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-11-29 23:14:27 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-11-29 23:14:27 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-11-29 23:14:27 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:14:27 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-11-29 23:14:27 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-11-29 23:14:27 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:14:58 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: tr
+2025-11-29 23:14:59 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 3467, "name": "Trent Ltd", "url": "/company/TRENT/consolidated/"}, {"id": 1285532, "name": "Travel Food Services Ltd", "url": "/company/TRAVELFOOD/consolidated/"}, {"id": 3486, "name": "Triveni Turbine Ltd", "url": "/company/TRITURBINE/consolidated/"}, {"id": 3473, "name": "Trident Ltd", "url": "/company/TRIDENT/consolidated/"}, {"id": 1285196, "name": "Transrail Lighting Ltd", "url": "/company/TRANSRAILL/consolidated/"}, {"id": 1272591, "name": "Triveni Engineering and Industries Ltd", "url": "/company/TRIVENI/consolidated/"}, {"id": 1285696, "name": "TruAlt Bioenergy Ltd", "url": "/company/TRUALT/consolidated/"}, {"id": 3460, "name": "Transpek Industry Ltd", "url": "/company/TRANSPEK/consolidated/"}]
+2025-11-29 23:14:59 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: tre
+2025-11-29 23:14:59 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 3467, "name": "Trent Ltd", "url": "/company/TRENT/consolidated/"}, {"id": 1274610, "name": "Trejhara Solutions Ltd", "url": "/company/TREJHARA/consolidated/"}, {"id": 3464, "name": "Tree House Education & Accessories Ltd", "url": "/company/TREEHOUSE/consolidated/"}, {"id": 1273974, "name": "Trescon Ltd", "url": "/company/532159/consolidated/"}, {"id": 1284455, "name": "TransIndia Real Estate Ltd", "url": "/company/TREL/consolidated/"}, {"id": 1273442, "name": "LTIMindtree Ltd", "url": "/company/LTIM/consolidated/"}, {"id": 1274323, "name": "Lemon Tree Hotels Ltd", "url": "/company/LEMONTREE/consolidated/"}, {"id": 1274919, "name": "Vijaya Diagnostic Centre Ltd", "url": "/company/VIJAYA/consolidated/"}]
+2025-11-29 23:15:02 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY,TRENT
+2025-11-29 23:15:02 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-11-29 23:15:02 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-11-29 23:15:02 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:15:02 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-11-29 23:15:02 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-11-29 23:15:02 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:15:02 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TRENT, trying text search
+2025-11-29 23:15:02 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TRENT
+2025-11-29 23:15:02 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TRENT is : {10Yrs PE=150, Book Value=172, Piotroski score=7.00, PEG Ratio=0.68, Chg in FII Hold 3Yr=-9.11, Net profit=1,606, Industry PE=49.1, Public holding=26.2, Industry=Others, Chg in DII Hold=1.42, Debt=2,349, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=18.5, Chg in FII Hold=-1.58, Face Value=1.00, Reserves=6,066, Chg in DII Hold 3Yr=4.68, ROE=30.4, Current ratio=1.24, Current Price=4,250, Stock P/E=93.2, Dividend Yield=0.12, ROCE=30.7, Down from 52w high=43.3, Debt to equity=0.38, High / Low=7,493 / 4,236, Market Cap=1,51,096}
+2025-11-29 23:17:24 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 99478 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:17:24 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:17:24 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:17:25 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:17:25 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:17:25 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:17:25 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:17:25 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 488 ms
+2025-11-29 23:17:25 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:17:25 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:17:25 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:17:25 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-11-29 23:17:25 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-29 23:17:25 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-11-29 23:17:46 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 99923 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:17:46 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:17:46 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:17:46 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:17:46 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:17:46 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:17:46 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:17:46 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 470 ms
+2025-11-29 23:17:46 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:17:47 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:17:47 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:17:47 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 23:17:47 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 1.043 seconds (process running for 1.3)
+2025-11-29 23:17:47 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-11-29 23:18:18 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 23:18:18 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 23:18:18 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-11-29 23:18:37 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-11-29 23:18:37 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:18:37 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = R7XUbI9Jq2Kr7e4OvOjcA6luW0aubkGE
+2025-11-29 23:18:37 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-11-29 23:18:37 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-11-29 23:18:37 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-11-29 23:18:41 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-11-29 23:18:41 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-11-29 23:18:41 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-11-29 23:18:41 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:18:41 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-11-29 23:18:41 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-11-29 23:18:41 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:20:49 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 241 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:20:49 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:20:49 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:20:50 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:20:50 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:20:50 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:20:50 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:20:50 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 488 ms
+2025-11-29 23:20:50 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:20:50 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:20:50 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:20:50 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-11-29 23:20:50 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-11-29 23:20:50 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-11-29 23:21:06 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 942 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-11-29 23:21:06 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-11-29 23:21:06 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-11-29 23:21:07 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-11-29 23:21:07 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:21:07 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-29 23:21:07 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-11-29 23:21:07 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 475 ms
+2025-11-29 23:21:07 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-11-29 23:21:07 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-29 23:21:07 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-29 23:21:07 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-11-29 23:21:07 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 1.044 seconds (process running for 1.292)
+2025-11-29 23:21:07 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-11-29 23:21:39 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-29 23:21:39 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-29 23:21:39 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-29 23:21:49 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-11-29 23:21:49 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-11-29 23:21:49 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = 4qmJrsK64dd7gZ2gkdNOQrzxKEHje4sz
+2025-11-29 23:21:50 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-11-29 23:21:50 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-11-29 23:21:50 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-11-29 23:21:51 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-11-29 23:21:52 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-11-29 23:21:52 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-11-29 23:21:52 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:21:52 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-11-29 23:21:52 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-11-29 23:21:52 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:22:00 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: vb
+2025-11-29 23:22:00 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1273562, "name": "Varun Beverages Ltd", "url": "/company/VBL/consolidated/"}, {"id": 3581, "name": "V B Desai Financial Services Ltd", "url": "/company/VBDESAIFIN/"}, {"id": 1270830, "name": "V B Industries Ltd", "url": "/company/539123/"}, {"id": 1275172, "name": "Vaidya Sane Ayurved Laboratories Ltd", "url": "/company/MADHAVBAUG/consolidated/"}, {"id": 1284748, "name": "Ramdevbaba Solvent Ltd", "url": "/company/RBS/consolidated/"}, {"id": 1270888, "name": "Genomic Valley Biotech Ltd", "url": "/company/539206/"}, {"id": 3621, "name": "VBC Industries Ltd", "url": "/company/524310/"}, {"id": 1272036, "name": "Nava Bharat Enterprises Ltd", "url": "/company/NAVBHARENT/"}]
+2025-11-29 23:22:00 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: vbl
+2025-11-29 23:22:00 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1273562, "name": "Varun Beverages Ltd", "url": "/company/VBL/consolidated/"}, {"id": 1270888, "name": "Genomic Valley Biotech Ltd", "url": "/company/539206/"}]
+2025-11-29 23:22:03 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY,VBL
+2025-11-29 23:22:03 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-11-29 23:22:03 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-11-29 23:22:03 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.76, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=25.1, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,138, Stock P/E=22.6, Dividend Yield=1.91, ROCE=64.6, Down from 52w high=30.2, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,35,175}
+2025-11-29 23:22:04 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-11-29 23:22:04 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-11-29 23:22:04 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.57, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=25.1, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,560, Stock P/E=23.0, Dividend Yield=2.76, ROCE=37.5, Down from 52w high=22.3, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,48,163}
+2025-11-29 23:22:04 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for VBL, trying text search
+2025-11-29 23:22:04 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for VBL
+2025-11-29 23:22:04 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : VBL is : {10Yrs PE=59.8, Book Value=54.3, Piotroski score=6.00, PEG Ratio=0.99, Chg in FII Hold 3Yr=-3.08, Net profit=2,998, Industry PE=48.4, Public holding=6.84, Industry=Others, Chg in DII Hold=1.26, Debt=2,138, Change in Prom Hold=-0.38, Pledged percentage=0.04, Profit growth=16.9, Chg in FII Hold=0.07, Face Value=2.00, Reserves=17,687, Chg in DII Hold 3Yr=7.33, ROE=22.5, Current ratio=1.80, Current Price=482, Stock P/E=54.8, Dividend Yield=0.21, ROCE=24.8, Down from 52w high=27.4, Debt to equity=0.12, High / Low=664 / 419, Market Cap=1,62,860}

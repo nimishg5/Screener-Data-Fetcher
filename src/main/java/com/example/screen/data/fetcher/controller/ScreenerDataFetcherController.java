@@ -84,4 +84,12 @@ public class ScreenerDataFetcherController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/search")
+    public ResponseEntity<java.util.List<java.util.Map<String, String>>> searchTickers(
+            @RequestParam(value = "query") String query) {
+        log.info("Search request received for query: {}", query);
+        java.util.List<java.util.Map<String, String>> suggestions = screenerAnalysisService.searchTickers(query);
+        return new ResponseEntity<>(suggestions, HttpStatus.OK);
+    }
+
 }

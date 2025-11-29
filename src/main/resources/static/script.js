@@ -21,9 +21,10 @@ let tickers = new Set(['TCS', 'INFY']); // Default tickers
 let chartInstance = null;
 let currentData = null;
 
-// Initialize chips
+// Initialize chips and autocomplete
 document.addEventListener('DOMContentLoaded', () => {
     renderChips();
+    setupAutocomplete(document.getElementById('tickerInput'), null);
 });
 
 // Add ticker on Enter key
@@ -32,6 +33,73 @@ document.getElementById('tickerInput').addEventListener('keypress', function (e)
         addTicker();
     }
 });
+
+function setupAutocomplete(inputElement, onSelect) {
+    let debounceTimer;
+    const dropdown = document.createElement('div');
+    dropdown.className = 'suggestions-dropdown';
+    // Ensure parent is relative
+    if (getComputedStyle(inputElement.parentNode).position === 'static') {
+        inputElement.parentNode.style.position = 'relative';
+    }
+    inputElement.parentNode.appendChild(dropdown);
+
+    inputElement.addEventListener('input', function () {
+        const query = this.value.trim();
+        clearTimeout(debounceTimer);
+
+        if (query.length < 2) {
+            dropdown.style.display = 'none';
+            return;
+        }
+
+        debounceTimer = setTimeout(async () => {
+            try {
+                const response = await fetch(`/api/v1/data-fetcher/search?query=${encodeURIComponent(query)}`);
+                if (response.ok) {
+                    const suggestions = await response.json();
+                    renderSuggestions(suggestions);
+                }
+            } catch (e) {
+                console.error('Error fetching suggestions', e);
+            }
+        }, 300);
+    });
+
+    function renderSuggestions(suggestions) {
+        dropdown.innerHTML = '';
+        if (suggestions.length === 0) {
+            dropdown.style.display = 'none';
+            return;
+        }
+
+        suggestions.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'suggestion-item';
+            div.innerHTML = `
+                <span class="suggestion-ticker">${item.ticker}</span>
+                <span class="suggestion-name">${item.name}</span>
+            `;
+            div.onclick = () => {
+                inputElement.value = item.ticker;
+                dropdown.style.display = 'none';
+                addTicker(); // Auto-add the ticker
+                if (onSelect) {
+                    onSelect(item.ticker);
+                }
+            };
+            dropdown.appendChild(div);
+        });
+        dropdown.style.display = 'block';
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+        if (e.target !== inputElement && e.target !== dropdown && !dropdown.contains(e.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+}
 
 function addTicker() {
     const input = document.getElementById('tickerInput');
@@ -119,6 +187,16 @@ async function compareTickers() {
         const data = await response.json();
         currentData = data;
 
+        // Extract Industries
+        const industries = new Set();
+        Object.values(data).forEach(d => {
+            if (d && d.Industry) industries.add(d.Industry);
+        });
+
+        renderIndustryTabs(industries);
+
+        // Default to All
+        currentIndustry = 'All';
         renderTable(data);
 
         // Show UI
@@ -146,6 +224,60 @@ async function compareTickers() {
     }
 }
 
+let currentIndustry = 'All';
+
+function renderIndustryTabs(industries) {
+    // Remove existing industry tabs if any
+    const existing = document.getElementById('industryTabs');
+    if (existing) existing.remove();
+
+    if (industries.size === 0) return;
+
+    const container = document.createElement('div');
+    container.id = 'industryTabs';
+    container.className = 'tabs';
+    container.style.marginTop = '1rem';
+    container.style.borderBottom = 'none'; // distinct style
+    container.style.gap = '0.5rem';
+
+    // All Tab
+    const allBtn = document.createElement('button');
+    allBtn.className = 'sub-tab-btn active';
+    allBtn.textContent = 'All';
+    allBtn.onclick = () => switchIndustry('All', allBtn);
+    container.appendChild(allBtn);
+
+    // Sort industries alphabetically
+    const sortedIndustries = Array.from(industries).sort();
+
+    sortedIndustries.forEach(ind => {
+        const btn = document.createElement('button');
+        btn.className = 'sub-tab-btn';
+        btn.textContent = ind;
+        btn.onclick = () => switchIndustry(ind, btn);
+        container.appendChild(btn);
+    });
+
+    // Insert before the main content tabs
+    const tabs = document.getElementById('tabs');
+    tabs.parentNode.insertBefore(container, tabs);
+}
+
+function switchIndustry(industry, btn) {
+    currentIndustry = industry;
+
+    // Update active state
+    const container = document.getElementById('industryTabs');
+    container.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Re-render current view
+    renderTable(currentData);
+    if (document.getElementById('chartTab').classList.contains('active')) {
+        renderChart(currentData);
+    }
+}
+
 function renderTable(data) {
     const headerRow = document.getElementById('headerRow');
     const tableBody = document.getElementById('tableBody');
@@ -167,15 +299,20 @@ function renderTable(data) {
         if (data[ticker] === null) {
             invalidTickers.push(ticker);
         } else {
-            validTickers.push(ticker);
+            // Filter by Industry
+            if (currentIndustry === 'All' || data[ticker].Industry === currentIndustry) {
+                validTickers.push(ticker);
+            }
         }
     });
 
-    if (invalidTickers.length > 0) {
-        alert('Invalid ticker(s): ' + invalidTickers.join(', '));
+    if (invalidTickers.length > 0 && currentIndustry === 'All') {
+        // Only show alert if we are in 'All' view to avoid spamming when switching tabs
+        // alert('Invalid ticker(s): ' + invalidTickers.join(', '));
     }
 
     if (validTickers.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="100%" style="text-align:center; color: #94a3b8;">No tickers found for this industry.</td></tr>';
         return;
     }
 
@@ -189,7 +326,9 @@ function renderTable(data) {
     // Metrics
     const allMetrics = new Set();
     validTickers.forEach(ticker => {
-        Object.keys(data[ticker]).forEach(metric => allMetrics.add(metric));
+        Object.keys(data[ticker]).forEach(metric => {
+            if (metric !== 'Industry') allMetrics.add(metric);
+        });
     });
 
     Array.from(allMetrics).sort().forEach(metric => {
@@ -201,12 +340,66 @@ function renderTable(data) {
 
         validTickers.forEach(ticker => {
             const tdValue = document.createElement('td');
-            tdValue.textContent = data[ticker][metric] || '-';
+            const rawValue = data[ticker][metric];
+            tdValue.textContent = rawValue || '-';
+
+            // Apply conditional formatting
+            if (rawValue) {
+                const color = getMetricColor(metric, rawValue);
+                if (color) {
+                    tdValue.style.color = color;
+                    tdValue.style.fontWeight = '600';
+                }
+            }
+
             tr.appendChild(tdValue);
         });
 
         tableBody.appendChild(tr);
     });
+}
+
+function getMetricColor(metric, rawValue) {
+    const value = parseValue(rawValue);
+    if (isNaN(value)) return null;
+
+    const lowerMetric = metric.toLowerCase();
+
+    // Rules
+    if (lowerMetric.includes('p/e') || lowerMetric.includes('price to earning')) {
+        if (value < 25) return '#4ade80'; // Green
+        if (value > 50) return '#f87171'; // Red
+    }
+    else if (lowerMetric.includes('roce') || lowerMetric.includes('return on capital')) {
+        if (value > 20) return '#4ade80';
+        if (value < 10) return '#f87171';
+    }
+    else if (lowerMetric.includes('roe') || lowerMetric.includes('return on equity')) {
+        if (value > 15) return '#4ade80';
+        if (value < 8) return '#f87171';
+    }
+    else if (lowerMetric.includes('dividend yield')) {
+        if (value > 2) return '#4ade80';
+        if (value < 0.5) return '#f87171';
+    }
+    else if (lowerMetric.includes('sales growth') || lowerMetric.includes('profit growth')) {
+        if (value > 10) return '#4ade80';
+        if (value < 0) return '#f87171';
+    }
+    else if (lowerMetric.includes('debt') && lowerMetric.includes('equity')) {
+        if (value < 0.5) return '#4ade80';
+        if (value > 1) return '#f87171';
+    }
+    else if (lowerMetric.includes('price to book')) {
+        if (value < 3) return '#4ade80';
+        if (value > 8) return '#f87171';
+    }
+    else if (lowerMetric.includes('pledged percentage')) {
+        if (value === 0) return '#4ade80';
+        if (value > 0) return '#f87171';
+    }
+
+    return null;
 }
 
 function parseValue(value) {
@@ -229,13 +422,17 @@ function renderChart(data) {
         chartInstance.destroy();
     }
 
-    const validTickers = Object.keys(data).filter(t => data[t] !== null);
+    const validTickers = Object.keys(data).filter(t => {
+        return data[t] !== null && (currentIndustry === 'All' || data[t].Industry === currentIndustry);
+    });
+
     if (validTickers.length === 0) return;
 
     // Collect numeric metrics only
     const numericMetrics = new Set();
     validTickers.forEach(ticker => {
         Object.entries(data[ticker]).forEach(([key, value]) => {
+            if (key === 'Industry') return;
             const val = parseValue(value);
             if (!isNaN(val) && isFinite(val)) {
                 numericMetrics.add(key);
@@ -556,9 +753,22 @@ function renderTickerData(ticker, result, container) {
     const canvasContainer = document.createElement('div');
     canvasContainer.className = 'chart-container';
     canvasContainer.style.height = '400px';
-    const canvas = document.createElement('canvas');
-    canvas.id = `geoChart_${ticker}`;
-    canvasContainer.appendChild(canvas);
+
+    // Check if revenue split data exists
+    const revenueSplit = data.revenueSplit || {};
+    if (Object.keys(revenueSplit).length === 0) {
+        canvasContainer.innerHTML = `
+            <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #94a3b8; flex-direction: column; gap: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <div>Revenue split data not available</div>
+            </div>
+        `;
+    } else {
+        const canvas = document.createElement('canvas');
+        canvas.id = `geoChart_${ticker}`;
+        canvasContainer.appendChild(canvas);
+    }
+
     chartDiv.appendChild(canvasContainer);
 
     // News Section
@@ -610,9 +820,9 @@ function renderTickerData(ticker, result, container) {
     flexContainer.appendChild(newsDiv);
     container.appendChild(flexContainer);
 
-    // Render chart if this tab is currently visible
-    if (container.style.display !== 'none') {
-        renderPieChart(`geoChart_${ticker}`, data.revenueSplit, ticker);
+    // Render chart if this tab is currently visible AND data exists
+    if (container.style.display !== 'none' && Object.keys(revenueSplit).length > 0) {
+        renderPieChart(`geoChart_${ticker}`, revenueSplit, ticker);
     }
 }
 

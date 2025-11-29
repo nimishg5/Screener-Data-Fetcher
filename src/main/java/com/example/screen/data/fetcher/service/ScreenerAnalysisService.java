@@ -241,6 +241,56 @@ public class ScreenerAnalysisService {
                 }
             }
 
+            // Extract Industry/Sector
+            try {
+                String industry = "Others";
+                Element peersSection = doc.selectFirst("#peers");
+
+                // Fallback if #peers ID is not found
+                if (peersSection == null) {
+                    log.warn("#peers section not found for {}, trying text search", ticker);
+                    Elements headers = doc.select("h2");
+                    for (Element h : headers) {
+                        if (h.text().trim().equalsIgnoreCase("Peer comparison")) {
+                            // The content is usually in the parent section or following sibling
+                            peersSection = h.parent();
+                            break;
+                        }
+                    }
+                }
+
+                if (peersSection != null) {
+                    Elements sectorLinks = peersSection.select("a[href*='/market/']");
+                    if (!sectorLinks.isEmpty()) {
+                        industry = sectorLinks.first().text().trim();
+                        log.info("Extracted Industry for {}: {}", ticker, industry);
+                    } else {
+                        log.warn("Peers section found but no market links for {}", ticker);
+                    }
+                } else {
+                    log.warn("Peers section completely missing for {}", ticker);
+                }
+
+                // Fallback: Check for breadcrumbs if peers extraction failed
+                if ("Others".equals(industry)) {
+                    Elements breadcrumbs = doc.select("ul.breadcrumbs li a");
+                    if (breadcrumbs.isEmpty()) {
+                        breadcrumbs = doc.select(".breadcrumbs a");
+                    }
+
+                    if (breadcrumbs.size() > 1) {
+                        industry = breadcrumbs.get(1).text().trim();
+                        log.info("Extracted Industry from breadcrumbs for {}: {}", ticker, industry);
+                    }
+                }
+
+                ratiosMap.put("Industry", industry);
+
+            } catch (Exception e) {
+                log.warn("Failed to extract industry for {}: {}", ticker, e.getMessage());
+                ratiosMap.put("Industry", "Others");
+            }
+
             log.debug("Data for Ticker : {} is : {}", ticker, ratiosMap);
             return ratiosMap;
         } catch (Exception e) {
@@ -491,5 +541,60 @@ public class ScreenerAnalysisService {
             log.error("Error fetching news for {}: {}", country, e.getMessage());
         }
         return newsList;
+    }
+
+    public List<Map<String, String>> searchTickers(String query) {
+        List<Map<String, String>> suggestions = new ArrayList<>();
+        try {
+            String searchUrl = "https://www.screener.in/api/company/search/?q="
+                    + java.net.URLEncoder.encode(query, "UTF-8");
+
+            // Fetch JSON response using Jsoup
+            String jsonResponse = Jsoup.connect(searchUrl)
+                    .ignoreContentType(true)
+                    .header("User-Agent", "Mozilla/5.0")
+                    .execute()
+                    .body();
+
+            log.debug("Search JSON Response: {}", jsonResponse);
+
+            // Parse JSON using Regex to avoid dependency issues
+            // Pattern to match: "name": "...", "url": "..."
+            // We split by "}" to handle multiple objects roughly
+            String[] objects = jsonResponse.split("}");
+
+            java.util.regex.Pattern namePattern = java.util.regex.Pattern.compile("\"name\"\\s*:\\s*\"([^\"]+)\"");
+            java.util.regex.Pattern urlPattern = java.util.regex.Pattern.compile("\"url\"\\s*:\\s*\"([^\"]+)\"");
+
+            for (String obj : objects) {
+                java.util.regex.Matcher nameMatcher = namePattern.matcher(obj);
+                java.util.regex.Matcher urlMatcher = urlPattern.matcher(obj);
+
+                if (nameMatcher.find() && urlMatcher.find()) {
+                    String name = nameMatcher.group(1);
+                    String url = urlMatcher.group(1);
+
+                    // Extract ticker from URL (e.g., /company/TCS/consolidated/ -> TCS)
+                    String ticker = "";
+                    if (url.startsWith("/company/")) {
+                        String[] parts = url.split("/");
+                        if (parts.length > 2) {
+                            ticker = parts[2];
+                        }
+                    }
+
+                    if (!ticker.isEmpty()) {
+                        Map<String, String> item = new HashMap<>();
+                        item.put("ticker", ticker);
+                        item.put("name", name);
+                        suggestions.add(item);
+                    }
+                }
+            }
+
+        } catch (Throwable e) {
+            log.error("Error searching tickers for query: {}", query, e);
+        }
+        return suggestions;
     }
 }
