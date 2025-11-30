@@ -218,6 +218,14 @@ public class ScreenerAnalysisService {
         return tickerNameSet;
     }
 
+    @Autowired
+    private MoneyControlService moneyControlService;
+
+    public Map<String, Object> getCorporateActions(String ticker) {
+        log.info("Fetching corporate actions for {} from Moneycontrol", ticker);
+        return moneyControlService.getCorporateActions(ticker);
+    }
+
     public Map<String, String> findBasicElementsAndAdvanced(String ticker) {
         try {
             final String screenerBasicRatioUrl = "https://www.screener.in/company/" + ticker + "/consolidated/";
