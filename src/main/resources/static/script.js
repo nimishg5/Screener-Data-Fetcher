@@ -152,6 +152,11 @@ function switchTab(tabName) {
     if (tabName === 'geo') {
         fetchGeoAnalysis();
     }
+
+    // Fetch corporate actions if switching to actions tab
+    if (tabName === 'actions') {
+        fetchCorporateActions();
+    }
 }
 
 function updateChartType() {
@@ -983,3 +988,213 @@ document.getElementById('password').addEventListener('keypress', function (e) {
         login();
     }
 });
+
+let actionsResults = {};
+
+async function fetchCorporateActions() {
+    if (tickers.size === 0) return;
+
+    const loading = document.getElementById('loading');
+    const actionsTab = document.getElementById('actionsTab');
+
+    // 1. Initialize UI Structure
+    actionsTab.innerHTML = '';
+
+    const subTabsContainer = document.createElement('div');
+    subTabsContainer.className = 'sub-tabs';
+    subTabsContainer.style.display = 'flex';
+    subTabsContainer.style.gap = '1rem';
+    subTabsContainer.style.marginBottom = '1.5rem';
+    subTabsContainer.style.borderBottom = '1px solid #334155';
+    subTabsContainer.style.paddingBottom = '1rem';
+    actionsTab.appendChild(subTabsContainer);
+
+    const contentContainer = document.createElement('div');
+    actionsTab.appendChild(contentContainer);
+
+    const hasAnyCachedData = Array.from(tickers).some(t => actionsResults[t]);
+    if (!hasAnyCachedData) {
+        loading.style.display = 'block';
+    } else {
+        loading.style.display = 'none';
+    }
+
+    const tickerArray = Array.from(tickers);
+
+    tickerArray.forEach((ticker) => {
+        const btn = document.createElement('button');
+        btn.textContent = ticker;
+        btn.className = 'sub-tab-btn';
+        btn.dataset.ticker = ticker;
+        btn.onclick = () => switchActionsSubTab(ticker);
+        subTabsContainer.appendChild(btn);
+
+        const contentDiv = document.createElement('div');
+        contentDiv.id = `actions-content-${ticker}`;
+        contentDiv.className = 'actions-sub-content';
+        contentDiv.style.display = 'none';
+        contentContainer.appendChild(contentDiv);
+    });
+
+    if (tickerArray.length > 0) {
+        switchActionsSubTab(tickerArray[0]);
+    }
+
+    tickerArray.forEach(async (ticker) => {
+        const contentDiv = document.getElementById(`actions-content-${ticker}`);
+
+        if (actionsResults[ticker]) {
+            renderActionsData(ticker, actionsResults[ticker], contentDiv);
+        } else {
+            // Ensure contentDiv is visible if it's the active one, or just set innerHTML
+            // The visibility is handled by switchActionsSubTab, but we need to make sure content is there
+            contentDiv.innerHTML = `
+                <div class="loading-local" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; color: #94a3b8;">
+                    <div class="loader"></div>
+                    <div style="margin-top: 1rem; font-weight: 500;">Fetching Corporate Actions for ${ticker}...</div>
+                </div>
+            `;
+
+            try {
+                console.log(`Fetching actions for ${ticker}...`);
+                const response = await fetch(`/api/v1/data-fetcher/corporate-actions?ticker=${ticker}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(`Received actions for ${ticker}:`, data);
+                actionsResults[ticker] = { data };
+                renderActionsData(ticker, { data }, contentDiv);
+            } catch (e) {
+                console.error(`Error fetching actions for ${ticker}`, e);
+                actionsResults[ticker] = { error: e.message };
+                renderActionsData(ticker, { error: e.message }, contentDiv);
+            } finally {
+                // If this was the last one, hide global loader (though we are using local loaders now)
+                loading.style.display = 'none';
+            }
+        }
+    });
+}
+
+function switchActionsSubTab(ticker) {
+    document.querySelectorAll('#actionsTab .sub-tab-btn').forEach(btn => {
+        if (btn.dataset.ticker === ticker) btn.classList.add('active');
+        else btn.classList.remove('active');
+    });
+
+    document.querySelectorAll('.actions-sub-content').forEach(div => {
+        div.style.display = 'none';
+    });
+    document.getElementById(`actions-content-${ticker}`).style.display = 'block';
+}
+
+function renderActionsData(ticker, result, container) {
+    container.innerHTML = '';
+    if (result.error) {
+        container.innerHTML = `<div class="error">Failed to load data: ${result.error}</div>`;
+        return;
+    }
+
+    const data = result.data;
+    if (data.error) {
+        container.innerHTML = `<div class="error">${data.error}</div>`;
+        return;
+    }
+
+    const categories = ['dividends', 'bonus', 'splits', 'rights'];
+
+    const grid = document.createElement('div');
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(400px, 1fr))';
+    grid.style.gap = '2rem';
+    container.appendChild(grid);
+
+    categories.forEach(cat => {
+        if (!data[cat]) return;
+
+        const card = document.createElement('div');
+        card.style.background = '#1e293b';
+        card.style.padding = '1.5rem';
+        card.style.borderRadius = '1rem';
+        card.style.border = '1px solid #334155';
+
+        const title = document.createElement('h3');
+        title.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        title.style.marginTop = '0';
+        title.style.color = '#f1f5f9';
+        title.style.borderBottom = '1px solid #334155';
+        title.style.paddingBottom = '0.5rem';
+        card.appendChild(title);
+
+        // Upcoming
+        if (data[cat].upcoming && data[cat].upcoming.length > 0) {
+            const subTitle = document.createElement('h4');
+            subTitle.textContent = 'Upcoming';
+            subTitle.style.color = '#4ade80'; // Green
+            subTitle.style.marginTop = '1rem';
+            card.appendChild(subTitle);
+            card.appendChild(createActionTable(data[cat].upcoming));
+        }
+
+        // Previous
+        if (data[cat].previous && data[cat].previous.length > 0) {
+            const subTitle = document.createElement('h4');
+            subTitle.textContent = 'Previous';
+            subTitle.style.color = '#94a3b8'; // Muted
+            subTitle.style.marginTop = '1rem';
+            card.appendChild(subTitle);
+            card.appendChild(createActionTable(data[cat].previous.slice(0, 5))); // Limit to 5
+        } else if (!data[cat].upcoming || data[cat].upcoming.length === 0) {
+            const empty = document.createElement('div');
+            empty.textContent = 'No data available';
+            empty.style.color = '#64748b';
+            empty.style.fontStyle = 'italic';
+            empty.style.marginTop = '1rem';
+            card.appendChild(empty);
+        }
+
+        grid.appendChild(card);
+    });
+}
+
+function createActionTable(rows) {
+    const table = document.createElement('table');
+    table.style.width = '100%';
+    table.style.fontSize = '0.9rem';
+    table.style.marginTop = '0.5rem';
+
+    // Headers
+    if (rows.length > 0) {
+        const thead = document.createElement('thead');
+        const tr = document.createElement('tr');
+        Object.keys(rows[0]).forEach(key => {
+            const th = document.createElement('th');
+            th.textContent = key;
+            th.style.padding = '0.5rem';
+            th.style.color = '#94a3b8';
+            th.style.fontSize = '0.8rem';
+            th.style.textAlign = 'left';
+            th.style.borderBottom = '1px solid #334155';
+            tr.appendChild(th);
+        });
+        thead.appendChild(tr);
+        table.appendChild(thead);
+    }
+
+    const tbody = document.createElement('tbody');
+    rows.forEach(row => {
+        const tr = document.createElement('tr');
+        Object.values(row).forEach(val => {
+            const td = document.createElement('td');
+            td.textContent = val;
+            td.style.padding = '0.5rem';
+            td.style.borderBottom = '1px solid #334155';
+            td.style.color = '#e2e8f0';
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    return table;
+}

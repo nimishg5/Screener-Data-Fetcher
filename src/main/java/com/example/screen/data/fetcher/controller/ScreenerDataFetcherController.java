@@ -92,4 +92,12 @@ public class ScreenerDataFetcherController {
         return new ResponseEntity<>(suggestions, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/corporate-actions")
+    public ResponseEntity<java.util.Map<String, Object>> getCorporateActions(
+            @RequestParam(value = "ticker") String ticker) {
+        log.info("Corporate actions request received for ticker: {}", ticker);
+        java.util.Map<String, Object> data = screenerAnalysisService.getCorporateActions(ticker);
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
 }
