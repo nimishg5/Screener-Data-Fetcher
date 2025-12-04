@@ -17,10 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 public class ScreenerDataFetcherController {
 
     @Autowired
-    private ScreenerDataFetcherService screenerDataFetcherService;
+    private ScreenerAnalysisService screenerAnalysisService;
 
     @Autowired
-    private ScreenerAnalysisService screenerAnalysisService;
+    private com.example.screen.data.fetcher.service.NewsAnalysisService newsAnalysisService;
 
     @GetMapping(value = "/ticker/{ticker}")
     public ResponseEntity<String> fetchDataForTicker(
@@ -97,6 +97,14 @@ public class ScreenerDataFetcherController {
             @RequestParam(value = "ticker") String ticker) {
         log.info("Corporate actions request received for ticker: {}", ticker);
         java.util.Map<String, Object> data = screenerAnalysisService.getCorporateActions(ticker);
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/news-analysis")
+    public ResponseEntity<java.util.Map<String, Object>> getNewsAnalysis(
+            @RequestParam(value = "ticker") String ticker) {
+        log.info("News analysis request received for ticker: {}", ticker);
+        java.util.Map<String, Object> data = newsAnalysisService.analyzeStockNews(ticker);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 

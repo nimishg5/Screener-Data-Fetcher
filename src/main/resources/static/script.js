@@ -781,53 +781,206 @@ function renderTickerData(ticker, result, container) {
     newsDiv.style.flex = '1';
     newsDiv.style.minWidth = '300px';
 
-    const newsTitle = document.createElement('h3');
-    newsTitle.textContent = 'Recent Impact News';
-    newsDiv.appendChild(newsTitle);
+    // News Tabs
+    const newsTabs = document.createElement('div');
+    newsTabs.className = 'tabs';
+    newsTabs.style.marginBottom = '1rem';
+    newsTabs.style.borderBottom = '1px solid #334155';
 
-    const newsContainer = document.createElement('div');
-    newsContainer.style.display = 'flex';
-    newsContainer.style.flexDirection = 'column';
-    newsContainer.style.gap = '1rem';
+    const aiTabBtn = document.createElement('button');
+    aiTabBtn.className = 'sub-tab-btn active';
+    aiTabBtn.textContent = 'AI Insights';
+    aiTabBtn.onclick = () => switchNewsTab(ticker, 'ai', aiTabBtn);
+
+    const rawTabBtn = document.createElement('button');
+    rawTabBtn.className = 'sub-tab-btn';
+    rawTabBtn.textContent = 'Raw News';
+    rawTabBtn.onclick = () => switchNewsTab(ticker, 'raw', rawTabBtn);
+
+    newsTabs.appendChild(aiTabBtn);
+    newsTabs.appendChild(rawTabBtn);
+    newsDiv.appendChild(newsTabs);
+
+    // AI Content
+    const aiContent = document.createElement('div');
+    aiContent.id = `news-ai-${ticker}`;
+    aiContent.style.display = 'block';
+    aiContent.innerHTML = `
+        <div class="loading-local" style="text-align: center; padding: 2rem; color: #94a3b8;">
+            <div class="loader" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            <div style="margin-top: 0.5rem; font-size: 0.9rem;">Analyzing news impact...</div>
+        </div>
+    `;
+    newsDiv.appendChild(aiContent);
+
+    // Raw Content
+    const rawContent = document.createElement('div');
+    rawContent.id = `news-raw-${ticker}`;
+    rawContent.style.display = 'none';
 
     const countryNews = data.news || {};
     if (Object.keys(countryNews).length === 0) {
-        newsContainer.innerHTML = '<div style="color: #94a3b8;">No recent news found.</div>';
+        rawContent.innerHTML = '<div style="color: #94a3b8;">No recent news found.</div>';
     } else {
+        const list = document.createElement('div');
+        list.style.display = 'flex';
+        list.style.flexDirection = 'column';
+        list.style.gap = '1rem';
+
         for (const [country, newsList] of Object.entries(countryNews)) {
             if (!newsList || newsList.length === 0) continue;
 
             const countryHeader = document.createElement('h4');
             countryHeader.textContent = country;
-            countryHeader.style.color = '#60a5fa';
-            countryHeader.style.marginTop = '1rem';
-            newsContainer.appendChild(countryHeader);
+            countryHeader.style.color = 'var(--accent-color)';
+            countryHeader.style.marginBottom = '0.5rem';
+            countryHeader.style.marginTop = '0';
+            list.appendChild(countryHeader);
 
             newsList.forEach(item => {
                 const newsItem = document.createElement('div');
-                newsItem.style.padding = '1rem';
-                newsItem.style.backgroundColor = '#334155';
+                newsItem.className = 'news-item';
+                newsItem.style.padding = '0.75rem';
+                newsItem.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
                 newsItem.style.borderRadius = '0.5rem';
                 newsItem.style.marginBottom = '0.5rem';
+
                 newsItem.innerHTML = `
-                    <div style="font-weight: 600; margin-bottom: 0.25rem;">
-                        <a href="${item.link}" target="_blank" style="color: #e2e8f0; text-decoration: none;">${item.title}</a>
+                    <div style="font-weight: 500; margin-bottom: 0.25rem;">
+                        <a href="${item.link}" target="_blank" style="color: var(--text-color); text-decoration: none; hover: text-decoration: underline;">${item.title}</a>
                     </div>
-                    <div style="font-size: 0.875rem; color: #94a3b8;">${item.pubDate}</div>
+                    <div style="font-size: 0.8rem; color: #94a3b8;">${item.pubDate}</div>
                 `;
-                newsContainer.appendChild(newsItem);
+                list.appendChild(newsItem);
             });
         }
+        rawContent.appendChild(list);
     }
-    newsDiv.appendChild(newsContainer);
+    newsDiv.appendChild(rawContent);
 
     flexContainer.appendChild(chartDiv);
     flexContainer.appendChild(newsDiv);
     container.appendChild(flexContainer);
 
-    // Render chart if this tab is currently visible AND data exists
-    if (container.style.display !== 'none' && Object.keys(revenueSplit).length > 0) {
-        renderPieChart(`geoChart_${ticker}`, revenueSplit, ticker);
+    // Render Chart
+    if (Object.keys(revenueSplit).length > 0) {
+        const ctx = document.getElementById(`geoChart_${ticker}`).getContext('2d');
+
+        // Prepare data for Pie/Doughnut
+        const labels = Object.keys(revenueSplit);
+        const values = Object.values(revenueSplit);
+
+        const colors = [
+            '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'
+        ];
+
+        geoChartInstances[ticker] = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: colors,
+                    borderColor: '#0f172a',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#cbd5e1' }
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        formatter: (value) => value + '%'
+                    }
+                }
+            }
+        });
+    }
+
+    // Fetch AI Analysis
+    fetchAiAnalysis(ticker);
+}
+
+function switchNewsTab(ticker, tab, btn) {
+    const parent = btn.parentNode;
+    parent.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.getElementById(`news-ai-${ticker}`).style.display = tab === 'ai' ? 'block' : 'none';
+    document.getElementById(`news-raw-${ticker}`).style.display = tab === 'raw' ? 'block' : 'none';
+}
+
+async function fetchAiAnalysis(ticker) {
+    const container = document.getElementById(`news-ai-${ticker}`);
+    try {
+        const response = await fetch(`/api/v1/data-fetcher/news-analysis?ticker=${ticker}`);
+        if (!response.ok) throw new Error('Failed to fetch analysis');
+        const data = await response.json();
+
+        const aiData = data.aiAnalysis;
+        if (!aiData) {
+            container.innerHTML = '<div style="color: #94a3b8;">No analysis available.</div>';
+            return;
+        }
+
+        let html = '';
+
+        // Summary
+        if (aiData.summary) {
+            // Convert hyphens or newlines to list items
+            const summaryText = aiData.summary;
+            let summaryHtml = '';
+
+            if (summaryText.includes('- ')) {
+                const items = summaryText.split('- ').filter(item => item.trim().length > 0);
+                summaryHtml = '<ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem; line-height: 1.5;">';
+                items.forEach(item => {
+                    summaryHtml += `<li style="margin-bottom: 0.5rem;">${item.trim()}</li>`;
+                });
+                summaryHtml += '</ul>';
+            } else {
+                // Fallback for paragraph text
+                summaryHtml = `<p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">${summaryText}</p>`;
+            }
+
+            html += `
+                <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <h4 style="margin-top: 0; color: var(--primary-color); margin-bottom: 0.5rem;">AI Summary</h4>
+                    ${summaryHtml}
+                </div>
+            `;
+        }
+
+        // Scored News
+        if (aiData.scoredNews && aiData.scoredNews.length > 0) {
+            html += '<h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">High Impact News</h4>';
+            aiData.scoredNews.forEach(item => {
+                const scoreColor = item.score >= 8 ? '#ef4444' : (item.score >= 6 ? '#f59e0b' : '#10b981');
+                html += `
+                    <div style="padding: 0.75rem; background-color: rgba(255, 255, 255, 0.03); border-radius: 0.5rem; margin-bottom: 0.5rem; border-left: 3px solid ${scoreColor};">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem;">
+                            <a href="${item.link}" target="_blank" style="font-weight: 500; color: var(--text-color); text-decoration: none; flex: 1; margin-right: 0.5rem;">${item.title}</a>
+                            <span style="background: ${scoreColor}; color: #000; font-size: 0.7rem; font-weight: bold; padding: 0.1rem 0.4rem; border-radius: 1rem;">${item.score}/10</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.25rem;">${item.reason}</div>
+                        <div style="font-size: 0.75rem; color: #94a3b8;">${item.pubDate || ''}</div>
+                    </div>
+                `;
+            });
+        } else {
+            html += '<div style="color: #94a3b8; font-size: 0.9rem;">No high-impact news found.</div>';
+        }
+
+        container.innerHTML = html;
+
+    } catch (e) {
+        console.error('Error fetching AI analysis', e);
+        container.innerHTML = '<div class="error" style="font-size: 0.9rem;">Failed to load AI insights.</div>';
     }
 }
 
@@ -1049,11 +1202,11 @@ async function fetchCorporateActions() {
             // Ensure contentDiv is visible if it's the active one, or just set innerHTML
             // The visibility is handled by switchActionsSubTab, but we need to make sure content is there
             contentDiv.innerHTML = `
-                <div class="loading-local" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; color: #94a3b8;">
-                    <div class="loader"></div>
-                    <div style="margin-top: 1rem; font-weight: 500;">Fetching Corporate Actions for ${ticker}...</div>
-                </div>
-            `;
+<div class="loading-local" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; color: #94a3b8;">
+    <div class="loader"></div>
+    <div style="margin-top: 1rem; font-weight: 500;">Fetching Corporate Actions for ${ticker}...</div>
+</div>
+`;
 
             try {
                 console.log(`Fetching actions for ${ticker}...`);

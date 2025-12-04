@@ -31,7 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+application-local.yml
+application-local.yaml
 src/main/resources/application-local.yml
-src/main/resources/application-local.yml
+src/main/resources/application-local.yaml
 application-*.log
 application.log
+logs/
