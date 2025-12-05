@@ -21,4 +21,9 @@ public class ScreenDataFetcherApplication {
         return new RestTemplate();
     }
 
+    @Bean
+    public com.fasterxml.jackson.databind.ObjectMapper objectMapper() {
+        return new com.fasterxml.jackson.databind.ObjectMapper();
+    }
+
 }

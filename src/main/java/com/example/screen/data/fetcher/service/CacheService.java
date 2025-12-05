@@ -1,46 +1,84 @@
 package com.example.screen.data.fetcher.service;
 
+import com.example.screen.data.fetcher.entity.CacheData;
+import com.example.screen.data.fetcher.repository.CacheDataRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class CacheService {
 
-    private final Map<String, CacheEntry<?>> cache = new ConcurrentHashMap<>();
+    @Autowired
+    private CacheDataRepository cacheDataRepository;
 
-    private static class CacheEntry<T> {
-        T value;
-        long expiryTime;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-        CacheEntry(T value, long expiryTime) {
-            this.value = value;
-            this.expiryTime = expiryTime;
+    public <T> void put(String key, T value, long ttlMillis) {
+        try {
+            String jsonValue = objectMapper.writeValueAsString(value);
+            CacheData data = new CacheData(key, jsonValue, LocalDateTime.now());
+            cacheDataRepository.save(data);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public <T> void put(String key, T value, long ttlMillis) {
-        cache.put(key, new CacheEntry<>(value, System.currentTimeMillis() + ttlMillis));
+    public <T> T get(String key, Class<T> clazz) {
+        try {
+            Optional<CacheData> data = cacheDataRepository.findById(key);
+            if (data.isPresent()) {
+                return objectMapper.readValue(data.get().getValue(), clazz);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T get(String key) {
-        CacheEntry<?> entry = cache.get(key);
-        if (entry != null) {
-            if (System.currentTimeMillis() < entry.expiryTime) {
-                return (T) entry.value;
-            } else {
-                cache.remove(key);
+    public <T> T get(String key, TypeReference<T> typeReference) {
+        try {
+            Optional<CacheData> data = cacheDataRepository.findById(key);
+            if (data.isPresent()) {
+                return objectMapper.readValue(data.get().getValue(), typeReference);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Deprecated: Try to avoid using this as it relies on default typing which
+    // might be tricky
+    public Object get(String key) {
+        try {
+            Optional<CacheData> data = cacheDataRepository.findById(key);
+            if (data.isPresent()) {
+                // Default to Map or List
+                return objectMapper.readValue(data.get().getValue(), Object.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     public void remove(String key) {
-        cache.remove(key);
+        cacheDataRepository.deleteById(key);
     }
 
     public void clear() {
-        cache.clear();
+        cacheDataRepository.deleteAll();
+    }
+
+    public LocalDateTime getLastUpdated(String key) {
+        return cacheDataRepository.findById(key)
+                .map(CacheData::getLastUpdated)
+                .orElse(null);
     }
 }

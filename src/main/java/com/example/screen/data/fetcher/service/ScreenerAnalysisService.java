@@ -446,7 +446,27 @@ public class ScreenerAnalysisService {
     @Autowired
     private NewsService newsService;
 
-    public Map<String, Object> getGeoAnalysis(String ticker) {
+    @Autowired
+    private CacheService cacheService;
+
+    public Map<String, Object> getGeoAnalysis(String ticker, boolean refresh) {
+        String cacheKey = "GEO_ANALYSIS_" + ticker;
+        if (refresh) {
+            cacheService.remove(cacheKey);
+        }
+
+        Map<String, Object> cachedResult = cacheService.get(cacheKey,
+                new com.fasterxml.jackson.core.type.TypeReference<Map<String, Object>>() {
+                });
+        if (cachedResult != null) {
+            log.info("Returning cached Geo Analysis for {}", ticker);
+            java.time.LocalDateTime lastUpdated = cacheService.getLastUpdated(cacheKey);
+            if (lastUpdated != null) {
+                cachedResult.put("fetchedAt", lastUpdated.toString());
+            }
+            return cachedResult;
+        }
+
         Map<String, Object> result = new HashMap<>();
         try {
             // 1. Fetch Revenue Split
@@ -497,16 +517,45 @@ public class ScreenerAnalysisService {
                     continue;
 
                 String query = ticker + " " + region;
-                List<Map<String, String>> news = newsService.fetchNews(query);
+                List<Map<String, String>> news = newsService.fetchNews(query, refresh);
+
+                // Sort news by date
+                news.sort((n1, n2) -> {
+                    String d1 = n1.get("pubDate");
+                    String d2 = n2.get("pubDate");
+                    if (d1 == null)
+                        return 1;
+                    if (d2 == null)
+                        return -1;
+                    return parseDate(d2).compareTo(parseDate(d1)); // Descending
+                });
+
                 countryNews.put(region, news);
             }
             result.put("news", countryNews);
+
+            // Cache the result
+            cacheService.put(cacheKey, result, 2L * 24 * 60 * 60 * 1000); // 2 days
+            result.put("fetchedAt", java.time.LocalDateTime.now().toString());
 
         } catch (Exception e) {
             log.error("Error in getGeoAnalysis", e);
             result.put("error", e.getMessage());
         }
         return result;
+    }
+
+    private java.time.ZonedDateTime parseDate(String dateStr) {
+        try {
+            return java.time.ZonedDateTime.parse(dateStr, java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME);
+        } catch (Exception e) {
+            // Fallback or return min date
+            return java.time.ZonedDateTime.now().minusYears(10);
+        }
+    }
+
+    public Map<String, Object> getGeoAnalysis(String ticker) {
+        return getGeoAnalysis(ticker, false);
     }
 
     public List<Map<String, String>> searchTickers(String query) {

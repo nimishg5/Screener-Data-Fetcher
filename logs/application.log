@@ -1255,3 +1255,894 @@ java.lang.RuntimeException: Gemini API returned status 400: {
 2025-12-04 19:45:46 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Vizhinjam International Seaport
 2025-12-04 19:45:46 [http-nio-8080-exec-10] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Vizhinjam+International+Seaport+business&hl=en-IN&gl=IN&ceid=IN:en
 2025-12-04 19:45:48 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for ADANIPORTS
+2025-12-05 10:16:00 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 56387 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:16:00 [restartedMain] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:16:00 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:16:00 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:00 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:16:00 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 145 ms
+2025-12-05 10:16:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-12-05 10:16:00 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection conn11: url=jdbc:h2:mem:f5fe9b16-e14e-44f9-824b-33b1fd7e8ed0 user=SA
+2025-12-05 10:16:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-12-05 10:16:00 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:16:00 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:f5fe9b16-e14e-44f9-824b-33b1fd7e8ed0]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: F5FE9B16-E14E-44F9-824B-33B1FD7E8ED0/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:16:00 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:16:00 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:16:00 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:16:00 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 0.38 seconds (process running for 154.941)
+2025-12-05 10:16:00 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2025-12-05 10:16:00 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:16:02 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 19 class path changes (0 additions, 0 deletions, 19 modifications)
+2025-12-05 10:16:02 [Thread-7] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 10:16:02 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:02 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 10:16:02 [Thread-7] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:02 [Thread-7] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:16:02 [Thread-7] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
+2025-12-05 10:16:02 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-12-05 10:16:02 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-12-05 10:16:02 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 56387 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:16:02 [restartedMain] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:16:02 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:16:02 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:02 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:16:02 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 128 ms
+2025-12-05 10:16:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2025-12-05 10:16:02 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection conn21: url=jdbc:h2:mem:43dffb0a-9d53-4e9d-add5-3490475d724e user=SA
+2025-12-05 10:16:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2025-12-05 10:16:02 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:16:02 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:43dffb0a-9d53-4e9d-add5-3490475d724e]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: 43DFFB0A-9D53-4E9D-ADD5-3490475D724E/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:16:02 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:16:02 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:16:02 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:16:02 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 0.351 seconds (process running for 156.702)
+2025-12-05 10:16:02 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2025-12-05 10:16:02 [restartedMain] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:16:04 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 10:16:04 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 10:16:04 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:16:04 [SpringApplicationShutdownHook] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-240]
+2025-12-05 10:16:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2025-12-05 10:16:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2025-12-05 10:16:13 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 56880 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:16:13 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:16:13 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:16:13 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:16:13 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:13 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:16:13 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:16:13 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 461 ms
+2025-12-05 10:16:14 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:16:14 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:16:14 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:16:14 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:16:14 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 1.035 seconds (process running for 1.266)
+2025-12-05 10:16:14 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:17:36 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 10:17:36 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 10:17:36 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-05 10:17:41 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 10:17:41 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 10:17:41 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = Mh15zsHCdRYloRLibYc9f8VIVBhTRIx8
+2025-12-05 10:17:42 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 10:17:42 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 10:17:42 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 10:23:19 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 10:23:20 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 10:23:48 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 57638 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:23:48 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:23:48 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:23:48 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:23:48 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 1 JPA repository interface.
+2025-12-05 10:23:48 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:23:48 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:23:48 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:23:48 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:23:49 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 587 ms
+2025-12-05 10:23:49 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:23:49 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:23:49 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:23:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:23:49 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:23:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:23:49 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:23:49 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:23:49 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:23:49 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:23:50 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:23:50 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'screenerDataFetcherController': Unsatisfied dependency expressed through field 'screenerAnalysisService': Error creating bean with name 'screenerAnalysisService': Unsatisfied dependency expressed through field 'newsService': Error creating bean with name 'newsService': Unsatisfied dependency expressed through field 'cacheService': Error creating bean with name 'cacheService': Unsatisfied dependency expressed through field 'objectMapper': No qualifying bean of type 'com.fasterxml.jackson.databind.ObjectMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-12-05 10:23:50 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:23:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 10:23:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 10:23:50 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-12-05 10:23:50 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-05 10:23:50 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field objectMapper in com.example.screen.data.fetcher.service.CacheService required a bean of type 'com.fasterxml.jackson.databind.ObjectMapper' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.fasterxml.jackson.databind.ObjectMapper' in your configuration.
+
+2025-12-05 10:24:21 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 57873 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:24:21 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:24:21 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:24:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:24:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interface.
+2025-12-05 10:24:21 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:24:21 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:24:21 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:24:21 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:24:21 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 607 ms
+2025-12-05 10:24:21 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:24:21 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:24:21 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:24:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:24:22 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:24:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:24:22 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:24:22 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:24:22 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:24:22 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:24:22 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:24:22 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:24:22 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:24:23 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:24:23 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:24:23 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:24:23 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.368 seconds (process running for 2.614)
+2025-12-05 10:24:23 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:28:14 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 58110 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:28:14 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:28:14 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:28:15 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:28:15 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:28:15 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:28:15 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:28:15 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:28:15 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:28:15 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 674 ms
+2025-12-05 10:28:15 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:28:15 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:28:15 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:28:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:28:15 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:28:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:28:15 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:28:15 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:28:16 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:28:16 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:28:16 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:28:16 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:28:16 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:28:16 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:28:16 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:28:16 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-12-05 10:28:16 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:28:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 10:28:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 10:28:16 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-05 10:28:16 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-12-05 10:28:23 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 10:28:23 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 10:28:23 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:28:23 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 10:28:23 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 10:28:36 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 58576 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:28:36 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:28:36 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:28:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:28:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:28:37 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:28:37 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:28:37 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:28:37 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:28:37 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 614 ms
+2025-12-05 10:28:37 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:28:37 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:28:37 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:28:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:28:37 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:28:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:28:37 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:28:37 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:28:38 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:28:38 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:28:38 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:28:38 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:28:38 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:28:38 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:28:38 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:28:38 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:28:38 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.213 seconds (process running for 2.443)
+2025-12-05 10:28:38 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:29:21 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 10:29:21 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 10:29:21 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-12-05 10:29:30 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 10:29:30 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 10:29:30 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = upOd97o7mcme9gixZTdTtpE6jKroPsWg
+2025-12-05 10:29:30 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 10:29:30 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 10:29:30 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 10:29:31 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 10:29:32 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 10:29:32 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 10:29:32 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.85, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,247, Stock P/E=23.4, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.8, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,74,793}
+2025-12-05 10:29:32 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 10:29:32 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 10:29:32 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.69, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,612, Stock P/E=23.8, Dividend Yield=2.66, ROCE=37.5, Down from 52w high=19.7, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,69,767}
+2025-12-05 10:29:33 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:29:33 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:29:33 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for TCS: Tata Consultancy Services is the flagship company and a part of Tata group. It is an IT services, consulting and business solutions organization that has been partnering with many of the world's largest businesses in their transformation journeys for over 50 years. TCS offers a consulting-led, cognitive powered, integrated portfolio of business, technology and engineering services and solutions. [1]
+2025-12-05 10:29:33 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:33 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for INFY: Infosys Ltd provides consulting, technology, outsourcing and next-generation digital services to enable clients to execute strategies for their digital transformation.[1] It is the 2nd largest Information Technology company in India behind TCS.[2]
+2025-12-05 10:29:33 [http-nio-8080-exec-9] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=INFY+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:34 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:34 [http-nio-8080-exec-9] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=INFY+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:35 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY
+2025-12-05 10:29:35 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS
+2025-12-05 10:29:35 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for TCS
+2025-12-05 10:29:35 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for INFY
+2025-12-05 10:29:44 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: INFY
+2025-12-05 10:29:44 [http-nio-8080-exec-10] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=INFY+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:45 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys Consulting
+2025-12-05 10:29:45 [http-nio-8080-exec-10] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Infosys+Consulting+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:46 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys BPM
+2025-12-05 10:29:46 [http-nio-8080-exec-10] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Infosys+BPM+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:47 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys Finacle
+2025-12-05 10:29:47 [http-nio-8080-exec-10] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Infosys+Finacle+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:48 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS
+2025-12-05 10:29:48 [http-nio-8080-exec-1] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:48 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys Public Services
+2025-12-05 10:29:48 [http-nio-8080-exec-10] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Infosys+Public+Services+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:48 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS BaNCS
+2025-12-05 10:29:48 [http-nio-8080-exec-1] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+BaNCS+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:49 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys Cobalt
+2025-12-05 10:29:49 [http-nio-8080-exec-10] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Infosys+Cobalt+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:49 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS iON
+2025-12-05 10:29:49 [http-nio-8080-exec-1] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+iON+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:49 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for INFY
+2025-12-05 10:29:50 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Tata Consultancy Services (China) Co., Ltd.
+2025-12-05 10:29:50 [http-nio-8080-exec-1] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Tata+Consultancy+Services+%28China%29+Co.%2C+Ltd.+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:50 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS Research & Innovation Network
+2025-12-05 10:29:50 [http-nio-8080-exec-1] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+Research+%26+Innovation+Network+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:29:52 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for TCS
+2025-12-05 10:30:00 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: INFY
+2025-12-05 10:30:00 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for INFY from Moneycontrol
+2025-12-05 10:30:00 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: TCS
+2025-12-05 10:30:00 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for TCS from Moneycontrol
+2025-12-05 10:30:00 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for TCS: Slug=tataconsultancyservices, ID=TCS
+2025-12-05 10:30:00 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/dividends/TCS/
+2025-12-05 10:30:00 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for INFY: Slug=infosys, ID=IT
+2025-12-05 10:30:00 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/infosys/dividends/IT/
+2025-12-05 10:30:01 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Dividends > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 10:30:01 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 10:30:01 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/bonus/TCS/
+2025-12-05 10:30:01 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Dividends > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 10:30:01 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 10:30:01 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/infosys/bonus/IT/
+2025-12-05 10:30:01 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Bonus > Computers - Software > Bonus declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 10:30:01 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 10:30:01 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/infosys/splits/IT/
+2025-12-05 10:30:01 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Bonus > Computers - Software > Bonus declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 10:30:01 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 10:30:01 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 10:30:02 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Splits > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 10:30:02 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Split Date, Old FV, New FV, Remarks]
+2025-12-05 10:30:02 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 10:30:02 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Splits > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 10:30:02 [http-nio-8080-exec-2] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for splits on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 10:30:02 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 10:30:02 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Rights > Computers - Software > Rights declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 10:30:02 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 10:30:02 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Rights > Computers - Software > Rights declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 10:30:02 [http-nio-8080-exec-2] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 10:30:04 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY
+2025-12-05 10:30:04 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS
+2025-12-05 10:30:04 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for TCS
+2025-12-05 10:30:04 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for INFY
+2025-12-05 10:30:10 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: INFY
+2025-12-05 10:30:10 [http-nio-8080-exec-5] INFO  c.e.s.d.fetcher.service.NewsService - Fetching news from cache for query: INFY
+2025-12-05 10:30:10 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys Consulting
+2025-12-05 10:30:10 [http-nio-8080-exec-5] INFO  c.e.s.d.fetcher.service.NewsService - Fetching news from cache for query: Infosys Consulting
+2025-12-05 10:30:10 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: EdgeVerve Systems
+2025-12-05 10:30:10 [http-nio-8080-exec-5] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=EdgeVerve+Systems+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:30:11 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys BPM
+2025-12-05 10:30:11 [http-nio-8080-exec-5] INFO  c.e.s.d.fetcher.service.NewsService - Fetching news from cache for query: Infosys BPM
+2025-12-05 10:30:11 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Simplus
+2025-12-05 10:30:11 [http-nio-8080-exec-5] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Simplus+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:30:12 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for INFY
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.fetcher.service.NewsService - Fetching news from cache for query: TCS
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS BaNCS
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.fetcher.service.NewsService - Fetching news from cache for query: TCS BaNCS
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS iON
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.fetcher.service.NewsService - Fetching news from cache for query: TCS iON
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS Diligenta
+2025-12-05 10:30:13 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+Diligenta+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:30:13 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS ignio™
+2025-12-05 10:30:13 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+ignio%E2%84%A2+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:30:14 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for TCS
+2025-12-05 10:30:27 [http-nio-8080-exec-5] ERROR c.e.s.d.fetcher.service.LlmService - Error scoring news with LLM
+java.lang.RuntimeException: Gemini API returned status 429: {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10, model: gemini-2.5-flash\nPlease retry in 33.314160619s.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Learn more about Gemini API quotas",
+            "url": "https://ai.google.dev/gemini-api/docs/rate-limits"
+          }
+        ]
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+        "violations": [
+          {
+            "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+            "quotaId": "GenerateRequestsPerMinutePerProjectPerModel-FreeTier",
+            "quotaDimensions": {
+              "location": "global",
+              "model": "gemini-2.5-flash"
+            },
+            "quotaValue": "10"
+          }
+        ]
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.RetryInfo",
+        "retryDelay": "33s"
+      }
+    ]
+  }
+}
+
+	at com.example.screen.data.fetcher.service.LlmService.callGemini(LlmService.java:194)
+	at com.example.screen.data.fetcher.service.LlmService.callLlm(LlmService.java:167)
+	at com.example.screen.data.fetcher.service.LlmService.filterAndScoreNews(LlmService.java:122)
+	at com.example.screen.data.fetcher.service.NewsAnalysisService.analyzeStockNews(NewsAnalysisService.java:69)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.getNewsAnalysis(ScreenerDataFetcherController.java:109)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 10:31:19 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 10:31:19 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 10:31:19 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 10:31:19 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.85, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,248, Stock P/E=23.4, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.7, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,75,209}
+2025-12-05 10:31:20 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 10:31:20 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 10:31:20 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.69, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,611, Stock P/E=23.8, Dividend Yield=2.66, ROCE=37.5, Down from 52w high=19.7, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,69,435}
+2025-12-05 10:31:21 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS
+2025-12-05 10:31:21 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY
+2025-12-05 10:31:21 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 10:31:21 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:31:30 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: true
+2025-12-05 10:31:30 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for TCS: Tata Consultancy Services is the flagship company and a part of Tata group. It is an IT services, consulting and business solutions organization that has been partnering with many of the world's largest businesses in their transformation journeys for over 50 years. TCS offers a consulting-led, cognitive powered, integrated portfolio of business, technology and engineering services and solutions. [1]
+2025-12-05 10:31:30 [http-nio-8080-exec-1] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:31:30 [http-nio-8080-exec-1] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:31:30 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS
+2025-12-05 10:31:30 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:31:33 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: true
+2025-12-05 10:31:33 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for TCS: Tata Consultancy Services is the flagship company and a part of Tata group. It is an IT services, consulting and business solutions organization that has been partnering with many of the world's largest businesses in their transformation journeys for over 50 years. TCS offers a consulting-led, cognitive powered, integrated portfolio of business, technology and engineering services and solutions. [1]
+2025-12-05 10:31:33 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:31:33 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:31:33 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS
+2025-12-05 10:31:33 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:32:43 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 58835 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:32:43 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:32:43 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:32:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:32:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28 ms. Found 1 JPA repository interface.
+2025-12-05 10:32:44 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:32:44 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:32:44 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:32:44 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:32:44 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 720 ms
+2025-12-05 10:32:44 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:32:44 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:32:44 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:32:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:32:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:32:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:32:44 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:32:44 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:32:45 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:32:45 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:32:45 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:32:45 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:32:45 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:32:45 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:32:45 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:32:45 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-12-05 10:32:45 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:32:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 10:32:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 10:32:45 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-05 10:32:45 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-12-05 10:32:51 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 10:32:51 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 10:32:51 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:32:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 10:32:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 10:32:59 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 59222 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:32:59 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:32:59 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:33:00 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:33:00 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25 ms. Found 1 JPA repository interface.
+2025-12-05 10:33:00 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:33:00 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:33:00 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:33:00 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:33:00 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 618 ms
+2025-12-05 10:33:00 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:33:00 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:33:00 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:33:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:33:01 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:33:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:33:01 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:33:01 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:33:01 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:33:01 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:33:01 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:33:01 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:33:01 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:33:01 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:33:01 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:33:01 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:33:01 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.271 seconds (process running for 2.528)
+2025-12-05 10:33:01 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:35:06 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 59449 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:35:06 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:35:06 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:35:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:35:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:35:06 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:35:06 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:35:06 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:35:06 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:35:06 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 653 ms
+2025-12-05 10:35:06 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:35:06 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:35:07 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:35:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:35:07 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:35:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:35:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:35:07 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:35:07 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:35:07 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:35:07 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:35:07 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:35:07 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:35:08 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:35:08 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:35:08 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-12-05 10:35:08 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:35:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 10:35:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 10:35:08 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-05 10:35:08 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-12-05 10:35:13 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 10:35:13 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 10:35:13 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:35:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 10:35:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 10:35:21 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 59834 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:35:21 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:35:21 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:35:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:35:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:35:22 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:35:22 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:35:22 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:35:22 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:35:22 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 683 ms
+2025-12-05 10:35:22 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:35:22 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:35:22 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:35:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:35:22 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:35:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:35:22 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:35:22 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:35:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:35:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:35:23 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:35:23 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:35:23 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:35:23 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:35:23 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:35:23 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:35:23 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.283 seconds (process running for 2.514)
+2025-12-05 10:35:23 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:38:56 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 60220 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:38:56 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:38:56 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:38:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:38:56 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:38:57 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:38:57 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:38:57 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:38:57 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:38:57 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 640 ms
+2025-12-05 10:38:57 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:38:57 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:38:57 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:38:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:39:00 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:39:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:39:00 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:39:00 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:39:01 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:39:01 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:39:01 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:39:01 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:39:01 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:39:01 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:39:01 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:39:01 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:39:01 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 5.659 seconds (process running for 5.903)
+2025-12-05 10:39:01 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:39:31 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 10:39:31 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 10:39:31 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-12-05 10:39:41 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 10:39:41 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 10:39:41 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = DQJDHRGJgVTsfd4CPeSSGFzxW0HjM92y
+2025-12-05 10:39:42 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 10:39:42 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 10:39:42 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 10:39:42 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 10:39:43 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 10:39:43 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 10:39:43 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.85, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,247, Stock P/E=23.4, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.8, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,74,956}
+2025-12-05 10:39:43 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 10:39:43 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 10:39:43 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.69, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,613, Stock P/E=23.8, Dividend Yield=2.66, ROCE=37.5, Down from 52w high=19.6, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,70,328}
+2025-12-05 10:39:44 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:39:44 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:39:44 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 10:39:44 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 10:39:44 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:39:44 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:39:44 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 10:39:44 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:39:53 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: true
+2025-12-05 10:39:53 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for TCS: Tata Consultancy Services is the flagship company and a part of Tata group. It is an IT services, consulting and business solutions organization that has been partnering with many of the world's largest businesses in their transformation journeys for over 50 years. TCS offers a consulting-led, cognitive powered, integrated portfolio of business, technology and engineering services and solutions. [1]
+2025-12-05 10:39:53 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:39:54 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:39:55 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:39:55 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:39:58 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: true
+2025-12-05 10:39:58 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for TCS
+2025-12-05 10:40:06 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS
+2025-12-05 10:40:06 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:40:07 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Diligenta
+2025-12-05 10:40:07 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Diligenta+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:40:08 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS BaNCS
+2025-12-05 10:40:08 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+BaNCS+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:40:09 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: TCS iON
+2025-12-05 10:40:09 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=TCS+iON+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:40:09 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Tata Digital
+2025-12-05 10:40:09 [http-nio-8080-exec-4] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Tata+Digital+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:40:10 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for TCS
+2025-12-05 10:42:55 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 60685 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:42:55 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:42:55 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:42:55 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:42:55 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:42:55 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:42:55 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:42:55 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:42:55 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:42:55 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 641 ms
+2025-12-05 10:42:55 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:42:55 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:42:56 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:42:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:42:59 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:42:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:42:59 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:42:59 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:43:00 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:43:00 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:43:00 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:43:00 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:43:00 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:43:00 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:43:00 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:43:00 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:43:00 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 5.653 seconds (process running for 5.924)
+2025-12-05 10:43:00 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:43:30 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 10:43:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 10:43:30 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-12-05 10:43:44 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 10:43:44 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 10:43:45 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = 8szVpBGNOD50rVcz01K41zfvBdaKcpPy
+2025-12-05 10:43:45 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 10:43:45 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 10:43:45 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 10:43:46 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 10:43:46 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 10:43:46 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 10:43:46 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.85, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,248, Stock P/E=23.4, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.7, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,75,155}
+2025-12-05 10:43:46 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 10:43:46 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 10:43:46 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.70, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,618, Stock P/E=23.9, Dividend Yield=2.65, ROCE=37.5, Down from 52w high=19.4, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,72,426}
+2025-12-05 10:43:48 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:43:48 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:43:48 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 10:43:48 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 10:43:48 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:43:48 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:43:48 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 10:43:48 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:44:10 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: true
+2025-12-05 10:44:10 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for INFY
+2025-12-05 10:44:19 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: INFY
+2025-12-05 10:44:19 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=INFY+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:44:20 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: EdgeVerve Systems
+2025-12-05 10:44:20 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=EdgeVerve+Systems+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:44:21 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys Consulting
+2025-12-05 10:44:21 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Infosys+Consulting+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:44:22 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Infosys Topaz
+2025-12-05 10:44:22 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Infosys+Topaz+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:44:23 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Simplus
+2025-12-05 10:44:23 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Simplus+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:44:23 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for INFY

@@ -724,6 +724,31 @@ async function fetchGeoAnalysis() {
     });
 }
 
+async function refetchGeoAnalysis(ticker) {
+    const contentDiv = document.getElementById(`geo-content-${ticker}`);
+    if (!contentDiv) return;
+
+    contentDiv.innerHTML = `
+        <div class="loading-local" style="text-align: center; padding: 2rem; color: #94a3b8;">
+            <div class="loader" style="width: 30px; height: 30px; border-width: 3px;"></div>
+            <div>Refetching ${ticker}...</div>
+        </div>
+    `;
+
+    try {
+        const response = await fetch(`/api/v1/data-fetcher/geo-analysis?ticker=${ticker}&refresh=true`);
+        if (!response.ok) throw new Error('Failed');
+        const data = await response.json();
+
+        geoResults[ticker] = { data };
+        renderTickerData(ticker, { data }, contentDiv);
+    } catch (e) {
+        console.error(`Error refetching geo for ${ticker}`, e);
+        geoResults[ticker] = { error: e.message };
+        renderTickerData(ticker, { error: e.message }, contentDiv);
+    }
+}
+
 function renderTickerData(ticker, result, container) {
     // Clear old chart instance for this ticker if it exists
     if (geoChartInstances[ticker]) {
@@ -922,66 +947,134 @@ async function fetchAiAnalysis(ticker) {
         if (!response.ok) throw new Error('Failed to fetch analysis');
         const data = await response.json();
 
-        const aiData = data.aiAnalysis;
-        if (!aiData) {
-            container.innerHTML = '<div style="color: #94a3b8;">No analysis available.</div>';
-            return;
-        }
-
-        let html = '';
-
-        // Summary
-        if (aiData.summary) {
-            // Convert hyphens or newlines to list items
-            const summaryText = aiData.summary;
-            let summaryHtml = '';
-
-            if (summaryText.includes('- ')) {
-                const items = summaryText.split('- ').filter(item => item.trim().length > 0);
-                summaryHtml = '<ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem; line-height: 1.5;">';
-                items.forEach(item => {
-                    summaryHtml += `<li style="margin-bottom: 0.5rem;">${item.trim()}</li>`;
-                });
-                summaryHtml += '</ul>';
-            } else {
-                // Fallback for paragraph text
-                summaryHtml = `<p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">${summaryText}</p>`;
-            }
-
-            html += `
-                <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                    <h4 style="margin-top: 0; color: var(--primary-color); margin-bottom: 0.5rem;">AI Summary</h4>
-                    ${summaryHtml}
-                </div>
-            `;
-        }
-
-        // Scored News
-        if (aiData.scoredNews && aiData.scoredNews.length > 0) {
-            html += '<h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">High Impact News</h4>';
-            aiData.scoredNews.forEach(item => {
-                const scoreColor = item.score >= 8 ? '#ef4444' : (item.score >= 6 ? '#f59e0b' : '#10b981');
-                html += `
-                    <div style="padding: 0.75rem; background-color: rgba(255, 255, 255, 0.03); border-radius: 0.5rem; margin-bottom: 0.5rem; border-left: 3px solid ${scoreColor};">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem;">
-                            <a href="${item.link}" target="_blank" style="font-weight: 500; color: var(--text-color); text-decoration: none; flex: 1; margin-right: 0.5rem;">${item.title}</a>
-                            <span style="background: ${scoreColor}; color: #000; font-size: 0.7rem; font-weight: bold; padding: 0.1rem 0.4rem; border-radius: 1rem;">${item.score}/10</span>
-                        </div>
-                        <div style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.25rem;">${item.reason}</div>
-                        <div style="font-size: 0.75rem; color: #94a3b8;">${item.pubDate || ''}</div>
-                    </div>
-                `;
-            });
-        } else {
-            html += '<div style="color: #94a3b8; font-size: 0.9rem;">No high-impact news found.</div>';
-        }
-
-        container.innerHTML = html;
+        renderAiAnalysis(ticker, data, container);
 
     } catch (e) {
         console.error('Error fetching AI analysis', e);
         container.innerHTML = '<div class="error" style="font-size: 0.9rem;">Failed to load AI insights.</div>';
     }
+}
+
+async function refetchAiAnalysis(ticker) {
+    const container = document.getElementById(`news-ai-${ticker}`);
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="loading-local" style="text-align: center; padding: 2rem; color: #94a3b8;">
+            <div class="loader" style="width: 20px; height: 20px; border-width: 2px;"></div>
+            <div style="margin-top: 0.5rem; font-size: 0.9rem;">Refetching AI analysis...</div>
+        </div>
+    `;
+
+    try {
+        const response = await fetch(`/api/v1/data-fetcher/news-analysis?ticker=${ticker}&refresh=true`);
+        if (!response.ok) throw new Error('Failed to fetch analysis');
+        const data = await response.json();
+
+        renderAiAnalysis(ticker, data, container);
+
+    } catch (e) {
+        console.error('Error refetching AI analysis', e);
+        container.innerHTML = '<div class="error" style="font-size: 0.9rem;">Failed to load AI insights.</div>';
+    }
+}
+
+function renderAiAnalysis(ticker, data, container) {
+    const aiData = data.aiAnalysis;
+    if (!aiData) {
+        container.innerHTML = '<div style="color: #94a3b8;">No analysis available.</div>';
+        return;
+    }
+
+    // Header with Date and Refetch
+    const headerDiv = document.createElement('div');
+    headerDiv.style.display = 'flex';
+    headerDiv.style.justifyContent = 'space-between';
+    headerDiv.style.alignItems = 'center';
+    headerDiv.style.marginBottom = '1rem';
+    headerDiv.style.paddingBottom = '0.5rem';
+    headerDiv.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+
+    const dateSpan = document.createElement('span');
+    dateSpan.style.fontSize = '0.85rem';
+    dateSpan.style.color = '#94a3b8';
+    if (data.fetchedAt) {
+        const date = new Date(data.fetchedAt);
+        dateSpan.textContent = `Last updated: ${date.toLocaleString()}`;
+    } else {
+        dateSpan.textContent = 'Last updated: Just now';
+    }
+
+    const refetchBtn = document.createElement('button');
+    refetchBtn.textContent = 'Refetch';
+    refetchBtn.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+    refetchBtn.style.color = '#60a5fa';
+    refetchBtn.style.border = '1px solid rgba(59, 130, 246, 0.2)';
+    refetchBtn.style.padding = '0.25rem 0.75rem';
+    refetchBtn.style.borderRadius = '0.25rem';
+    refetchBtn.style.cursor = 'pointer';
+    refetchBtn.style.fontSize = '0.85rem';
+    refetchBtn.onmouseover = () => refetchBtn.style.backgroundColor = 'rgba(59, 130, 246, 0.2)';
+    refetchBtn.onmouseout = () => refetchBtn.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+    refetchBtn.onclick = () => refetchAiAnalysis(ticker);
+
+    headerDiv.appendChild(dateSpan);
+    headerDiv.appendChild(refetchBtn);
+
+    container.innerHTML = '';
+    container.appendChild(headerDiv);
+
+    let html = '';
+
+    // Summary
+    if (aiData.summary) {
+        // Convert hyphens or newlines to list items
+        const summaryText = aiData.summary;
+        let summaryHtml = '';
+
+        if (summaryText.includes('- ')) {
+            const items = summaryText.split('- ').filter(item => item.trim().length > 0);
+            summaryHtml = '<ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem; line-height: 1.5;">';
+            items.forEach(item => {
+                summaryHtml += `<li style="margin-bottom: 0.5rem;">${item.trim()}</li>`;
+            });
+            summaryHtml += '</ul>';
+        } else {
+            // Fallback for paragraph text
+            summaryHtml = `<p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">${summaryText}</p>`;
+        }
+
+        html += `
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                <h4 style="margin-top: 0; color: var(--primary-color); margin-bottom: 0.5rem;">AI Summary</h4>
+                ${summaryHtml}
+            </div>
+        `;
+    }
+
+    // Scored News
+    if (aiData.scoredNews && aiData.scoredNews.length > 0) {
+        html += '<h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">High Impact News</h4>';
+        aiData.scoredNews.forEach(item => {
+            const scoreColor = item.score >= 8 ? '#ef4444' : (item.score >= 6 ? '#f59e0b' : '#10b981');
+            html += `
+                <div style="padding: 0.75rem; background-color: rgba(255, 255, 255, 0.03); border-radius: 0.5rem; margin-bottom: 0.5rem; border-left: 3px solid ${scoreColor};">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem;">
+                        <a href="${item.link}" target="_blank" style="font-weight: 500; color: var(--text-color); text-decoration: none; flex: 1; margin-right: 0.5rem;">${item.title}</a>
+                        <span style="background: ${scoreColor}; color: #000; font-size: 0.7rem; font-weight: bold; padding: 0.1rem 0.4rem; border-radius: 1rem;">${item.score}/10</span>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.25rem;">${item.reason}</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8;">${item.pubDate || ''}</div>
+                </div>
+            `;
+        });
+    } else {
+        html += '<div style="color: #94a3b8; font-size: 0.9rem;">No high-impact news found.</div>';
+    }
+
+    const contentDiv = document.createElement('div');
+    contentDiv.innerHTML = html;
+    container.appendChild(contentDiv);
 }
 
 function switchSubTab(ticker) {

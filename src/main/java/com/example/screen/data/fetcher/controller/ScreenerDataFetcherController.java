@@ -78,9 +78,11 @@ public class ScreenerDataFetcherController {
     }
 
     @GetMapping(value = "/geo-analysis")
-    public ResponseEntity<java.util.Map<String, Object>> getGeoAnalysis(@RequestParam(value = "ticker") String ticker) {
-        log.info("Geo analysis request received for ticker: {}", ticker);
-        java.util.Map<String, Object> data = screenerAnalysisService.getGeoAnalysis(ticker);
+    public ResponseEntity<java.util.Map<String, Object>> getGeoAnalysis(
+            @RequestParam(value = "ticker") String ticker,
+            @RequestParam(value = "refresh", defaultValue = "false") boolean refresh) {
+        log.info("Geo analysis request received for ticker: {}, refresh: {}", ticker, refresh);
+        java.util.Map<String, Object> data = screenerAnalysisService.getGeoAnalysis(ticker, refresh);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
@@ -102,9 +104,10 @@ public class ScreenerDataFetcherController {
 
     @GetMapping(value = "/news-analysis")
     public ResponseEntity<java.util.Map<String, Object>> getNewsAnalysis(
-            @RequestParam(value = "ticker") String ticker) {
-        log.info("News analysis request received for ticker: {}", ticker);
-        java.util.Map<String, Object> data = newsAnalysisService.analyzeStockNews(ticker);
+            @RequestParam(value = "ticker") String ticker,
+            @RequestParam(value = "refresh", defaultValue = "false") boolean refresh) {
+        log.info("News analysis request received for ticker: {}, refresh: {}", ticker, refresh);
+        java.util.Map<String, Object> data = newsAnalysisService.analyzeStockNews(ticker, refresh);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 

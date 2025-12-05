@@ -25,8 +25,19 @@ public class NewsService {
     private static final long CACHE_EXPIRY_MS = 2L * 24 * 60 * 60 * 1000; // 2 days
 
     public List<Map<String, String>> fetchNews(String query) {
+        return fetchNews(query, false);
+    }
+
+    public List<Map<String, String>> fetchNews(String query, boolean refresh) {
         String cacheKey = "NEWS_" + query.toLowerCase().replace(" ", "_");
-        List<Map<String, String>> cachedNews = cacheService.get(cacheKey);
+
+        if (refresh) {
+            cacheService.remove(cacheKey);
+        }
+
+        List<Map<String, String>> cachedNews = cacheService.get(cacheKey,
+                new com.fasterxml.jackson.core.type.TypeReference<List<Map<String, String>>>() {
+                });
 
         if (cachedNews != null) {
             log.info("Fetching news from cache for query: {}", query);

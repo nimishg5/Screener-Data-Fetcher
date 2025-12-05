@@ -24,10 +24,25 @@ public class NewsAnalysisService {
     private static final long CACHE_EXPIRY_MS = 3L * 24 * 60 * 60 * 1000; // 3 Days
 
     public Map<String, Object> analyzeStockNews(String ticker) {
+        return analyzeStockNews(ticker, false);
+    }
+
+    public Map<String, Object> analyzeStockNews(String ticker, boolean refresh) {
         String cacheKey = "news_analysis_" + ticker;
-        Map<String, Object> cachedResult = cacheService.get(cacheKey);
+
+        if (refresh) {
+            cacheService.remove(cacheKey);
+        }
+
+        Map<String, Object> cachedResult = cacheService.get(cacheKey,
+                new com.fasterxml.jackson.core.type.TypeReference<Map<String, Object>>() {
+                });
         if (cachedResult != null) {
             log.info("Returning cached AI analysis for {}", ticker);
+            java.time.LocalDateTime lastUpdated = cacheService.getLastUpdated(cacheKey);
+            if (lastUpdated != null) {
+                cachedResult.put("fetchedAt", lastUpdated.toString());
+            }
             return cachedResult;
         }
 
@@ -48,7 +63,7 @@ public class NewsAnalysisService {
         Map<String, List<Map<String, String>>> aggregatedNews = new HashMap<>();
         for (String entity : relatedEntities) {
             log.info("Fetching news for entity: {}", entity);
-            List<Map<String, String>> news = newsService.fetchNews(entity);
+            List<Map<String, String>> news = newsService.fetchNews(entity, refresh);
             if (!news.isEmpty()) {
                 aggregatedNews.put(entity, news);
             }
@@ -66,15 +81,35 @@ public class NewsAnalysisService {
 
         List<Map<String, Object>> scoredNews = llmService.filterAndScoreNews(ticker, allNews);
 
+        // Sort scored news by date (newest first)
+        scoredNews.sort((n1, n2) -> {
+            String d1 = (String) n1.get("pubDate");
+            String d2 = (String) n2.get("pubDate");
+            if (d1 == null)
+                return 1;
+            if (d2 == null)
+                return -1;
+            return parseDate(d2).compareTo(parseDate(d1));
+        });
+
         Map<String, Object> aiAnalysis = new HashMap<>();
         aiAnalysis.put("summary", summary);
         aiAnalysis.put("scoredNews", scoredNews);
 
         result.put("aiAnalysis", aiAnalysis);
+        result.put("fetchedAt", java.time.LocalDateTime.now().toString());
 
         // Cache the result
         cacheService.put(cacheKey, result, CACHE_EXPIRY_MS);
 
         return result;
+    }
+
+    private java.time.ZonedDateTime parseDate(String dateStr) {
+        try {
+            return java.time.ZonedDateTime.parse(dateStr, java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME);
+        } catch (Exception e) {
+            return java.time.ZonedDateTime.now().minusYears(10);
+        }
     }
 }
