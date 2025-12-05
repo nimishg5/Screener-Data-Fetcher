@@ -2146,3 +2146,1279 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2025-12-05 10:44:23 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Simplus
 2025-12-05 10:44:23 [http-nio-8080-exec-2] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Simplus+business&hl=en-IN&gl=IN&ceid=IN:en
 2025-12-05 10:44:23 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for INFY
+2025-12-05 10:48:04 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 61656 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:48:04 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:48:04 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:48:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:48:04 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:48:04 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:48:04 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:48:04 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:48:04 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:48:04 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 647 ms
+2025-12-05 10:48:05 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:48:05 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:48:05 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:48:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:48:08 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:48:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:48:08 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:48:08 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:48:09 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:48:09 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:48:09 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:48:09 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:48:09 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:48:09 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:48:09 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:48:09 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:48:09 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 5.654 seconds (process running for 5.894)
+2025-12-05 10:48:09 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:48:46 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 10:48:46 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 10:48:46 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-05 10:48:54 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 10:48:54 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 10:48:54 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = f6DyqxCcNhr16DTjEdmKMJ8bP558TAl8
+2025-12-05 10:48:54 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 10:48:54 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 10:48:54 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 10:48:56 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 10:48:56 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 10:48:56 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 10:48:56 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.86, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,262, Stock P/E=23.5, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.4, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,80,166}
+2025-12-05 10:48:56 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 10:48:56 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 10:48:56 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.72, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,624, Stock P/E=24.0, Dividend Yield=2.64, ROCE=37.5, Down from 52w high=19.1, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,74,566}
+2025-12-05 10:48:57 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:48:57 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:48:58 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 10:48:58 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 10:48:58 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:48:58 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:48:58 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 10:48:58 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:56:28 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 62502 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 10:56:28 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 10:56:28 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 10:56:28 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 10:56:29 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-12-05 10:56:29 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 10:56:29 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:56:29 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 10:56:29 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 10:56:29 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 616 ms
+2025-12-05 10:56:29 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 10:56:29 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 10:56:29 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 10:56:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 10:56:33 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 10:56:33 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 10:56:33 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 10:56:33 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 10:56:33 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 10:56:33 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 10:56:33 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 10:56:33 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 10:56:33 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 10:56:33 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 10:56:33 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 10:56:33 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 10:56:33 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 5.491 seconds (process running for 5.73)
+2025-12-05 10:56:33 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 10:57:09 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 10:57:09 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 10:57:09 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-05 10:57:23 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 10:57:23 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 10:57:23 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = WEAGjABl99fpgwMnlI4eo9avoKZhj5Uo
+2025-12-05 10:57:24 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 10:57:24 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 10:57:24 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 10:57:30 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 10:57:30 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 10:57:30 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 10:57:30 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.87, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,267, Stock P/E=23.5, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.3, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,82,011}
+2025-12-05 10:57:30 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 10:57:30 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 10:57:30 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.72, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,624, Stock P/E=24.0, Dividend Yield=2.64, ROCE=37.5, Down from 52w high=19.1, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,74,856}
+2025-12-05 10:57:31 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:57:31 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:57:31 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 10:57:31 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 10:57:31 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:57:31 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:57:31 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 10:57:31 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:57:48 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: in
+2025-12-05 10:57:48 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1489, "name": "Infosys Ltd", "url": "/company/INFY/consolidated/"}, {"id": 1273121, "name": "Interglobe Aviation Ltd", "url": "/company/INDIGO/"}, {"id": 1439, "name": "Indian Bank", "url": "/company/INDIANB/consolidated/"}, {"id": 244384, "name": "Indus Towers Ltd", "url": "/company/INDUSTOWER/consolidated/"}, {"id": 1443, "name": "Indian Hotels Co Ltd", "url": "/company/INDHOTEL/consolidated/"}, {"id": 1480, "name": "IndusInd Bank Ltd", "url": "/company/INDUSINDBK/consolidated/"}, {"id": 1270795, "name": "Inox Wind Ltd", "url": "/company/INOXWIND/consolidated/"}, {"id": 1199533, "name": "Intellect Design Arena Ltd", "url": "/company/INTELLECT/consolidated/"}]
+2025-12-05 10:57:49 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: indi
+2025-12-05 10:57:49 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1439, "name": "Indian Bank", "url": "/company/INDIANB/consolidated/"}, {"id": 1274674, "name": "Indiamart Intermesh Ltd", "url": "/company/INDIAMART/consolidated/"}, {"id": 1420, "name": "India Cements Ltd", "url": "/company/INDIACEM/consolidated/"}, {"id": 1284585, "name": "India Shelter Finance Corporation Ltd", "url": "/company/INDIASHLTR/"}, {"id": 1422, "name": "India Glycols Ltd", "url": "/company/INDIAGLYCO/consolidated/"}, {"id": 1274826, "name": "Indigo Paints Ltd", "url": "/company/INDIGOPNTS/"}, {"id": 1285556, "name": "Indiqube Spaces Ltd", "url": "/company/INDIQUBE/"}, {"id": 1444, "name": "Indian Hume Pipe Company Ltd", "url": "/company/INDIANHUME/"}]
+2025-12-05 10:57:50 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: indigo
+2025-12-05 10:57:51 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1274826, "name": "Indigo Paints Ltd", "url": "/company/INDIGOPNTS/"}, {"id": 1273121, "name": "Interglobe Aviation Ltd", "url": "/company/INDIGO/"}]
+2025-12-05 10:57:53 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY,INDIGO
+2025-12-05 10:57:53 [http-nio-8080-exec-5] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 10:57:53 [http-nio-8080-exec-5] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 10:57:53 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.87, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,269, Stock P/E=23.5, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.3, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,82,753}
+2025-12-05 10:57:53 [http-nio-8080-exec-5] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 10:57:53 [http-nio-8080-exec-5] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 10:57:53 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.72, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,624, Stock P/E=24.0, Dividend Yield=2.64, ROCE=37.5, Down from 52w high=19.1, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,74,856}
+2025-12-05 10:57:53 [http-nio-8080-exec-5] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INDIGO, trying text search
+2025-12-05 10:57:53 [http-nio-8080-exec-5] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INDIGO
+2025-12-05 10:57:53 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INDIGO is : {10Yrs PE=27.8, Book Value=223, Piotroski score=5.00, PEG Ratio=0.94, Chg in FII Hold 3Yr=10.4, Net profit=5,110, Industry PE=20.2, Public holding=5.32, Industry=Others, Chg in DII Hold=0.56, Debt=74,814, Change in Prom Hold=-1.96, Pledged percentage=0.00, Profit growth=-23.0, Chg in FII Hold=1.13, Face Value=10.0, Reserves=8,247, Chg in DII Hold 3Yr=16.8, ROE=103, Current ratio=1.44, Current Price=5,300, Stock P/E=40.1, Dividend Yield=0.18, ROCE=17.3, Down from 52w high=15.0, Debt to equity=8.67, High / Low=6,232 / 3,945, Market Cap=2,04,873}
+2025-12-05 10:57:54 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 10:57:54 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 10:57:54 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INDIGO, refresh: false
+2025-12-05 10:57:54 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 10:57:54 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 10:57:54 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for INDIGO: Interglobe Aviation Ltd (Indigo) is India’s largest passenger airline operating as a low-cost carrier. Serving 86 destinations including 24 international destinations, it provides passengers with a simple, unbundled product, fulfilling its singular brand promise of providing “low fares, on-time flights, and a courteous and hassle-free service” to its customers. IndiGo commenced operations in August 2006 with a single aircraft and has grown its fleet to 262 aircrafts. [1]
+2025-12-05 10:57:54 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=INDIGO+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:57:55 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=INDIGO+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:57:56 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INDIGO, refresh: false
+2025-12-05 10:57:56 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for INDIGO
+2025-12-05 10:58:15 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: INDIGO
+2025-12-05 10:58:15 [http-nio-8080-exec-9] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=INDIGO+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:58:16 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: IndiGo
+2025-12-05 10:58:16 [http-nio-8080-exec-9] INFO  c.e.s.d.fetcher.service.NewsService - Fetching news from cache for query: IndiGo
+2025-12-05 10:58:16 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: InterGlobe Technology Solutions Private Limited
+2025-12-05 10:58:16 [http-nio-8080-exec-9] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=InterGlobe+Technology+Solutions+Private+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:58:17 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: InterGlobe Enterprises
+2025-12-05 10:58:17 [http-nio-8080-exec-9] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=InterGlobe+Enterprises+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:58:18 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: IndiGo CarGo
+2025-12-05 10:58:18 [http-nio-8080-exec-9] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=IndiGo+CarGo+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 10:58:18 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for INDIGO
+2025-12-05 11:10:42 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 84331 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 11:10:42 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 11:10:42 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 11:10:42 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 11:10:42 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interface.
+2025-12-05 11:10:42 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 11:10:42 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 11:10:42 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 11:10:42 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 11:10:42 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 591 ms
+2025-12-05 11:10:42 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 11:10:42 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 11:10:42 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 11:10:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 11:10:46 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 11:10:46 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 11:10:46 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 11:10:46 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 11:10:46 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 11:10:46 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 11:10:46 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 11:10:47 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 11:10:47 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 11:10:47 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 11:10:47 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 11:10:47 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 11:10:47 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 5.451 seconds (process running for 5.684)
+2025-12-05 11:10:47 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 11:13:07 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 11:13:07 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 11:13:07 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2025-12-05 11:13:16 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 11:13:16 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 11:13:16 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = AnHDX4nqhLScwfh4j0W0Ad3TPgGTFMfy
+2025-12-05 11:13:16 [http-nio-8080-exec-5] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 11:13:16 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for TCS: Information Technology
+2025-12-05 11:13:16 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {Industry=Information Technology, Current Price=3,260, Stock P/E=23.4, Dividend Yield=1.86, Book Value=294, ROCE=64.6, ROE=52.4, High / Low=4,495 / 2,867, Market Cap=11,79,605, Face Value=1.00}
+2025-12-05 11:13:16 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 11:13:16 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = cDPXkcQRddpXjPCUtoXmrvj1tN1mve1j
+2025-12-05 11:13:16 [http-nio-8080-exec-5] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 11:13:17 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for INFY: Information Technology
+2025-12-05 11:13:17 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {Industry=Information Technology, Current Price=1,621, Stock P/E=24.0, Dividend Yield=2.64, Book Value=249, ROCE=37.5, ROE=28.8, High / Low=2,007 / 1,307, Market Cap=6,73,631, Face Value=5.00}
+2025-12-05 11:13:19 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 11:13:19 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 11:13:19 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 11:13:19 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 11:13:19 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 11:13:19 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 11:13:19 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 11:13:19 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 11:15:43 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 11:15:43 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 11:15:43 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 11:15:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 11:15:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 11:16:27 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 85363 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 11:16:27 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 11:16:27 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 11:16:27 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 11:16:27 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
+2025-12-05 11:16:27 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 11:16:27 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 11:16:27 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 11:16:27 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 11:16:28 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 696 ms
+2025-12-05 11:16:28 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 11:16:28 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 11:16:28 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 11:16:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 11:16:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 11:16:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 11:16:28 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 11:16:28 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 11:16:29 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 11:16:29 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 11:16:29 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 11:16:29 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 11:16:29 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 11:16:29 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 11:16:29 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 11:16:29 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 11:16:29 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.467 seconds (process running for 2.724)
+2025-12-05 11:16:29 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 11:16:32 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 11:16:32 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 11:16:32 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-12-05 11:16:34 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 11:16:34 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 11:16:34 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = gtArPusHVl4PXKGAdV1jUf5vubDo52Q6
+2025-12-05 11:16:34 [http-nio-8080-exec-6] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 11:16:34 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for TCS: Information Technology
+2025-12-05 11:16:34 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {Industry=Information Technology, Current Price=3,261, Stock P/E=23.4, Dividend Yield=1.86, Book Value=294, ROCE=64.6, ROE=52.4, High / Low=4,495 / 2,867, Market Cap=11,79,931, Face Value=1.00}
+2025-12-05 11:16:34 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 11:16:34 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = jbzuJY1yBSZjmN30LVqh7UFeLKJfzYm5
+2025-12-05 11:16:34 [http-nio-8080-exec-6] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 11:16:34 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for INFY: Information Technology
+2025-12-05 11:16:34 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {Industry=Information Technology, Current Price=1,622, Stock P/E=24.0, Dividend Yield=2.64, Book Value=249, ROCE=37.5, ROE=28.8, High / Low=2,007 / 1,307, Market Cap=6,73,818, Face Value=5.00}
+2025-12-05 11:16:36 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: indi
+2025-12-05 11:16:36 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1439, "name": "Indian Bank", "url": "/company/INDIANB/consolidated/"}, {"id": 1274674, "name": "Indiamart Intermesh Ltd", "url": "/company/INDIAMART/consolidated/"}, {"id": 1420, "name": "India Cements Ltd", "url": "/company/INDIACEM/consolidated/"}, {"id": 1284585, "name": "India Shelter Finance Corporation Ltd", "url": "/company/INDIASHLTR/"}, {"id": 1422, "name": "India Glycols Ltd", "url": "/company/INDIAGLYCO/consolidated/"}, {"id": 1274826, "name": "Indigo Paints Ltd", "url": "/company/INDIGOPNTS/"}, {"id": 1285556, "name": "Indiqube Spaces Ltd", "url": "/company/INDIQUBE/"}, {"id": 1444, "name": "Indian Hume Pipe Company Ltd", "url": "/company/INDIANHUME/"}]
+2025-12-05 11:16:38 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: indigo
+2025-12-05 11:16:39 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1274826, "name": "Indigo Paints Ltd", "url": "/company/INDIGOPNTS/"}, {"id": 1273121, "name": "Interglobe Aviation Ltd", "url": "/company/INDIGO/"}]
+2025-12-05 11:16:40 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY,INDIGO
+2025-12-05 11:16:40 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 11:16:40 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = TSZ3M5SFJu6AKFC9gZzeGE8SzDy5PxuD
+2025-12-05 11:16:40 [http-nio-8080-exec-9] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 11:16:41 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for TCS: Information Technology
+2025-12-05 11:16:41 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {Industry=Information Technology, Current Price=3,261, Stock P/E=23.4, Dividend Yield=1.86, Book Value=294, ROCE=64.6, ROE=52.4, High / Low=4,495 / 2,867, Market Cap=11,79,931, Face Value=1.00}
+2025-12-05 11:16:41 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 11:16:41 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = t8qp5iZ7D5T0U1blODxTFnJJU5oO0pJ2
+2025-12-05 11:16:41 [http-nio-8080-exec-9] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 11:16:41 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for INFY: Information Technology
+2025-12-05 11:16:41 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {Industry=Information Technology, Current Price=1,622, Stock P/E=24.0, Dividend Yield=2.64, Book Value=249, ROCE=37.5, ROE=28.8, High / Low=2,007 / 1,307, Market Cap=6,73,818, Face Value=5.00}
+2025-12-05 11:16:41 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 11:16:41 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = nw9KCYNAMCl9uZqcWxipleaNhfMSKTPz
+2025-12-05 11:16:41 [http-nio-8080-exec-9] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 11:16:41 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for INDIGO: Services
+2025-12-05 11:16:41 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INDIGO is : {Industry=Services, Current Price=5,307, Stock P/E=40.2, Dividend Yield=0.18, Book Value=223, ROCE=17.3, ROE=103, High / Low=6,232 / 3,945, Market Cap=2,05,156, Face Value=10.0}
+2025-12-05 11:16:43 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 11:16:43 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 11:16:43 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INDIGO, refresh: false
+2025-12-05 11:16:43 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INDIGO
+2025-12-05 11:16:43 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 11:16:43 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 11:16:43 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 11:16:43 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INDIGO, refresh: false
+2025-12-05 11:16:43 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 11:16:43 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 11:16:43 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 11:16:43 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INDIGO
+2025-12-05 11:16:50 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: TCS
+2025-12-05 11:16:50 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: INFY
+2025-12-05 11:16:50 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for TCS from Moneycontrol
+2025-12-05 11:16:50 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for INFY from Moneycontrol
+2025-12-05 11:16:50 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: INDIGO
+2025-12-05 11:16:50 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for INDIGO from Moneycontrol
+2025-12-05 11:16:50 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for INFY: Slug=infosys, ID=IT
+2025-12-05 11:16:50 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/infosys/dividends/IT/
+2025-12-05 11:16:51 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for TCS: Slug=tataconsultancyservices, ID=TCS
+2025-12-05 11:16:51 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/dividends/TCS/
+2025-12-05 11:16:51 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for INDIGO: Slug=interglobeaviation, ID=IA04
+2025-12-05 11:16:51 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/interglobeaviation/dividends/IA04/
+2025-12-05 11:16:51 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Dividends > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 11:16:51 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 11:16:51 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/bonus/TCS/
+2025-12-05 11:16:51 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Interglobe Aviation | Dividends > Transport & Logistics > Dividends declared by Interglobe Aviation - BSE: 539448, NSE: INDIGO
+2025-12-05 11:16:51 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 11:16:51 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/interglobeaviation/bonus/IA04/
+2025-12-05 11:16:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Dividends > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 11:16:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 11:16:51 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/infosys/bonus/IT/
+2025-12-05 11:16:51 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Bonus > Computers - Software > Bonus declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 11:16:51 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 11:16:51 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 11:16:51 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Interglobe Aviation | Bonus > Transport & Logistics > Bonus declared by Interglobe Aviation - BSE: 539448, NSE: INDIGO
+2025-12-05 11:16:51 [http-nio-8080-exec-8] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for bonus on page: https://www.moneycontrol.com/company-facts/interglobeaviation/bonus/IA04/
+2025-12-05 11:16:51 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/interglobeaviation/splits/IA04/
+2025-12-05 11:16:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Bonus > Computers - Software > Bonus declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 11:16:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 11:16:51 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/infosys/splits/IT/
+2025-12-05 11:16:51 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Splits > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 11:16:51 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for splits on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 11:16:51 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 11:16:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Splits > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 11:16:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Split Date, Old FV, New FV, Remarks]
+2025-12-05 11:16:51 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 11:16:51 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Interglobe Aviation | Splits > Transport & Logistics > Dividends declared by Interglobe Aviation - BSE: 539448, NSE: INDIGO
+2025-12-05 11:16:51 [http-nio-8080-exec-8] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for splits on page: https://www.moneycontrol.com/company-facts/interglobeaviation/splits/IA04/
+2025-12-05 11:16:51 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/interglobeaviation/rights/IA04/
+2025-12-05 11:16:52 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Rights > Computers - Software > Rights declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 11:16:52 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 11:16:52 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Rights > Computers - Software > Rights declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 11:16:52 [http-nio-8080-exec-7] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 11:16:52 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Interglobe Aviation | Rights > Transport & Logistics > Rights declared by Interglobe Aviation - BSE: 539448, NSE: INDIGO
+2025-12-05 11:16:52 [http-nio-8080-exec-8] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/interglobeaviation/rights/IA04/
+2025-12-05 11:16:53 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 11:16:53 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 11:16:53 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INDIGO, refresh: false
+2025-12-05 11:16:53 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 11:16:53 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 11:16:53 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INDIGO
+2025-12-05 12:33:48 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 12:33:48 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 12:33:48 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 12:33:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 12:33:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 12:34:22 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 87007 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 12:34:22 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 12:34:22 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 12:34:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 12:34:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interface.
+2025-12-05 12:34:22 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 12:34:22 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 12:34:22 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 12:34:22 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 12:34:22 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 686 ms
+2025-12-05 12:34:23 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 12:34:23 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 12:34:23 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 12:34:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 12:34:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 12:34:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 12:34:23 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 12:34:23 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 12:34:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 12:34:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 12:34:23 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 12:34:24 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 12:34:24 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 12:34:24 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 12:34:24 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 12:34:24 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 12:34:24 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.332 seconds (process running for 2.568)
+2025-12-05 12:34:24 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 12:34:32 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 12:34:32 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 12:34:32 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-05 12:34:35 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 12:34:35 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:34:35 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = VLc3bbNoQcwP4HWCt8gpG2EsC8QOhu6o
+2025-12-05 12:34:35 [http-nio-8080-exec-6] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 12:34:36 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for TCS: Information Technology
+2025-12-05 12:34:36 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {Industry=Information Technology, Current Price=3,257, Stock P/E=23.4, Dividend Yield=1.86, Book Value=294, ROCE=64.6, ROE=52.4, High / Low=4,495 / 2,867, Market Cap=11,78,339, Face Value=1.00}
+2025-12-05 12:34:36 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:34:36 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = wb5dPHPe8E3yvzm7nDQclUUZ0gLi54mF
+2025-12-05 12:34:36 [http-nio-8080-exec-6] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 12:34:36 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for INFY: Information Technology
+2025-12-05 12:34:36 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {Industry=Information Technology, Current Price=1,626, Stock P/E=24.0, Dividend Yield=2.64, Book Value=249, ROCE=37.5, ROE=28.8, High / Low=2,007 / 1,307, Market Cap=6,75,708, Face Value=5.00}
+2025-12-05 12:34:37 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 12:34:37 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 12:34:37 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 12:34:37 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 12:34:37 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 12:34:37 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 12:34:37 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 12:34:37 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 12:34:43 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: TCS
+2025-12-05 12:34:43 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: INFY
+2025-12-05 12:34:43 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for TCS from Moneycontrol
+2025-12-05 12:34:43 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for INFY from Moneycontrol
+2025-12-05 12:34:43 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for INFY: Slug=infosys, ID=IT
+2025-12-05 12:34:43 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/infosys/dividends/IT/
+2025-12-05 12:34:43 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for TCS: Slug=tataconsultancyservices, ID=TCS
+2025-12-05 12:34:43 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/dividends/TCS/
+2025-12-05 12:34:45 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Dividends > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:34:45 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 12:34:45 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/infosys/bonus/IT/
+2025-12-05 12:34:45 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Bonus > Computers - Software > Bonus declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:34:45 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 12:34:45 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/infosys/splits/IT/
+2025-12-05 12:34:45 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Dividends > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:34:45 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 12:34:45 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/bonus/TCS/
+2025-12-05 12:34:46 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Splits > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:34:46 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Split Date, Old FV, New FV, Remarks]
+2025-12-05 12:34:46 [http-nio-8080-exec-3] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 12:34:46 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Bonus > Computers - Software > Bonus declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:34:46 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 12:34:46 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 12:34:46 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Rights > Computers - Software > Rights declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:34:46 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 12:34:46 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Splits > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:34:46 [http-nio-8080-exec-1] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for splits on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 12:34:46 [http-nio-8080-exec-1] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 12:34:50 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Rights > Computers - Software > Rights declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:34:50 [http-nio-8080-exec-1] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 12:38:08 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: kayn
+2025-12-05 12:38:09 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1275358, "name": "Kaynes Technology India Ltd", "url": "/company/KAYNES/consolidated/"}]
+2025-12-05 12:38:13 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: sy
+2025-12-05 12:38:13 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1272977, "name": "Syngene International Ltd", "url": "/company/SYNGENE/consolidated/"}, {"id": 1275268, "name": "Syrma SGS Technology Ltd", "url": "/company/SYRMA/consolidated/"}, {"id": 3327, "name": "Symphony Ltd", "url": "/company/SYMPHONY/consolidated/"}, {"id": 3334, "name": "Systematix Corporate Services Ltd", "url": "/company/SYSTMTXC/consolidated/"}, {"id": 3328, "name": "Syncom Formulations (India) Ltd", "url": "/company/SYNCOMF/"}, {"id": 1284317, "name": "Systango Technologies Ltd", "url": "/company/SYSTANGO/consolidated/"}, {"id": 1285677, "name": "Systematic Industries Ltd", "url": "/company/544541/"}, {"id": 3333, "name": "Syschem (India) Ltd", "url": "/company/531173/"}]
+2025-12-05 12:38:14 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: syr
+2025-12-05 12:38:14 [http-nio-8080-exec-8] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1275268, "name": "Syrma SGS Technology Ltd", "url": "/company/SYRMA/consolidated/"}]
+2025-12-05 12:38:19 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: KAYNES,SYRMA
+2025-12-05 12:38:19 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:38:19 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = OKAkV2XQZuFP5z3v9RahgVZOcDl8t1xS
+2025-12-05 12:38:19 [http-nio-8080-exec-7] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 12:38:20 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for KAYNES: Industrials
+2025-12-05 12:38:20 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : KAYNES is : {Industry=Industrials, Current Price=4,606, Stock P/E=81.5, Dividend Yield=0.00, Book Value=698, ROCE=14.3, ROE=10.7, High / Low=7,825 / 3,825, Market Cap=30,878, Face Value=10.0}
+2025-12-05 12:38:20 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:38:20 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = KHFpKvrWJozLeL3dHSqynYpXRn0ffeGJ
+2025-12-05 12:38:20 [http-nio-8080-exec-7] ERROR c.e.s.d.f.s.ScreenerAnalysisService - Error during login
+org.jsoup.helper.ValidationException: The parameter 'value' must not be null.
+	at org.jsoup.helper.HttpConnection$KeyVal.<init>(HttpConnection.java:1328)
+	at org.jsoup.helper.HttpConnection$KeyVal.create(HttpConnection.java:1318)
+	at org.jsoup.helper.HttpConnection.data(HttpConnection.java:210)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginResponseCookies(ScreenerAnalysisService.java:356)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.fetchLoginCookiesAndRatios(ScreenerAnalysisService.java:308)
+	at com.example.screen.data.fetcher.service.ScreenerAnalysisService.findBasicElementsAndAdvanced(ScreenerAnalysisService.java:235)
+	at com.example.screen.data.fetcher.controller.ScreenerDataFetcherController.compareTickers(ScreenerDataFetcherController.java:68)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1778)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-12-05 12:38:20 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Extracted Industry for SYRMA: Industrials
+2025-12-05 12:38:20 [http-nio-8080-exec-7] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : SYRMA is : {Industry=Industrials, Current Price=759, Stock P/E=63.8, Dividend Yield=0.19, Book Value=146, ROCE=11.7, ROE=9.45, High / Low=910 / 355, Market Cap=14,642, Face Value=10.0}
+2025-12-05 12:38:40 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Logout request received
+2025-12-05 12:38:48 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 12:38:48 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:38:48 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = VKo0Emek3rVRY9WhiB8qSF6JcOyXqt4S
+2025-12-05 12:38:49 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 12:38:49 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 12:38:49 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 12:38:56 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: kayn
+2025-12-05 12:38:56 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1275358, "name": "Kaynes Technology India Ltd", "url": "/company/KAYNES/consolidated/"}]
+2025-12-05 12:39:02 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Search request received for query: sy
+2025-12-05 12:39:02 [http-nio-8080-exec-1] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Search JSON Response: [{"id": 1272977, "name": "Syngene International Ltd", "url": "/company/SYNGENE/consolidated/"}, {"id": 1275268, "name": "Syrma SGS Technology Ltd", "url": "/company/SYRMA/consolidated/"}, {"id": 3327, "name": "Symphony Ltd", "url": "/company/SYMPHONY/consolidated/"}, {"id": 3334, "name": "Systematix Corporate Services Ltd", "url": "/company/SYSTMTXC/consolidated/"}, {"id": 3328, "name": "Syncom Formulations (India) Ltd", "url": "/company/SYNCOMF/"}, {"id": 1284317, "name": "Systango Technologies Ltd", "url": "/company/SYSTANGO/consolidated/"}, {"id": 1285677, "name": "Systematic Industries Ltd", "url": "/company/544541/"}, {"id": 3333, "name": "Syschem (India) Ltd", "url": "/company/531173/"}]
+2025-12-05 12:39:04 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: KAYNES,SYRMA
+2025-12-05 12:39:04 [http-nio-8080-exec-2] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for KAYNES, trying text search
+2025-12-05 12:39:04 [http-nio-8080-exec-2] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for KAYNES
+2025-12-05 12:39:04 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : KAYNES is : {10Yrs PE=119, Book Value=698, Piotroski score=2.00, PEG Ratio=0.90, Chg in FII Hold 3Yr=, Net profit=379, Industry PE=34.0, Public holding=12.2, Industry=Others, Chg in DII Hold=1.27, Debt=885, Change in Prom Hold=-0.06, Pledged percentage=0.00, Profit growth=59.5, Chg in FII Hold=0.00, Face Value=10.0, Reserves=4,613, Chg in DII Hold 3Yr=, ROE=10.7, Current ratio=2.09, Current Price=4,603, Stock P/E=81.5, Dividend Yield=0.00, ROCE=14.3, Down from 52w high=41.2, Debt to equity=0.19, High / Low=7,825 / 3,825, Market Cap=30,856}
+2025-12-05 12:39:05 [http-nio-8080-exec-2] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for SYRMA, trying text search
+2025-12-05 12:39:05 [http-nio-8080-exec-2] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for SYRMA
+2025-12-05 12:39:05 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : SYRMA is : {10Yrs PE=69.1, Book Value=146, Piotroski score=8.00, PEG Ratio=2.30, Chg in FII Hold 3Yr=2.94, Net profit=241, Industry PE=34.0, Public holding=33.5, Industry=Others, Chg in DII Hold=7.23, Debt=332, Change in Prom Hold=-3.45, Pledged percentage=0.00, Profit growth=117, Chg in FII Hold=0.68, Face Value=10.0, Reserves=2,617, Chg in DII Hold 3Yr=8.92, ROE=9.45, Current ratio=1.80, Current Price=758, Stock P/E=63.7, Dividend Yield=0.19, ROCE=11.7, Down from 52w high=16.6, Debt to equity=0.12, High / Low=910 / 355, Market Cap=14,625}
+2025-12-05 12:39:38 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: KAYNES, refresh: false
+2025-12-05 12:39:38 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: SYRMA, refresh: false
+2025-12-05 12:39:39 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for SYRMA: Incorporated in 2004, Syrma SGS Technology Limited is a Chennai-based engineering and design company engaged in electronics manufacturing services (EMS). The company provides integrated services and solutions to original equipment manufacturers (OEMs) from the initial product concept stage to volume production through concept co-creation and product realization.[1]
+2025-12-05 12:39:39 [http-nio-8080-exec-6] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=SYRMA+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:39 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - About Text for KAYNES: Incorporated in 2008, Kaynes Technology is a leading end-to-end and IoT solutions-enabled integrated electronics manufacturing company. The company provides conceptual design, process engineering, integrated manufacturing, and life-cycle support for major players in the automotive, industrial, aerospace and defense, outer-space, nuclear, medical, railways, Internet of Things ("IoT"), Information Technology ("IT") and other segments.[1]
+2025-12-05 12:39:39 [http-nio-8080-exec-5] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=KAYNES+Global+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:39 [http-nio-8080-exec-6] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=SYRMA+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:39 [http-nio-8080-exec-5] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=KAYNES+India+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:40 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: KAYNES, refresh: false
+2025-12-05 12:39:40 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for KAYNES
+2025-12-05 12:39:40 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: SYRMA, refresh: false
+2025-12-05 12:39:40 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching related entities for SYRMA
+2025-12-05 12:39:48 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: KAYNES
+2025-12-05 12:39:48 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=KAYNES+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:49 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Syrma SGS Technology Limited
+2025-12-05 12:39:49 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Syrma+SGS+Technology+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:49 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Dixon Technologies (India) Limited
+2025-12-05 12:39:49 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Dixon+Technologies+%28India%29+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:50 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: SYRMA
+2025-12-05 12:39:50 [http-nio-8080-exec-7] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=SYRMA+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:51 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: SGS Tekniks Manufacturing Private Limited
+2025-12-05 12:39:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=SGS+Tekniks+Manufacturing+Private+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:51 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Perfect ID Limited
+2025-12-05 12:39:51 [http-nio-8080-exec-7] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Perfect+ID+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:51 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Kaynes Semicon Private Limited
+2025-12-05 12:39:51 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Kaynes+Semicon+Private+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:52 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Dixon Technologies (India) Ltd.
+2025-12-05 12:39:52 [http-nio-8080-exec-7] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Dixon+Technologies+%28India%29+Ltd.+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:52 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Kaynes Electra Private Limited
+2025-12-05 12:39:52 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Kaynes+Electra+Private+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:53 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Cyient DLM Limited
+2025-12-05 12:39:53 [http-nio-8080-exec-8] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Cyient+DLM+Limited+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:53 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Kaynes Technology India Ltd.
+2025-12-05 12:39:53 [http-nio-8080-exec-7] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Kaynes+Technology+India+Ltd.+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:54 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Fetching news for entity: Amber Enterprises India Ltd.
+2025-12-05 12:39:54 [http-nio-8080-exec-7] DEBUG c.e.s.d.fetcher.service.NewsService - Fetching news from: https://news.google.com/rss/search?q=Amber+Enterprises+India+Ltd.+business&hl=en-IN&gl=IN&ceid=IN:en
+2025-12-05 12:39:54 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for KAYNES
+2025-12-05 12:39:55 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Generating summary for SYRMA
+2025-12-05 12:40:39 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: test@example.com
+2025-12-05 12:40:39 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:40:39 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = czAzU2qfoRoUcKjfcw5EGyt56duROh0Z
+2025-12-05 12:40:39 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/login/
+2025-12-05 12:40:39 [http-nio-8080-exec-2] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Login failed: Invalid credentials
+2025-12-05 12:40:39 [http-nio-8080-exec-2] WARN  c.e.s.d.f.c.ScreenerDataFetcherController - Login failed for user: test@example.com
+2025-12-05 12:40:54 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: test@example.comnimish.gupta@gmail.com
+2025-12-05 12:40:54 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:40:54 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = v2CLQa98TXV2UWbjsFh6ufx5qMtiTcLI
+2025-12-05 12:40:54 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/login/
+2025-12-05 12:40:54 [http-nio-8080-exec-4] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Login failed: Invalid credentials
+2025-12-05 12:40:54 [http-nio-8080-exec-4] WARN  c.e.s.d.f.c.ScreenerDataFetcherController - Login failed for user: test@example.comnimish.gupta@gmail.com
+2025-12-05 12:41:07 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: test@example.comnimish.gupta@gmail.com
+2025-12-05 12:41:07 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:41:07 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = bnRoN1jtkNCNGPlr2ZyJ7ozV1RvTnaTJ
+2025-12-05 12:41:08 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/login/
+2025-12-05 12:41:08 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Login failed: Invalid credentials
+2025-12-05 12:41:08 [http-nio-8080-exec-10] WARN  c.e.s.d.f.c.ScreenerDataFetcherController - Login failed for user: test@example.comnimish.gupta@gmail.com
+2025-12-05 12:41:20 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimish.gupta@gmail.com
+2025-12-05 12:41:20 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:41:20 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = V63fEw1DsDHzUSDVn9r65Gk2AmenJHL3
+2025-12-05 12:41:21 [http-nio-8080-exec-9] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/login/
+2025-12-05 12:41:21 [http-nio-8080-exec-9] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Login failed: Invalid credentials
+2025-12-05 12:41:21 [http-nio-8080-exec-9] WARN  c.e.s.d.f.c.ScreenerDataFetcherController - Login failed for user: nimish.gupta@gmail.com
+2025-12-05 12:41:38 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-05 12:41:38 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-12-05 12:41:38 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 12:41:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-05 12:41:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-12-05 12:42:05 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 21.0.8 with PID 87566 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-05 12:42:06 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-05 12:42:06 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-05 12:42:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-05 12:42:06 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interface.
+2025-12-05 12:42:06 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-05 12:42:06 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-05 12:42:06 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-05 12:42:06 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-05 12:42:06 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 688 ms
+2025-12-05 12:42:06 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-05 12:42:06 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-05 12:42:07 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-05 12:42:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-05 12:42:07 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-05 12:42:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-05 12:42:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-05 12:42:07 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-05 12:42:07 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-05 12:42:07 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-05 12:42:07 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-05 12:42:07 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-05 12:42:07 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-05 12:42:08 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-05 12:42:08 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-05 12:42:08 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-05 12:42:08 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.376 seconds (process running for 2.623)
+2025-12-05 12:42:08 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-05 12:42:52 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-05 12:42:52 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-05 12:42:52 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-05 12:43:02 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-05 12:43:02 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-05 12:43:03 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = Yt4lKcbxYe9JkRDwd8YpfxIYHC18bmNx
+2025-12-05 12:43:03 [http-nio-8080-exec-2] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-05 12:43:03 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-05 12:43:03 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-05 12:43:14 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 12:43:14 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 12:43:14 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 12:43:14 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.86, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,257, Stock P/E=23.4, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.6, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,78,266}
+2025-12-05 12:43:14 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 12:43:14 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 12:43:14 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.72, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,624, Stock P/E=24.0, Dividend Yield=2.64, ROCE=37.5, Down from 52w high=19.0, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,74,919}
+2025-12-05 12:43:25 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: INFY, refresh: false
+2025-12-05 12:43:25 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: TCS, refresh: false
+2025-12-05 12:43:25 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for TCS from Moneycontrol
+2025-12-05 12:43:25 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for INFY from Moneycontrol
+2025-12-05 12:43:26 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for TCS: Slug=tataconsultancyservices, ID=TCS
+2025-12-05 12:43:26 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for INFY: Slug=infosys, ID=IT
+2025-12-05 12:43:26 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/dividends/TCS/
+2025-12-05 12:43:26 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/infosys/dividends/IT/
+2025-12-05 12:43:26 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Dividends > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:43:26 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Dividends > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:43:26 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 12:43:26 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 12:43:26 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/infosys/bonus/IT/
+2025-12-05 12:43:26 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/bonus/TCS/
+2025-12-05 12:43:26 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Bonus > Computers - Software > Bonus declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:43:26 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 12:43:26 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 12:43:26 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Bonus > Computers - Software > Bonus declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:43:26 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 12:43:26 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/infosys/splits/IT/
+2025-12-05 12:43:26 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Splits > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:43:26 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Splits > Computers - Software > Dividends declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:43:26 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Split Date, Old FV, New FV, Remarks]
+2025-12-05 12:43:26 [http-nio-8080-exec-4] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for splits on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/splits/TCS/
+2025-12-05 12:43:26 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 12:43:26 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 12:43:26 [http-nio-8080-exec-4] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Tata Consultancy Services | Rights > Computers - Software > Rights declared by Tata Consultancy Services - BSE: 532540, NSE: TCS
+2025-12-05 12:43:26 [http-nio-8080-exec-4] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/tataconsultancyservices/rights/TCS/
+2025-12-05 12:43:26 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Rights > Computers - Software > Rights declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:43:26 [http-nio-8080-exec-5] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 12:47:05 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY
+2025-12-05 12:47:05 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-05 12:47:05 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-05 12:47:05 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.87, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.3, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Reserves=1,06,053, Chg in DII Hold 3Yr=4.11, ROE=52.4, Current ratio=2.43, Current Price=3,260, Stock P/E=23.5, Dividend Yield=1.86, ROCE=64.6, Down from 52w high=27.5, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,79,370}
+2025-12-05 12:47:05 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-05 12:47:05 [http-nio-8080-exec-3] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-05 12:47:05 [http-nio-8080-exec-3] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.72, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.3, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Reserves=1,01,256, Chg in DII Hold 3Yr=9.33, ROE=28.8, Current ratio=2.28, Current Price=1,625, Stock P/E=24.0, Dividend Yield=2.64, ROCE=37.5, Down from 52w high=19.0, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,75,147}
+2025-12-05 12:47:06 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: TCS, refresh: false
+2025-12-05 12:47:06 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Geo analysis request received for ticker: INFY, refresh: false
+2025-12-05 12:47:06 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for INFY
+2025-12-05 12:47:06 [http-nio-8080-exec-4] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached Geo Analysis for TCS
+2025-12-05 12:47:06 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: TCS, refresh: false
+2025-12-05 12:47:06 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - News analysis request received for ticker: INFY, refresh: false
+2025-12-05 12:47:07 [http-nio-8080-exec-7] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for TCS
+2025-12-05 12:47:07 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.NewsAnalysisService - Returning cached AI analysis for INFY
+2025-12-05 12:47:10 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: TCS, refresh: false
+2025-12-05 12:47:10 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: INFY, refresh: false
+2025-12-05 12:47:10 [http-nio-8080-exec-8] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached corporate actions for TCS
+2025-12-05 12:47:10 [http-nio-8080-exec-9] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Returning cached corporate actions for INFY
+2025-12-05 12:47:14 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Corporate actions request received for ticker: INFY, refresh: true
+2025-12-05 12:47:14 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Fetching corporate actions for INFY from Moneycontrol
+2025-12-05 12:47:14 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.MoneyControlService - Found Moneycontrol details for INFY: Slug=infosys, ID=IT
+2025-12-05 12:47:14 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.MoneyControlService - Fetching dividends from URL: https://www.moneycontrol.com/company-facts/infosys/dividends/IT/
+2025-12-05 12:47:14 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Dividends > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:47:14 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Dividend Date, Dividend Type, Dividend (Rs)]
+2025-12-05 12:47:14 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.MoneyControlService - Fetching bonus from URL: https://www.moneycontrol.com/company-facts/infosys/bonus/IT/
+2025-12-05 12:47:14 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Bonus > Computers - Software > Bonus declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:47:14 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Bonus Date, Bonus Ratio, Remarks]
+2025-12-05 12:47:14 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.MoneyControlService - Fetching splits from URL: https://www.moneycontrol.com/company-facts/infosys/splits/IT/
+2025-12-05 12:47:14 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Splits > Computers - Software > Dividends declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:47:14 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.MoneyControlService - Found headers: [Announcement Date, Ex-Split Date, Old FV, New FV, Remarks]
+2025-12-05 12:47:14 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.MoneyControlService - Fetching rights from URL: https://www.moneycontrol.com/company-facts/infosys/rights/IT/
+2025-12-05 12:47:15 [http-nio-8080-exec-10] DEBUG c.e.s.d.f.s.MoneyControlService - Page Title: Infosys | Rights > Computers - Software > Rights declared by Infosys - BSE: 500209, NSE: INFY
+2025-12-05 12:47:15 [http-nio-8080-exec-10] WARN  c.e.s.d.f.s.MoneyControlService - No suitable table found for rights on page: https://www.moneycontrol.com/company-facts/infosys/rights/IT/

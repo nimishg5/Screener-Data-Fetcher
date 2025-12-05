@@ -96,9 +96,10 @@ public class ScreenerDataFetcherController {
 
     @GetMapping(value = "/corporate-actions")
     public ResponseEntity<java.util.Map<String, Object>> getCorporateActions(
-            @RequestParam(value = "ticker") String ticker) {
-        log.info("Corporate actions request received for ticker: {}", ticker);
-        java.util.Map<String, Object> data = screenerAnalysisService.getCorporateActions(ticker);
+            @RequestParam(value = "ticker") String ticker,
+            @RequestParam(value = "refresh", defaultValue = "false") boolean refresh) {
+        log.info("Corporate actions request received for ticker: {}, refresh: {}", ticker, refresh);
+        java.util.Map<String, Object> data = screenerAnalysisService.getCorporateActions(ticker, refresh);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 

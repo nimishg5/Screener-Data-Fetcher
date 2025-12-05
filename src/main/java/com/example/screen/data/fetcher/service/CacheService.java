@@ -81,4 +81,20 @@ public class CacheService {
                 .map(CacheData::getLastUpdated)
                 .orElse(null);
     }
+
+    /**
+     * Check if cached data is older than the specified duration in milliseconds
+     * 
+     * @param key          Cache key
+     * @param maxAgeMillis Maximum age in milliseconds
+     * @return true if cache is older than maxAgeMillis or doesn't exist
+     */
+    public boolean isOlderThan(String key, long maxAgeMillis) {
+        LocalDateTime lastUpdated = getLastUpdated(key);
+        if (lastUpdated == null) {
+            return true; // No cache exists
+        }
+        LocalDateTime threshold = LocalDateTime.now().minusNanos(maxAgeMillis * 1_000_000);
+        return lastUpdated.isBefore(threshold);
+    }
 }

@@ -216,9 +216,56 @@ public class ScreenerAnalysisService {
     @Autowired
     private MoneyControlService moneyControlService;
 
-    public Map<String, Object> getCorporateActions(String ticker) {
+    /**
+     * Get corporate actions with caching support
+     * 
+     * @param ticker  Stock ticker
+     * @param refresh If true, bypass cache and fetch fresh data
+     * @return Corporate actions data
+     */
+    public Map<String, Object> getCorporateActions(String ticker, boolean refresh) {
+        String cacheKey = "CORPORATE_ACTIONS_" + ticker;
+        long oneWeekInMillis = 7L * 24 * 60 * 60 * 1000; // 1 week
+
+        // If refresh is requested, clear the cache
+        if (refresh) {
+            cacheService.remove(cacheKey);
+        }
+
+        // Check if cache exists and is not older than 1 week
+        if (!refresh && !cacheService.isOlderThan(cacheKey, oneWeekInMillis)) {
+            Map<String, Object> cachedResult = cacheService.get(cacheKey,
+                    new com.fasterxml.jackson.core.type.TypeReference<Map<String, Object>>() {
+                    });
+            if (cachedResult != null) {
+                log.info("Returning cached corporate actions for {}", ticker);
+                java.time.LocalDateTime lastUpdated = cacheService.getLastUpdated(cacheKey);
+                if (lastUpdated != null) {
+                    cachedResult.put("fetchedAt", lastUpdated.toString());
+                }
+                return cachedResult;
+            }
+        }
+
+        // Fetch fresh data
         log.info("Fetching corporate actions for {} from Moneycontrol", ticker);
-        return moneyControlService.getCorporateActions(ticker);
+        Map<String, Object> result = moneyControlService.getCorporateActions(ticker);
+
+        // Cache the result
+        cacheService.put(cacheKey, result, oneWeekInMillis);
+        result.put("fetchedAt", java.time.LocalDateTime.now().toString());
+
+        return result;
+    }
+
+    /**
+     * Get corporate actions (without refresh)
+     * 
+     * @param ticker Stock ticker
+     * @return Corporate actions data
+     */
+    public Map<String, Object> getCorporateActions(String ticker) {
+        return getCorporateActions(ticker, false);
     }
 
     public Map<String, String> findBasicElementsAndAdvanced(String ticker) {

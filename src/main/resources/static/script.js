@@ -1368,6 +1368,31 @@ async function fetchCorporateActions() {
     });
 }
 
+async function refetchCorporateActions(ticker) {
+    const contentDiv = document.getElementById(`actions-content-${ticker}`);
+    if (!contentDiv) return;
+
+    contentDiv.innerHTML = `
+        <div class="loading-local" style="text-align: center; padding: 2rem; color: #94a3b8;">
+            <div class="loader" style="width: 30px; height: 30px; border-width: 3px;"></div>
+            <div>Refetching ${ticker}...</div>
+        </div>
+    `;
+
+    try {
+        const response = await fetch(`/api/v1/data-fetcher/corporate-actions?ticker=${ticker}&refresh=true`);
+        if (!response.ok) throw new Error('Failed');
+        const data = await response.json();
+
+        actionsResults[ticker] = { data };
+        renderActionsData(ticker, { data }, contentDiv);
+    } catch (e) {
+        console.error(`Error refetching corporate actions for ${ticker}`, e);
+        actionsResults[ticker] = { error: e.message };
+        renderActionsData(ticker, { error: e.message }, contentDiv);
+    }
+}
+
 function switchActionsSubTab(ticker) {
     document.querySelectorAll('#actionsTab .sub-tab-btn').forEach(btn => {
         if (btn.dataset.ticker === ticker) btn.classList.add('active');
@@ -1392,6 +1417,75 @@ function renderActionsData(ticker, result, container) {
         container.innerHTML = `<div class="error">${data.error}</div>`;
         return;
     }
+
+    // Header with Date and Refetch Button
+    const headerDiv = document.createElement('div');
+    headerDiv.style.display = 'flex';
+    headerDiv.style.justifyContent = 'space-between';
+    headerDiv.style.alignItems = 'center';
+    headerDiv.style.marginBottom = '1.5rem';
+    headerDiv.style.paddingBottom = '0.75rem';
+    headerDiv.style.borderBottom = '2px solid rgba(255,255,255,0.1)';
+
+    const dateSpan = document.createElement('span');
+    dateSpan.style.fontSize = '0.9rem';
+    dateSpan.style.color = '#94a3b8';
+    dateSpan.style.fontWeight = '500';
+    if (data.fetchedAt) {
+        const date = new Date(data.fetchedAt);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        let timeAgo = '';
+        if (diffDays === 0) {
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            if (diffHours === 0) {
+                const diffMins = Math.floor(diffMs / (1000 * 60));
+                timeAgo = diffMins === 0 ? 'Just now' : `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+            } else {
+                timeAgo = `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            }
+        } else if (diffDays === 1) {
+            timeAgo = 'Yesterday';
+        } else if (diffDays < 7) {
+            timeAgo = `${diffDays} days ago`;
+        } else {
+            timeAgo = `${Math.floor(diffDays / 7)} week${Math.floor(diffDays / 7) > 1 ? 's' : ''} ago`;
+        }
+
+        dateSpan.innerHTML = `
+            <span style="color: #cbd5e1;">Last updated:</span> ${date.toLocaleString()}
+            <span style="color: #64748b; margin-left: 0.5rem;">(${timeAgo})</span>
+        `;
+    } else {
+        dateSpan.textContent = 'Last updated: Just now';
+    }
+
+    const refetchBtn = document.createElement('button');
+    refetchBtn.textContent = '🔄 Refetch';
+    refetchBtn.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+    refetchBtn.style.color = '#60a5fa';
+    refetchBtn.style.border = '1px solid rgba(59, 130, 246, 0.3)';
+    refetchBtn.style.padding = '0.5rem 1rem';
+    refetchBtn.style.borderRadius = '0.5rem';
+    refetchBtn.style.cursor = 'pointer';
+    refetchBtn.style.fontSize = '0.9rem';
+    refetchBtn.style.fontWeight = '600';
+    refetchBtn.style.transition = 'all 0.2s ease';
+    refetchBtn.onmouseover = () => {
+        refetchBtn.style.backgroundColor = 'rgba(59, 130, 246, 0.2)';
+        refetchBtn.style.transform = 'translateY(-1px)';
+    };
+    refetchBtn.onmouseout = () => {
+        refetchBtn.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+        refetchBtn.style.transform = 'translateY(0)';
+    };
+    refetchBtn.onclick = () => refetchCorporateActions(ticker);
+
+    headerDiv.appendChild(dateSpan);
+    headerDiv.appendChild(refetchBtn);
+    container.appendChild(headerDiv);
 
     const categories = ['dividends', 'bonus', 'splits', 'rights'];
 
