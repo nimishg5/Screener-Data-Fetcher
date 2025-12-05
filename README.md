@@ -57,8 +57,8 @@ graph TD
         ScreenerService <--> MCService[MoneyControl Service]
         ScreenerService <--> CacheService[Cache Service]
         
-        NewsService <--> LLMService[LLM Service (Gemini)]
-        NewsService <--> GoogleNews[Google News RSS]
+        NewsService <--> LLMService["LLM Service (Gemini)"]
+        NewsService <--> GoogleNews["Google News RSS"]
     end
     
     subgraph "Data Sources"
