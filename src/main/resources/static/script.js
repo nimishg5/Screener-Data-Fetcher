@@ -149,28 +149,400 @@ function renderChips() {
 }
 
 function switchTab(tabName) {
-    // Update buttons
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
 
-    // Update content
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-    document.getElementById(tabName + 'Tab').classList.add('active');
+    // Deactivate all tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
 
-    // Render chart if switching to chart tab and data exists
-    if (tabName === 'chart' && currentData) {
-        renderChart(currentData);
+    // Show selected tab content
+    const selectedTab = document.getElementById(tabName + 'Tab');
+    if (selectedTab) {
+        selectedTab.classList.add('active');
     }
 
-    // Fetch geo analysis if switching to geo tab
-    if (tabName === 'geo') {
-        fetchGeoAnalysis();
+    // Activate button
+    // Find button with onclick="switchTab('tabName')"
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+        if (btn.getAttribute('onclick').includes(`'${tabName}'`)) {
+            btn.classList.add('active');
+        }
+    });
+
+    if (tabName === 'chart') {
+        updateChart();
+    } else if (tabName === 'geo') {
+        // Trigger geo analysis for all tickers if not already done
+        tickers.forEach(t => {
+            if (!geoResults[t]) fetchGeoAnalysis(t);
+        });
+    } else if (tabName === 'actions') {
+        // Trigger corporate actions for all tickers
+        tickers.forEach(t => {
+            if (!actionsResults[t]) fetchCorporateActions(t);
+        });
+    } else if (tabName === 'marketActions') {
+        fetchMarketActions();
+    }
+}
+
+// State for market actions
+let marketActionsData = {};
+let currentMarketActionCategory = 'dividends';
+let marketActionSearchQuery = '';
+// Default sort: Ex-Date (or similar) DESC
+let marketActionSort = { column: 'exDate', direction: 'desc' };
+let currentMarketActionYear = new Date().getFullYear();
+
+async function fetchMarketActions(year = null) {
+    const container = document.getElementById('marketActionsTab');
+
+    // Ensure layout exists
+    if (!document.getElementById('marketActionsContent')) {
+        setupMarketActionsLayout();
     }
 
-    // Fetch corporate actions if switching to actions tab
-    if (tabName === 'actions') {
-        fetchCorporateActions();
+    const contentDiv = document.getElementById('marketActionsContent');
+    // Show loading in the content area
+    contentDiv.innerHTML = `
+        <div class="loading">
+            <div class="loader"></div>
+            <div>Fetching market actions...</div>
+        </div>
+    `;
+
+    try {
+        let url = '/api/v1/data-fetcher/market-actions';
+        const yearToFetch = year || currentMarketActionYear;
+        // Use yearToFetch for the API call
+        if (yearToFetch) {
+            url += `?year=${yearToFetch}`;
+        }
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+
+        marketActionsData = data;
+        if (year) currentMarketActionYear = parseInt(year);
+
+        filterAndRenderMarketActionTable();
+    } catch (e) {
+        contentDiv.innerHTML = `<div class="error">Error: ${e.message}</div>`;
     }
+}
+
+function setupMarketActionsLayout() {
+    const container = document.getElementById('marketActionsTab');
+    container.innerHTML = '';
+
+    // Top Controls Bar (Tabs + Year + Search)
+    const controlsDiv = document.createElement('div');
+    controlsDiv.className = 'tabs';
+    controlsDiv.style.marginBottom = '1rem';
+    controlsDiv.style.borderBottom = '1px solid #334155';
+    controlsDiv.style.display = 'flex';
+    controlsDiv.style.justifyContent = 'space-between';
+    controlsDiv.style.alignItems = 'center';
+    controlsDiv.style.flexWrap = 'wrap';
+    controlsDiv.style.gap = '1rem';
+
+    // 1. Categories
+    const categoriesContainer = document.createElement('div');
+    const categories = ['dividends', 'bonus', 'splits', 'rights'];
+
+    categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `sub-tab-btn ${cat === currentMarketActionCategory ? 'active' : ''}`;
+        btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        btn.style.marginRight = '0.5rem';
+        btn.onclick = () => {
+            currentMarketActionCategory = cat;
+            // Default sort when switching: Ex-Date DESC
+            const dateKey = cat === 'splits' ? 'splitDate' : 'exDate';
+            marketActionSort = { column: dateKey, direction: 'desc' };
+
+            // Update active class
+            categoriesContainer.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterAndRenderMarketActionTable();
+        };
+        categoriesContainer.appendChild(btn);
+    });
+    controlsDiv.appendChild(categoriesContainer);
+
+    // 2. Right Side Controls (Year + Search)
+    const rightControls = document.createElement('div');
+    rightControls.style.display = 'flex';
+    rightControls.style.gap = '1rem';
+    rightControls.style.alignItems = 'center';
+
+    // Year Selector
+    const yearSelect = document.createElement('select');
+    yearSelect.style.padding = '0.4rem';
+    yearSelect.style.borderRadius = '0.25rem';
+    yearSelect.style.border = '1px solid #334155';
+    yearSelect.style.backgroundColor = '#1e293b';
+    yearSelect.style.color = '#e2e8f0';
+
+    // Generate last 3 years + next year? 
+    // Usually we care about current and previous.
+    // 5paisa might have data for many years. Let's offer a range.
+    const thisYear = new Date().getFullYear();
+    const years = [thisYear + 1, thisYear, thisYear - 1, thisYear - 2];
+
+    years.forEach(y => {
+        const opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        if (y === currentMarketActionYear) opt.selected = true;
+        yearSelect.appendChild(opt);
+    });
+
+    yearSelect.onchange = (e) => {
+        const newYear = e.target.value;
+        currentMarketActionYear = parseInt(newYear);
+        fetchMarketActions(newYear);
+    };
+    rightControls.appendChild(yearSelect);
+
+    // Search Input
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search company...';
+    searchInput.value = marketActionSearchQuery;
+    searchInput.style.padding = '0.5rem';
+    searchInput.style.borderRadius = '0.25rem';
+    searchInput.style.border = '1px solid #334155';
+    searchInput.style.backgroundColor = '#1e293b';
+    searchInput.style.color = '#e2e8f0';
+    searchInput.style.minWidth = '200px';
+
+    searchInput.addEventListener('input', (e) => {
+        marketActionSearchQuery = e.target.value;
+        filterAndRenderMarketActionTable();
+    });
+    rightControls.appendChild(searchInput);
+
+    controlsDiv.appendChild(rightControls);
+    container.appendChild(controlsDiv);
+
+    const contentDiv = document.createElement('div');
+    contentDiv.id = 'marketActionsContent';
+    container.appendChild(contentDiv);
+
+    // Check sort
+    const dateKey = currentMarketActionCategory === 'splits' ? 'splitDate' : 'exDate';
+    if (!marketActionSort.column) {
+        marketActionSort = { column: dateKey, direction: 'desc' };
+    }
+}
+
+function filterAndRenderMarketActionTable() {
+    let items = marketActionsData[currentMarketActionCategory] || [];
+
+    // Filter
+    if (marketActionSearchQuery) {
+        const q = marketActionSearchQuery.toLowerCase();
+        items = items.filter(item => {
+            return item.company && item.company.toLowerCase().includes(q);
+        });
+    }
+
+    // Sort
+    if (marketActionSort.column) {
+        items.sort((a, b) => {
+            let valA = a[marketActionSort.column];
+            let valB = b[marketActionSort.column];
+
+            // Handle dates if possible
+            if (marketActionSort.column.toLowerCase().includes('date')) {
+                const dateA = parseDateGeneric(valA);
+                const dateB = parseDateGeneric(valB);
+
+                // If one is invalid, treat as smaller (or push to bottom?)
+                // Let's treat invalid as very old
+                const timeA = dateA ? dateA.getTime() : -8640000000000000;
+                const timeB = dateB ? dateB.getTime() : -8640000000000000;
+
+                if (timeA < timeB) return marketActionSort.direction === 'asc' ? -1 : 1;
+                if (timeA > timeB) return marketActionSort.direction === 'asc' ? 1 : -1;
+                return 0;
+            } else if (!isNaN(parseFloat(valA)) && !isNaN(parseFloat(valB))) {
+                // Handle numbers
+                valA = parseFloat(valA);
+                valB = parseFloat(valB);
+            } else {
+                // Handle strings
+                valA = (valA || '').toString().toLowerCase();
+                valB = (valB || '').toString().toLowerCase();
+            }
+
+            if (valA < valB) return marketActionSort.direction === 'asc' ? -1 : 1;
+            if (valA > valB) return marketActionSort.direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }
+
+    renderMarketActionTable(items, currentMarketActionCategory);
+}
+
+function renderMarketActionTable(items, category) {
+    const container = document.getElementById('marketActionsContent');
+    container.innerHTML = '';
+
+    if (!items || items.length === 0) {
+        container.innerHTML = '<div style="color: #94a3b8;">No data available.</div>';
+        return;
+    }
+
+    const tableWrapper = document.createElement('div');
+    tableWrapper.style.overflowX = 'auto';
+
+    const table = document.createElement('table');
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.style.minWidth = '600px';
+
+    // Headers depend on category. Key mapping for sorting.
+    let colDefs = [];
+    if (category === 'dividends') {
+        colDefs = [
+            { label: 'Company', key: 'company' },
+            { label: 'Type', key: 'type' },
+            { label: '%', key: 'percentage' },
+            { label: 'Announcement', key: 'announcementDate' },
+            { label: 'Record', key: 'recordDate' },
+            { label: 'Ex-Date', key: 'exDate' }
+        ];
+    } else if (category === 'bonus') {
+        colDefs = [
+            { label: 'Company', key: 'company' },
+            { label: 'Ratio', key: 'ratio' },
+            { label: 'Announcement', key: 'announcementDate' },
+            { label: 'Record', key: 'recordDate' },
+            { label: 'Ex-Date', key: 'exDate' }
+        ];
+    } else if (category === 'splits') {
+        colDefs = [
+            { label: 'Company', key: 'company' },
+            { label: 'Old FV', key: 'oldFV' },
+            { label: 'New FV', key: 'newFV' },
+            { label: 'Split Date', key: 'splitDate' }
+        ];
+    } else if (category === 'rights') {
+        colDefs = [
+            { label: 'Company', key: 'company' },
+            { label: 'Ratio', key: 'ratio' },
+            { label: 'Premium', key: 'premium' },
+            { label: 'Announcement', key: 'announcementDate' },
+            { label: 'Record', key: 'recordDate' },
+            { label: 'Ex-Date', key: 'exDate' }
+        ];
+    }
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    colDefs.forEach(col => {
+        const th = document.createElement('th');
+        th.textContent = col.label;
+        if (marketActionSort.column === col.key) {
+            th.textContent += marketActionSort.direction === 'asc' ? ' ↑' : ' ↓';
+        }
+        th.style.textAlign = 'left';
+        th.style.padding = '1rem';
+        th.style.borderBottom = '1px solid #334155';
+        th.style.color = '#94a3b8';
+        th.style.fontWeight = '600';
+        th.style.cursor = 'pointer';
+
+        th.onclick = () => {
+            if (marketActionSort.column === col.key) {
+                marketActionSort.direction = marketActionSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                marketActionSort.column = col.key;
+                marketActionSort.direction = 'asc';
+            }
+            filterAndRenderMarketActionTable();
+        };
+
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    items.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+
+        // Actionable if Today < Ex-Date (or Split Date)
+        const dateKey = category === 'splits' ? 'splitDate' : 'exDate';
+        const dateStr = item[dateKey];
+        const isActionable = checkIsFutureDate(dateStr);
+
+        if (isActionable) {
+            // Highlighting
+            tr.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+            tr.style.boxShadow = 'inset 4px 0 0 0 #10b981';
+        }
+
+        colDefs.forEach(col => {
+            const td = document.createElement('td');
+            const val = item[col.key];
+            td.textContent = val || '-';
+            td.style.padding = '1rem';
+            td.style.color = '#e2e8f0';
+
+            // Highlight the date column itself if actionable
+            if (isActionable && col.key === dateKey) {
+                td.style.color = '#34d399';
+                td.style.fontWeight = '700';
+            }
+
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    tableWrapper.appendChild(table);
+    container.appendChild(tableWrapper);
+}
+
+function parseDateGeneric(dateStr) {
+    if (!dateStr || dateStr.trim() === '-' || dateStr.toLowerCase().includes('not')) return null;
+
+    try {
+        const ddmmyyyyRegex = /^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/;
+        const match = dateStr.trim().match(ddmmyyyyRegex);
+
+        if (match) {
+            const day = parseInt(match[1], 10);
+            const month = parseInt(match[2], 10) - 1;
+            const year = parseInt(match[3], 10);
+            return new Date(year, month, day);
+        } else {
+            const d = new Date(dateStr);
+            return isNaN(d.getTime()) ? null : d;
+        }
+    } catch (e) {
+        return null;
+    }
+}
+
+function checkIsFutureDate(dateStr) {
+    const actionDate = parseDateGeneric(dateStr);
+    if (!actionDate) return false;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize today
+
+    return actionDate >= today;
 }
 
 function updateChartType() {
@@ -270,6 +642,7 @@ function renderIndustryTabs(industries) {
     const sortedIndustries = Array.from(industries).sort();
 
     sortedIndustries.forEach(ind => {
+        if (ind === 'Others') return; // Skip 'Others' tab as requested
         const btn = document.createElement('button');
         btn.className = 'sub-tab-btn';
         btn.textContent = ind;
@@ -803,8 +1176,11 @@ function renderTickerData(ticker, result, container) {
     if (Object.keys(revenueSplit).length === 0) {
         canvasContainer.innerHTML = `
             <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: #94a3b8; flex-direction: column; gap: 0.5rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <div>Revenue split data not available</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+                <div style="color: #f59e0b; font-weight: 500;">Work in Progress</div>
+                <div style="font-size: 0.8rem; color: #64748b;">Revenue split data is being processed</div>
             </div>
         `;
     } else {
@@ -829,11 +1205,13 @@ function renderTickerData(ticker, result, container) {
     const aiTabBtn = document.createElement('button');
     aiTabBtn.className = 'sub-tab-btn active';
     aiTabBtn.textContent = 'AI Insights';
+    aiTabBtn.dataset.tab = 'ai'; // Add data attribute for easier selection
     aiTabBtn.onclick = () => switchNewsTab(ticker, 'ai', aiTabBtn);
 
     const rawTabBtn = document.createElement('button');
     rawTabBtn.className = 'sub-tab-btn';
     rawTabBtn.textContent = 'Raw News';
+    rawTabBtn.dataset.tab = 'raw'; // Add data attribute
     rawTabBtn.onclick = () => switchNewsTab(ticker, 'raw', rawTabBtn);
 
     newsTabs.appendChild(aiTabBtn);
@@ -1122,10 +1500,17 @@ function renderAiAnalysis(ticker, data, container) {
 
 function switchSubTab(ticker) {
     // Update buttons
-    document.querySelectorAll('.sub-tab-btn').forEach(btn => {
-        if (btn.dataset.ticker === ticker) btn.classList.add('active');
-        else btn.classList.remove('active');
-    });
+    // Only target buttons that are actual ticker tabs (have data-ticker)
+    // This prevents clearing active state of other sub-tabs like news tabs
+    const geoTab = document.getElementById('geoTab');
+    if (geoTab) {
+        geoTab.querySelectorAll('.sub-tab-btn').forEach(btn => {
+            if (btn.dataset.ticker) {
+                if (btn.dataset.ticker === ticker) btn.classList.add('active');
+                else btn.classList.remove('active');
+            }
+        });
+    }
 
     // Show content
     document.querySelectorAll('.geo-sub-content').forEach(div => div.style.display = 'none');
@@ -1139,6 +1524,12 @@ function switchSubTab(ticker) {
             if (document.getElementById(`geoChart_${ticker}`)) {
                 renderPieChart(`geoChart_${ticker}`, geoResults[ticker].data.revenueSplit, ticker);
             }
+        }
+
+        // Reset to AI Insights tab by default
+        const aiTabBtn = activeContent.querySelector('button[data-tab="ai"]');
+        if (aiTabBtn) {
+            switchNewsTab(ticker, 'ai', aiTabBtn);
         }
     }
 }

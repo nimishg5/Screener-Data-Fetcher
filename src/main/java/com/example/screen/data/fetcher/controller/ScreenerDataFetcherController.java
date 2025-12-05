@@ -1,5 +1,7 @@
 package com.example.screen.data.fetcher.controller;
 
+import com.example.screen.data.fetcher.service.FivePaisaService;
+import com.example.screen.data.fetcher.service.NewsAnalysisService;
 import com.example.screen.data.fetcher.service.ScreenerAnalysisService;
 import com.example.screen.data.fetcher.service.ScreenerDataFetcherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -94,12 +98,23 @@ public class ScreenerDataFetcherController {
         return new ResponseEntity<>(suggestions, HttpStatus.OK);
     }
 
+    @Autowired
+    private FivePaisaService fivePaisaService;
+
     @GetMapping(value = "/corporate-actions")
     public ResponseEntity<java.util.Map<String, Object>> getCorporateActions(
             @RequestParam(value = "ticker") String ticker,
             @RequestParam(value = "refresh", defaultValue = "false") boolean refresh) {
         log.info("Corporate actions request received for ticker: {}, refresh: {}", ticker, refresh);
         java.util.Map<String, Object> data = screenerAnalysisService.getCorporateActions(ticker, refresh);
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/market-actions")
+    public ResponseEntity<java.util.Map<String, List<java.util.Map<String, String>>>> getMarketActions(
+            @RequestParam(value = "year", required = false) Integer year) {
+        log.info("Market actions request received for year: {}", year);
+        java.util.Map<String, List<java.util.Map<String, String>>> data = fivePaisaService.getAllCorporateActions(year);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
