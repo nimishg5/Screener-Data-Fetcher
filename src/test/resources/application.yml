@@ -1,0 +1,4 @@
+llm:
+  api:
+    key: "mock-key-for-testing"
+    url: "https://mock-url"
