@@ -25,7 +25,21 @@ let currentData = null;
 document.addEventListener('DOMContentLoaded', () => {
     renderChips();
     setupAutocomplete(document.getElementById('tickerInput'), null);
+    checkLoginStatus();
 });
+
+function checkLoginStatus() {
+    const user = localStorage.getItem('screen_fetcher_user');
+    if (user) {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('appSection').style.display = 'block';
+        const welcomeMsg = document.getElementById('welcomeMsg');
+        if (welcomeMsg) {
+            welcomeMsg.textContent = `Welcome, ${user}`;
+            welcomeMsg.style.display = 'block';
+        }
+    }
+}
 
 // Add ticker on Enter key
 document.getElementById('tickerInput').addEventListener('keypress', function (e) {
@@ -1032,15 +1046,44 @@ function renderAiAnalysis(ticker, data, container) {
         const summaryText = aiData.summary;
         let summaryHtml = '';
 
-        if (summaryText.includes('- ')) {
-            const items = summaryText.split('- ').filter(item => item.trim().length > 0);
+        // Split by newlines to handle different bullet formats
+        const lines = summaryText.split('\n');
+        const listItems = [];
+        let paragraphText = '';
+
+        lines.forEach(line => {
+            const trimmed = line.trim();
+            if (!trimmed) return;
+
+            // Check for bullet points (hyphen, asterisk, bullet char)
+            if (trimmed.startsWith('- ') || trimmed.startsWith('* ') || trimmed.startsWith('• ')) {
+                // Remove the bullet marker and bold markers if present
+                let content = trimmed.substring(2).trim();
+                // Handle bold text **text** -> <strong>text</strong>
+                content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                listItems.push(content);
+            } else {
+                // If it's not a bullet, treat as paragraph text or append to previous
+                if (listItems.length === 0) {
+                    paragraphText += (paragraphText ? ' ' : '') + trimmed;
+                } else {
+                    // If we already have list items, maybe this is a continuation or a new paragraph?
+                    // For now, let's just add it as a list item if it looks like a sentence
+                    listItems.push(trimmed);
+                }
+            }
+        });
+
+        if (listItems.length > 0) {
             summaryHtml = '<ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem; line-height: 1.5;">';
-            items.forEach(item => {
-                summaryHtml += `<li style="margin-bottom: 0.5rem;">${item.trim()}</li>`;
+            listItems.forEach(item => {
+                summaryHtml += `<li style="margin-bottom: 0.5rem;">${item}</li>`;
             });
             summaryHtml += '</ul>';
+        } else if (paragraphText) {
+            summaryHtml = `<p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">${paragraphText}</p>`;
         } else {
-            // Fallback for paragraph text
+            // Fallback if parsing failed completely but text exists
             summaryHtml = `<p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">${summaryText}</p>`;
         }
 
@@ -1179,6 +1222,7 @@ async function login() {
 
         if (response.ok) {
             const data = await response.json();
+            localStorage.setItem('screen_fetcher_user', data.username);
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('appSection').style.display = 'block';
 
@@ -1209,6 +1253,7 @@ async function logout() {
     } catch (error) {
         console.error('Logout failed:', error);
     } finally {
+        localStorage.removeItem('screen_fetcher_user');
         // Reset UI
         document.getElementById('appSection').style.display = 'none';
         document.getElementById('loginSection').style.display = 'flex';

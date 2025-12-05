@@ -4,15 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,35 +21,32 @@ import java.util.Map;
 @Slf4j
 public class LlmService {
 
-    @Value("${llm.api.key:}")
-    private String apiKey;
-
-    @Value("${llm.api.url:https://api.openai.com/v1/chat/completions}")
+    @Value("${llm.api.url}")
     private String apiUrl;
 
-    @Value("${llm.model:gpt-3.5-turbo}")
+    @Value("${llm.api.key}")
+    private String apiKey;
+
+    @Value("${llm.model}")
     private String model;
 
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
-    public LlmService() {
-        this.httpClient = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(10))
-                .build();
-        this.objectMapper = new ObjectMapper();
+    public LlmService(ObjectMapper objectMapper) {
+        this.httpClient = HttpClient.newHttpClient();
+        this.objectMapper = objectMapper;
     }
 
     public List<String> getRelatedEntities(String ticker) {
         if (apiKey == null || apiKey.isEmpty()) {
-            log.warn("LLM API Key is missing. Skipping dynamic entity discovery.");
             return new ArrayList<>();
         }
 
         String prompt = String.format(
-                "I am tracking the stock '%s'. Identify 3 to 5 key subsidiaries, managed projects, or related entities that significantly impact its business (like 'Vizhinjam Port' for 'Adani Ports'). "
+                "Identify the top 5 related entities (subsidiaries, parent companies, key competitors, or major partners) for the stock \"%s\". "
                         +
-                        "Return ONLY a JSON array of strings with the names. Example: [\"Entity 1\", \"Entity 2\"]. Do not include any other text.",
+                        "Return ONLY a JSON array of strings. Example: [\"Entity1\", \"Entity2\"]. Do not include any other text.",
                 ticker);
 
         try {
@@ -82,12 +78,12 @@ public class LlmService {
         }
 
         String prompt = String.format(
-                "You are a financial analyst. Analyze the following news for stock '%s' and its related entities. " +
+                "You are a financial analyst. Analyze the following news for stock \"%s\" and its related entities. " +
                         "Summarize the key events and explain their potential impact on the stock price or business outlook. "
                         +
-                        "Provide the summary as a list of bullet points. Use a hyphen (-) for each bullet point. "
+                        "Provide the summary as a list of bullet points. Start every bullet point with a hyphen and a space: \"- \". "
                         +
-                        "Be concise and focus on material information.\n\n%s",
+                        "Do not use asterisks or numbered lists. Be concise and focus on material information.\n\n%s",
                 ticker, newsContent.toString());
 
         try {
@@ -111,8 +107,8 @@ public class LlmService {
             }
 
             String prompt = String.format(
-                    "Analyze the following news headlines for stock '%s'. " +
-                            "For each news item, assign an 'impact_score' (0-10, where 10 is critical impact) and a brief 'reason'. "
+                    "Analyze the following news headlines for stock \"%s\". " +
+                            "For each news item, assign an \"impact_score\" (0-10, where 10 is critical impact) and a brief \"reason\". "
                             +
                             "Return a JSON array of objects: [{\"id\": 0, \"score\": 8, \"reason\": \"...\"}]. " +
                             "Only include items with score > 4. " +

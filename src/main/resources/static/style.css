@@ -223,8 +223,10 @@ select {
 }
 
 .loader {
-    border: 4px solid #334155; /* Light grey */
-    border-top: 4px solid #60a5fa; /* Blue */
+    border: 4px solid #334155;
+    /* Light grey */
+    border-top: 4px solid #60a5fa;
+    /* Blue */
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -233,6 +235,33 @@ select {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sub-tabs for Geo Analysis */
+.sub-tab-btn {
+    background: none;
+    color: #94a3b8;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sub-tab-btn.active {
+    background-color: rgba(96, 165, 250, 0.1) !important;
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.sub-tab-btn:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.05);
 }
