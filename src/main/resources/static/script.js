@@ -17,16 +17,41 @@ try {
     console.error('Error initializing Chart.js settings:', e);
 }
 
-let tickers = new Set(['TCS', 'INFY']); // Default tickers
+let tickers = new Set(['TCS', 'INFY']); // Default tickers (will be overwritten by localStorage if present)
 let chartInstance = null;
 let currentData = null;
 
 // Initialize chips and autocomplete
 document.addEventListener('DOMContentLoaded', () => {
+    loadTickers(); // Load saved tickers
     renderChips();
     setupAutocomplete(document.getElementById('tickerInput'), null);
     checkLoginStatus();
 });
+
+function loadTickers() {
+    const saved = localStorage.getItem('saved_tickers');
+    if (saved) {
+        try {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed)) {
+                // If array is populated, use it. If empty array, use it (user deleted all).
+                tickers = new Set(parsed);
+            }
+        } catch (e) {
+            console.error('Error loading saved tickers', e);
+            // Fallback to defaults on error
+            tickers = new Set(['TCS', 'INFY']);
+        }
+    } else {
+        // No saved data found -> Use defaults
+        tickers = new Set(['TCS', 'INFY']);
+    }
+}
+
+function saveTickers() {
+    localStorage.setItem('saved_tickers', JSON.stringify(Array.from(tickers)));
+}
 
 function checkLoginStatus() {
     const user = localStorage.getItem('screen_fetcher_user');
@@ -121,6 +146,7 @@ function addTicker() {
 
     if (ticker && !tickers.has(ticker)) {
         tickers.add(ticker);
+        saveTickers(); // Save
         renderChips();
         input.value = '';
     } else if (tickers.has(ticker)) {
@@ -130,6 +156,7 @@ function addTicker() {
 
 function removeTicker(ticker) {
     tickers.delete(ticker);
+    saveTickers(); // Save
     renderChips();
 }
 
@@ -175,7 +202,10 @@ function switchTab(tabName) {
     });
 
     if (tabName === 'chart') {
-        updateChart();
+        // Fix: Force redraw after a small delay to ensure canvas is visible and sized
+        setTimeout(() => {
+            updateChartType(); // This calls renderChart
+        }, 50);
     } else if (tabName === 'geo') {
         // Trigger geo analysis for all tickers if not already done
         tickers.forEach(t => {
@@ -210,7 +240,7 @@ async function fetchMarketActions(year = null) {
     const contentDiv = document.getElementById('marketActionsContent');
     // Show loading in the content area
     contentDiv.innerHTML = `
-        <div class="loading">
+        <div class="loading" style="display: block;">
             <div class="loader"></div>
             <div>Fetching market actions...</div>
         </div>
@@ -481,13 +511,17 @@ function renderMarketActionTable(items, category) {
         const tr = document.createElement('tr');
         tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
 
-        // Actionable if Today < Ex-Date (or Split Date)
+        // Check date status
         const dateKey = category === 'splits' ? 'splitDate' : 'exDate';
         const dateStr = item[dateKey];
-        const isActionable = checkIsFutureDate(dateStr);
+        const status = getDateStatus(dateStr);
 
-        if (isActionable) {
-            // Highlighting
+        if (status === 'urgent') {
+            // Yellow for Today/Tomorrow
+            tr.style.backgroundColor = 'rgba(234, 179, 8, 0.1)';
+            tr.style.boxShadow = 'inset 4px 0 0 0 #eab308';
+        } else if (status === 'upcoming') {
+            // Green for future
             tr.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
             tr.style.boxShadow = 'inset 4px 0 0 0 #10b981';
         }
@@ -499,10 +533,15 @@ function renderMarketActionTable(items, category) {
             td.style.padding = '1rem';
             td.style.color = '#e2e8f0';
 
-            // Highlight the date column itself if actionable
-            if (isActionable && col.key === dateKey) {
-                td.style.color = '#34d399';
-                td.style.fontWeight = '700';
+            // Highlight the date column itself
+            if (col.key === dateKey) {
+                if (status === 'urgent') {
+                    td.style.color = '#facc15'; // Yellow
+                    td.style.fontWeight = '700';
+                } else if (status === 'upcoming') {
+                    td.style.color = '#34d399'; // Green
+                    td.style.fontWeight = '700';
+                }
             }
 
             tr.appendChild(td);
@@ -535,14 +574,33 @@ function parseDateGeneric(dateStr) {
     }
 }
 
-function checkIsFutureDate(dateStr) {
+function getDateStatus(dateStr) {
     const actionDate = parseDateGeneric(dateStr);
-    if (!actionDate) return false;
+    if (!actionDate) return null;
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Normalize today
+    today.setHours(0, 0, 0, 0);
 
-    return actionDate >= today;
+    // Tomorrow
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    // Day after tomorrow (threshold for green)
+    const dayAfterTomorrow = new Date(today);
+    dayAfterTomorrow.setDate(today.getDate() + 2);
+
+    // Urgent: Today or Tomorrow
+    // Check if actionDate is >= today AND < dayAfterTomorrow
+    // Actually simpler: 
+    // If < today: Past (null)
+    // If >= today AND <= tomorrow: Urgent
+    // If > tomorrow: Upcoming
+
+    if (actionDate < today) return null;
+
+    if (actionDate <= tomorrow) return 'urgent';
+
+    return 'upcoming';
 }
 
 function updateChartType() {
@@ -1617,8 +1675,14 @@ async function login() {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('appSection').style.display = 'block';
 
-            // Show welcome message
+            // Restore saved state
+            loadTickers();
+            renderChips();
+
+
             const welcomeMsg = document.getElementById('welcomeMsg');
+
+            // Show welcome message
             if (welcomeMsg) {
                 welcomeMsg.textContent = `Welcome, ${data.username}`;
                 welcomeMsg.style.display = 'block';
@@ -1880,35 +1944,40 @@ function renderActionsData(ticker, result, container) {
 
     const categories = ['dividends', 'bonus', 'splits', 'rights'];
 
-    const grid = document.createElement('div');
-    grid.style.display = 'grid';
-    grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(400px, 1fr))';
-    grid.style.gap = '2rem';
-    container.appendChild(grid);
+    // Create Tabs Container
+    const tabsContainer = document.createElement('div');
+    tabsContainer.style.display = 'flex';
+    tabsContainer.style.gap = '1rem';
+    tabsContainer.style.marginBottom = '1.5rem';
+    tabsContainer.style.borderBottom = '1px solid #334155';
+    container.appendChild(tabsContainer);
 
-    categories.forEach(cat => {
-        if (!data[cat]) return;
+    // Content Container
+    const contentContainer = document.createElement('div');
+    container.appendChild(contentContainer);
+
+    // State for active tab
+    let activeTab = 'dividends'; // Default
+
+    // Function to render content for a specific category
+    const renderCategoryContent = (cat) => {
+        contentContainer.innerHTML = ''; // Clear previous content
+
+        if (!data[cat]) {
+            contentContainer.innerHTML = '<div style="color: #64748b; font-style: italic;">No data available for ' + cat + '</div>';
+            return;
+        }
 
         const card = document.createElement('div');
-        card.style.background = '#1e293b';
-        card.style.padding = '1.5rem';
-        card.style.borderRadius = '1rem';
-        card.style.border = '1px solid #334155';
-
-        const title = document.createElement('h3');
-        title.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-        title.style.marginTop = '0';
-        title.style.color = '#f1f5f9';
-        title.style.borderBottom = '1px solid #334155';
-        title.style.paddingBottom = '0.5rem';
-        card.appendChild(title);
+        // Card style specific to content - removed border/background to blend with tab view or keep if preferred
+        // Keeping it simple for now
 
         // Upcoming
         if (data[cat].upcoming && data[cat].upcoming.length > 0) {
             const subTitle = document.createElement('h4');
             subTitle.textContent = 'Upcoming';
             subTitle.style.color = '#4ade80'; // Green
-            subTitle.style.marginTop = '1rem';
+            subTitle.style.marginTop = '0';
             card.appendChild(subTitle);
             card.appendChild(createActionTable(data[cat].upcoming));
         }
@@ -1918,9 +1987,9 @@ function renderActionsData(ticker, result, container) {
             const subTitle = document.createElement('h4');
             subTitle.textContent = 'Previous';
             subTitle.style.color = '#94a3b8'; // Muted
-            subTitle.style.marginTop = '1rem';
+            subTitle.style.marginTop = '1.5rem';
             card.appendChild(subTitle);
-            card.appendChild(createActionTable(data[cat].previous.slice(0, 5))); // Limit to 5
+            card.appendChild(createActionTable(data[cat].previous)); // Show All previous in tab view, or limit? Let's show all for now or 10
         } else if (!data[cat].upcoming || data[cat].upcoming.length === 0) {
             const empty = document.createElement('div');
             empty.textContent = 'No data available';
@@ -1930,28 +1999,66 @@ function renderActionsData(ticker, result, container) {
             card.appendChild(empty);
         }
 
-        grid.appendChild(card);
+        contentContainer.appendChild(card);
+    };
+
+    // Create Tab Buttons
+    categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        btn.style.background = 'transparent';
+        btn.style.border = 'none';
+        btn.style.color = activeTab === cat ? '#3b82f6' : '#94a3b8';
+        btn.style.borderBottom = activeTab === cat ? '2px solid #3b82f6' : '2px solid transparent';
+        btn.style.padding = '0.75rem 1.5rem';
+        btn.style.cursor = 'pointer';
+        btn.style.fontSize = '1rem';
+        btn.style.transition = 'all 0.2s';
+
+        btn.onclick = () => {
+            activeTab = cat;
+            // Update buttons styles
+            Array.from(tabsContainer.children).forEach(child => {
+                const isSelected = child.textContent.toLowerCase() === cat;
+                child.style.color = isSelected ? '#3b82f6' : '#94a3b8';
+                child.style.borderBottom = isSelected ? '2px solid #3b82f6' : '2px solid transparent';
+            });
+            renderCategoryContent(cat);
+        };
+
+        tabsContainer.appendChild(btn);
     });
+
+    // Initial render
+    renderCategoryContent(activeTab);
 }
 
 function createActionTable(rows) {
+    // Wrap table for horizontal scrolling
+    const tableWrapper = document.createElement('div');
+    tableWrapper.style.overflowX = 'auto';
+
     const table = document.createElement('table');
     table.style.width = '100%';
     table.style.fontSize = '0.9rem';
     table.style.marginTop = '0.5rem';
+    table.style.borderCollapse = 'collapse'; // Better border handling
 
     // Headers
+    let headers = [];
     if (rows.length > 0) {
         const thead = document.createElement('thead');
         const tr = document.createElement('tr');
-        Object.keys(rows[0]).forEach(key => {
+        headers = Object.keys(rows[0]); // Capture headers to ensure consistent order
+        headers.forEach(key => {
             const th = document.createElement('th');
             th.textContent = key;
-            th.style.padding = '0.5rem';
+            th.style.padding = '0.75rem';
             th.style.color = '#94a3b8';
             th.style.fontSize = '0.8rem';
             th.style.textAlign = 'left';
             th.style.borderBottom = '1px solid #334155';
+            th.style.whiteSpace = 'nowrap'; // Prevent header wrapping
             tr.appendChild(th);
         });
         thead.appendChild(tr);
@@ -1961,16 +2068,21 @@ function createActionTable(rows) {
     const tbody = document.createElement('tbody');
     rows.forEach(row => {
         const tr = document.createElement('tr');
-        Object.values(row).forEach(val => {
+        // Use the captured headers to iterate, ensuring alignment
+        headers.forEach(key => {
+            const val = row[key];
             const td = document.createElement('td');
-            td.textContent = val;
-            td.style.padding = '0.5rem';
+            td.textContent = val !== undefined && val !== null ? val : '';
+            td.style.padding = '0.75rem';
             td.style.borderBottom = '1px solid #334155';
             td.style.color = '#e2e8f0';
+            td.style.whiteSpace = 'nowrap'; // Prevent content wrapping if desired, or remove for wrapping
             tr.appendChild(td);
         });
         tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-    return table;
+
+    tableWrapper.appendChild(table);
+    return tableWrapper;
 }

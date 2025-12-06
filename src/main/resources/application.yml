@@ -18,6 +18,8 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true
+  virtual-thread:
+    enabled: true
 
 # LLM Configuration
 llm:
@@ -30,5 +32,5 @@ llm:
   # Gemini Configuration (Active)
   api:
     key: ${GEMINI_API_KEY}
-    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
-  model: gemini-2.5-flash
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3.0-pro:generateContent
+  model: gemini-3.0-pro

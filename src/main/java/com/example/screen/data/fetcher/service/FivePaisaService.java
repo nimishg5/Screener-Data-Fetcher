@@ -52,9 +52,12 @@ public class FivePaisaService {
         }
 
         List<Map<String, String>> actions = new ArrayList<>();
-        String url = BASE_URL + type;
+        String url;
         if (year != null && !year.isEmpty()) {
-            url += "?Year=" + year;
+            String typeCode = getTypeCode(type);
+            url = "https://www.5paisa.com/rdbs/" + typeCode + "/" + year;
+        } else {
+            url = BASE_URL + type;
         }
 
         try {
@@ -127,6 +130,28 @@ public class FivePaisaService {
                 actions.add(action);
             }
 
+            // Filter by Year if requested
+            if (year != null && !year.isEmpty()) {
+                List<Map<String, String>> filteredActions = new ArrayList<>();
+                for (Map<String, String> action : actions) {
+                    String dateStr = "splits".equals(type) ? action.get("splitDate") : action.get("exDate");
+                    if (dateStr != null && dateStr.contains(year)) {
+                        filteredActions.add(action);
+                    }
+                }
+
+                if (filteredActions.isEmpty() && !actions.isEmpty()) {
+                    log.warn(
+                            "Source returned data but none matched requested year {}. Likely parameter ignored by source.",
+                            year);
+                    // If we requested a specific year but got nothing matching, return empty rather
+                    // than wrong data.
+                    actions.clear();
+                } else {
+                    actions = filteredActions;
+                }
+            }
+
             // Save to cache
             if (!actions.isEmpty()) {
                 cacheService.put(cacheKey, actions, CACHE_DURATION_MS);
@@ -137,5 +162,22 @@ public class FivePaisaService {
         }
 
         return actions;
+    }
+
+    private String getTypeCode(String type) {
+        if (type == null)
+            return "D";
+        switch (type.toLowerCase()) {
+            case "dividends":
+                return "D";
+            case "bonus":
+                return "B";
+            case "splits":
+                return "S";
+            case "rights":
+                return "R";
+            default:
+                return "D";
+        }
     }
 }

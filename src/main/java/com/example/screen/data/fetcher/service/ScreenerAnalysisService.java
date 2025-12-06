@@ -224,7 +224,7 @@ public class ScreenerAnalysisService {
      * @return Corporate actions data
      */
     public Map<String, Object> getCorporateActions(String ticker, boolean refresh) {
-        String cacheKey = "CORPORATE_ACTIONS_" + ticker;
+        String cacheKey = "CORPORATE_ACTIONS_V2_" + ticker;
         long oneWeekInMillis = 7L * 24 * 60 * 60 * 1000; // 1 week
 
         // If refresh is requested, clear the cache
@@ -309,11 +309,17 @@ public class ScreenerAnalysisService {
                     }
                 }
 
-                if (peersSection != null) {
+                // 1. Primary Strategy: Look for anchor with title="Industry"
+                Element industryLink = doc.selectFirst("a[title='Industry']");
+                if (industryLink != null) {
+                    industry = industryLink.text().trim();
+                    log.info("Extracted Industry for {} via title='Industry': {}", ticker, industry);
+                } else if (peersSection != null) {
+                    // 2. Secondary Strategy: Peers section
                     Elements sectorLinks = peersSection.select("a[href*='/market/']");
                     if (!sectorLinks.isEmpty()) {
                         industry = sectorLinks.first().text().trim();
-                        log.info("Extracted Industry for {}: {}", ticker, industry);
+                        log.info("Extracted Industry for {} via peers/market link: {}", ticker, industry);
                     } else {
                         log.warn("Peers section found but no market links for {}", ticker);
                     }
