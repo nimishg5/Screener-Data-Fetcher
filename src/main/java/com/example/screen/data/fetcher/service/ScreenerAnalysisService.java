@@ -341,6 +341,7 @@ public class ScreenerAnalysisService {
                 }
 
                 ratiosMap.put("Industry", industry);
+                log.info("Final Industry for {}: {}", ticker, industry);
 
             } catch (Exception e) {
                 log.warn("Failed to extract industry for {}: {}", ticker, e.getMessage());

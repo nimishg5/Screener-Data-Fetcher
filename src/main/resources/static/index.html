@@ -462,6 +462,7 @@
                 <button class="tab-btn" onclick="switchTab('chart')">Chart</button>
                 <button class="tab-btn" onclick="switchTab('geo')">Geo Analysis</button>
                 <button class="tab-btn" onclick="switchTab('marketActions')">Corporate Actions</button>
+                <button class="tab-btn" onclick="switchTab('brokerResearch')">Brokers Call</button>
                 <button class="tab-btn" onclick="switchTab('actions')">Watchlist Actions</button>
             </div>
 
@@ -504,9 +505,27 @@
                 <!-- Content will be dynamically populated by script.js -->
             </div>
 
+            <div id="brokerResearchTab" class="tab-content">
+                <!-- Content will be dynamically populated by script.js -->
+            </div>
+
             <div id="actionsTab" class="tab-content">
                 <!-- Content will be dynamically populated by script.js -->
             </div>
+        </div>
+    </div>
+
+    <!-- Generic Modal -->
+    <div id="infoModal" class="modal"
+        style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
+        <div class="modal-content"
+            style="background-color: var(--card-background); margin: 10% auto; padding: 2rem; border: 1px solid var(--border-color); width: 80%; max-width: 800px; border-radius: 1rem; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            <span class="close" onclick="closeModal()"
+                style="color: var(--text-muted); float: right; font-size: 2rem; font-weight: bold; cursor: pointer; line-height: 1;">&times;</span>
+            <h2 id="modalTitle"
+                style="margin-top: 0; color: var(--primary-color); margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                Summary</h2>
+            <div id="modalBody" style="color: var(--text-color); line-height: 1.8; font-size: 1.05rem;"></div>
         </div>
     </div>
 

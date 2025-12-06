@@ -218,8 +218,16 @@ function switchTab(tabName) {
         });
     } else if (tabName === 'marketActions') {
         fetchMarketActions();
+    } else if (tabName === 'brokerResearch') {
+        tickers.forEach(t => {
+            if (!brokerResearchResults[t]) fetchBrokerResearch(t);
+        });
+        renderBrokerResearch();
     }
 }
+
+// State for Broker Research
+let brokerResearchResults = {};
 
 // State for market actions
 let marketActionsData = {};
@@ -609,6 +617,20 @@ function updateChartType() {
     }
 }
 
+function extractIndustries(data) {
+    console.log('Extracting industries from data:', Object.keys(data));
+    const industries = new Set();
+    Object.values(data).forEach(d => {
+        if (d && d.Industry) {
+            industries.add(d.Industry);
+        } else {
+            console.log('Missing industry for ticker data:', d);
+        }
+    });
+    console.log('Found industries:', Array.from(industries));
+    renderIndustryTabs(industries);
+}
+
 async function compareTickers() {
     if (tickers.size === 0) {
         alert('Please add at least one ticker');
@@ -637,12 +659,7 @@ async function compareTickers() {
         currentData = data;
 
         // Extract Industries
-        const industries = new Set();
-        Object.values(data).forEach(d => {
-            if (d && d.Industry) industries.add(d.Industry);
-        });
-
-        renderIndustryTabs(industries);
+        extractIndustries(data);
 
         // Default to All
         currentIndustry = 'All';
@@ -661,6 +678,20 @@ async function compareTickers() {
         document.getElementById('tableTab').classList.add('active');
 
         // Reset active tab button
+        document.querySelectorAll('.tab-btn').forEach(b => {
+            b.classList.remove('active');
+            if (b.textContent.includes('Table')) b.classList.add('active');
+        });
+
+        // Pre-fetch Broker Research in background for better UX
+        setupBrokerResearchLayout(); // Ensure containers exist
+        tickers.forEach(t => {
+            // Check if already fetched to avoid double fetch if button clicked multiple times? 
+            // Actually, compareTickers implies a refreshed view, so fetching is good.
+            // But we should check if currently fetching?
+            // Simple approach: just trigger it.
+            fetchBrokerResearch(t);
+        });
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelector('.tab-btn:first-child').classList.add('active');
 
@@ -700,7 +731,7 @@ function renderIndustryTabs(industries) {
     const sortedIndustries = Array.from(industries).sort();
 
     sortedIndustries.forEach(ind => {
-        if (ind === 'Others') return; // Skip 'Others' tab as requested
+        // if (ind === 'Others') return; // Show Others if it's the only thing available
         const btn = document.createElement('button');
         btn.className = 'sub-tab-btn';
         btn.textContent = ind;
@@ -740,6 +771,12 @@ function renderTable(data) {
         document.getElementById('error').textContent = 'No data found';
         document.getElementById('error').style.display = 'block';
         return;
+    }
+
+    // IMPORTANT: Extract industries whenever table is re-rendered with new data (full refresh)
+    // But we need to be careful not to reset user selection if just filtering
+    if (currentIndustry === 'All' && document.getElementById('industryTabs').children.length <= 1) {
+        extractIndustries(data);
     }
 
     const validTickers = [];
@@ -1983,13 +2020,19 @@ function renderActionsData(ticker, result, container) {
         }
 
         // Previous
-        if (data[cat].previous && data[cat].previous.length > 0) {
+        // Filter out completely empty objects from 'previous' list
+        const validPrevious = data[cat].previous ? data[cat].previous.filter(item => {
+            // Check if item has at least one key with non-empty value
+            return Object.values(item).some(val => val && val.trim() !== '');
+        }) : [];
+
+        if (validPrevious.length > 0) {
             const subTitle = document.createElement('h4');
             subTitle.textContent = 'Previous';
             subTitle.style.color = '#94a3b8'; // Muted
             subTitle.style.marginTop = '1.5rem';
             card.appendChild(subTitle);
-            card.appendChild(createActionTable(data[cat].previous)); // Show All previous in tab view, or limit? Let's show all for now or 10
+            card.appendChild(createActionTable(validPrevious));
         } else if (!data[cat].upcoming || data[cat].upcoming.length === 0) {
             const empty = document.createElement('div');
             empty.textContent = 'No data available';
@@ -2085,4 +2128,323 @@ function createActionTable(rows) {
 
     tableWrapper.appendChild(table);
     return tableWrapper;
+}
+
+// Broker Research Logic with Sub-tabs
+
+// State for Broker Research
+// let brokerResearchResults = {}; // Already defined above
+
+function renderBrokerResearch() {
+    setupBrokerResearchLayout();
+}
+
+function setupBrokerResearchLayout() {
+    const tab = document.getElementById('brokerResearchTab');
+
+    // Check if layout already exists to prevent clearing on re-render/tab switch
+    if (tab.querySelector('.sub-tabs-container')) {
+        // Just ensure sub-tabs encompass all current tickers?
+        // For simplicity, if tickers changed, we might need to rebuild.
+        // Let's check if the number of tabs matches tickers.size
+        const existingTabs = tab.querySelectorAll('.sub-tab-btn');
+        if (existingTabs.length === tickers.size) {
+            return; // Assume already set up
+        }
+        // If mismatch, clear and rebuild (e.g., user added/removed ticker)
+        tab.innerHTML = '';
+    } else {
+        tab.innerHTML = '';
+    }
+
+    if (tickers.size === 0) {
+        tab.innerHTML = '<div class="error">No tickers added. Add tickers to see broker research.</div>';
+        return;
+    }
+
+    const tickerArray = Array.from(tickers);
+
+    // Create Sub-tabs Container
+    const tabsContainer = document.createElement('div');
+    tabsContainer.className = 'sub-tabs-container';
+    tabsContainer.style.display = 'flex';
+    tabsContainer.style.gap = '0.5rem';
+    tabsContainer.style.marginBottom = '1.5rem';
+    tabsContainer.style.flexWrap = 'wrap';
+    tab.appendChild(tabsContainer);
+
+    // Create Content Container
+    const contentContainer = document.createElement('div');
+    contentContainer.id = 'brokerResearchContent';
+    tab.appendChild(contentContainer);
+
+    // Generate Tabs
+    tickerArray.forEach((ticker, index) => {
+        const btn = document.createElement('button');
+        btn.textContent = ticker;
+        btn.className = 'sub-tab-btn';
+        if (index === 0) btn.classList.add('active');
+        btn.dataset.ticker = ticker;
+        btn.onclick = () => switchBrokerResearchSubTab(ticker);
+        tabsContainer.appendChild(btn);
+
+        // Create content div (hidden by default)
+        const contentDiv = document.createElement('div');
+        contentDiv.id = `broker-content-${ticker}`;
+        contentDiv.className = 'broker-sub-content';
+        contentDiv.style.display = 'none';
+        contentContainer.appendChild(contentDiv);
+    });
+
+    if (tickerArray.length > 0) {
+        // Only switch/show if no content currently visible?
+        // Or default to first
+        // Check if any is visible
+        const visible = document.querySelector('.broker-sub-content[style*="block"]');
+        if (!visible) {
+            switchBrokerResearchSubTab(tickerArray[0]);
+        }
+    }
+}
+
+function switchBrokerResearchSubTab(ticker) {
+    // Update buttons
+    document.querySelectorAll('#brokerResearchTab .sub-tab-btn').forEach(btn => {
+        if (btn.dataset.ticker === ticker) btn.classList.add('active');
+        else btn.classList.remove('active');
+    });
+
+    // Toggle content
+    document.querySelectorAll('.broker-sub-content').forEach(div => {
+        div.style.display = 'none';
+    });
+
+    const targetDiv = document.getElementById(`broker-content-${ticker}`);
+    if (targetDiv) {
+        targetDiv.style.display = 'block';
+    }
+}
+
+async function fetchBrokerResearch(ticker, refresh = false) {
+    const contentDiv = document.getElementById(`broker-content-${ticker}`);
+    if (!contentDiv) return;
+
+    // Only show loading if empty or refreshing
+    if (contentDiv.innerHTML.trim() === '' || refresh) {
+        contentDiv.innerHTML = `<div class="loading-local"><div class="loader"></div><div>${refresh ? 'Refetching' : 'Fetching'} Broker Research for ${ticker}...</div></div>`;
+    }
+
+    try {
+        const url = `/api/v1/data-fetcher/broker-research?ticker=${ticker}&refresh=${refresh}`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        brokerResearchResults[ticker] = data;
+        renderBrokerResearchContent(ticker, data, contentDiv);
+    } catch (err) {
+        console.error(err);
+        contentDiv.innerHTML = `<div class="error">Failed to load data: ${err.message}</div>`;
+    }
+}
+
+function renderBrokerResearchContent(ticker, result, container) {
+    if (!result || !result.reports || result.reports.length === 0) {
+        if (result.error) container.innerHTML = `<div class="error">${result.error}</div>`;
+        else container.innerHTML = `<div style="text-align:center; padding:2rem; color:#94a3b8;">No reports found. <br><br><button onclick="fetchBrokerResearch('${ticker}', true)" class="refetch-btn" style="background:var(--primary-color); border:none; padding:0.5rem 1rem; color:white; border-radius:0.5rem; cursor:pointer;">Refresh</button></div>`;
+        return;
+    }
+
+    const { reports, lastFetched, currentPrice } = result;
+
+    // Filter and Sort Logic
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+    let processedReports = reports.filter(r => {
+        if (!r.date) return false;
+        // Parse date. Moneycontrol dates are usually "16 Oct, 2024"
+        const d = new Date(r.date);
+        return !isNaN(d.getTime()) && d >= sixMonthsAgo;
+    });
+
+    // Sort Descending
+    processedReports.sort((a, b) => {
+        const da = new Date(a.date);
+        const db = new Date(b.date);
+        return db - da;
+    });
+
+    // Check filtered length
+    if (processedReports.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:2rem; color:#94a3b8;">No reports found in the last 6 months. <br><br><button onclick="fetchBrokerResearch('${ticker}', true)" class="refetch-btn" style="background:var(--primary-color); border:none; padding:0.5rem 1rem; color:white; border-radius:0.5rem; cursor:pointer;">Refresh</button></div>`;
+        return;
+    }
+
+    // Header
+    let headerHtml = `<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #334155; padding-bottom:1rem; margin-bottom:1rem;">
+       <div>
+           <h3 style="margin:0">${ticker}</h3>
+           <div style="font-size:0.85rem; color:#94a3b8;">
+               Last Updated: ${lastFetched ? new Date(lastFetched).toLocaleString() : 'Just now'}
+               ${currentPrice ? ` • CMP: ₹${currentPrice}` : ''}
+           </div>
+       </div>
+       <button onclick="fetchBrokerResearch('${ticker}', true)" class="refetch-btn" style="background:rgba(59,130,246,0.1); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); padding:0.5rem 1rem; border-radius:0.5rem; cursor:pointer; font-weight:600;">🔄 Refetch</button>
+    </div>`;
+
+    let html = headerHtml +
+        '<div style="overflow-x:auto;">' +
+        '<table class="comparison-table" style="width:100%">' +
+        '<thead>' +
+        '<tr>' +
+        '<th style="color:#f1f5f9; font-weight:600; border-bottom:1px solid #334155;">Date</th>' +
+        '<th>Broker</th>' +
+        '<th>Reco</th>' +
+        '<th>Target</th>' +
+        '<th>Upside</th>' +
+        '<th style="text-align:center;">Report / Summary</th>' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>';
+
+    processedReports.forEach(row => {
+        let recoClass = getRecoClass(row.reco);
+        let recoStyle = '';
+        if (row.reco) {
+            const r = row.reco.toUpperCase();
+            if (r.includes('BUY') || r.includes('ACCUMULATE')) {
+                recoStyle = 'color:#4ade80; font-weight:bold;'; // Green
+                recoClass = 'status-badge status-upcoming';
+            } else if (r.includes('SELL') || r.includes('REDUCE')) {
+                recoStyle = 'color:#f87171; font-weight:bold;'; // Red
+                recoClass = 'status-badge status-urgent';
+            } else {
+                recoClass = 'status-badge status-completed';
+            }
+        }
+
+        let upsideStyle = '';
+        if (row.upside && row.upside !== '-') {
+            if (!row.upside.startsWith('-')) upsideStyle = 'color:#4ade80; font-weight:bold;';
+            else upsideStyle = 'color:#f87171; font-weight:bold;';
+        }
+
+        html += '<tr>' +
+            '<td>' + (row.date || '-') + '</td>' +
+            '<td>' + (row.broker || '-') + '</td>' +
+            '<td><span class="' + recoClass + '" style="' + recoStyle + '">' + (row.reco || '-') + '</span></td>' +
+            '<td>₹' + (row.target || '-') + '</td>' +
+            '<td style="' + upsideStyle + '">' + (row.upside || '-') + '</td>' +
+            '<td>' +
+            '<div style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">';
+
+        if (row.link) {
+            const brokerClean = (row.broker || '').replace(/'/g, "\\'");
+
+            // PDF Icon: File shape with "PDF" text inside
+            html += `<a href="${row.link}" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center;" title="Open PDF">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <text x="5" y="18" font-size="6" fill="#ef4444" stroke="none" font-weight="bold" font-family="sans-serif">PDF</text>
+                </svg>
+            </a>`;
+
+            html += `<span style="color:#334155;">&nbsp;</span>`;
+
+            // Info Icon: Standard "i" in circle, colored blue/accent
+            html += `<button onclick="fetchBrokerReportSummary('${ticker}', '${row.link}', '${brokerClean}')" title="Generate AI Summary" style="background:transparent; border:none; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; padding:0; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+            </button>`;
+        } else {
+            html += '-';
+        }
+
+        html += '</div></td></tr>';
+    });
+
+    html += '</tbody></table></div>';
+    container.innerHTML = html;
+}
+
+function getRecoClass(reco) {
+    if (!reco) return '';
+    reco = reco.toLowerCase();
+    if (reco.includes('buy') || reco.includes('accumulate')) return 'status-badge status-upcoming';
+    if (reco.includes('sell') || reco.includes('reduce')) return 'status-badge status-urgent';
+    return 'status-badge status-completed';
+}
+
+// Modal Logic and AI Summary
+function closeModal() {
+    document.getElementById('infoModal').style.display = 'none';
+}
+
+window.onclick = function (event) {
+    const modal = document.getElementById('infoModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+async function fetchBrokerReportSummary(ticker, link, broker) {
+    const modal = document.getElementById('infoModal');
+    const title = document.getElementById('modalTitle');
+    const body = document.getElementById('modalBody');
+
+    modal.style.display = 'block';
+    title.textContent = `AI Summary for ${ticker} - ${broker || 'Unknown Broker'}`;
+    body.innerHTML = `<div class="loading-local"><div class="loader"></div><div>Analyzing report with AI... (Takes ~10-20s)</div></div>`;
+
+    try {
+        const response = await fetch('/api/v1/data-fetcher/broker-research/summary', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ticker, link })
+        });
+
+        if (!response.ok) throw new Error('Failed to generate summary');
+        const data = await response.json();
+
+        // Format bullet points
+        // Format formatting: Convert newlines to paragraphs or lists
+        // If content starts with bullets, make it a list
+        let formattedContent = data.summary;
+
+        // Remove "Start every bullet point..." instruction artifacts if present in output
+        // Convert "- " to <li>
+        if (formattedContent.includes('- ')) {
+            const items = formattedContent.split('\n').filter(line => line.trim().length > 0);
+            let listHtml = '<ul style="padding-left:1.5rem; line-height:1.6; color:#e2e8f0;">';
+            let inList = false;
+
+            items.forEach(line => {
+                if (line.trim().startsWith('-')) {
+                    listHtml += `<li style="margin-bottom:0.5rem;">${line.replace(/^- /, '')}</li>`;
+                    inList = true;
+                } else {
+                    // Regular paragraph or heading
+                    if (inList) {
+                        listHtml += '</ul>';
+                        inList = false;
+                    }
+                    listHtml += `<p style="margin-bottom:1rem; line-height:1.6; color:#94a3b8;">${line}</p>`;
+                }
+            });
+
+            if (inList) listHtml += '</ul>';
+            formattedContent = listHtml;
+        } else {
+            // Just paragraphs
+            formattedContent = formattedContent.split('\n').map(p => `<p style="margin-bottom:1rem; line-height:1.6;">${p}</p>`).join('');
+        }
+
+        body.innerHTML = formattedContent;
+    } catch (e) {
+        body.innerHTML = `<div class="error">Error: ${e.message}</div>`;
+    }
 }

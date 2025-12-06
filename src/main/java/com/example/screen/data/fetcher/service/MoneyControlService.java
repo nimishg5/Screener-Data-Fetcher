@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import jakarta.transaction.Transactional;
 
 @Service
 @Slf4j
@@ -235,11 +239,306 @@ public class MoneyControlService {
             }
 
             return true;
-
         } catch (Exception e) {
             log.error("Error parsing Next.js JSON data", e);
             return false;
         }
+    }
+
+    @Autowired
+    private com.example.screen.data.fetcher.repository.BrokerResearchRepository brokerResearchRepository;
+
+    @Autowired
+    private com.example.screen.data.fetcher.repository.TickerMetadataRepository tickerMetadataRepository;
+
+    @Autowired
+    private LlmService llmService;
+
+    // Remove unused constant if preferred, or keep for reference
+    // private static final String BROKER_RESEARCH_API =
+    // "https://api.moneycontrol.com/mcapi/v1/stock/broker-research?scId=%s&page=1";
+    private static final String PRICE_API = "https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/%s";
+
+    public String getBrokerReportSummary(String ticker, String reportLink) {
+        try {
+            if (reportLink == null || reportLink.isEmpty())
+                return "No report link provided.";
+
+            // Check if summary already exists in DB
+            List<com.example.screen.data.fetcher.entity.BrokerResearch> existing = brokerResearchRepository
+                    .findByReportLink(reportLink);
+            if (!existing.isEmpty()) {
+                // Return the first one that has a summary
+                for (com.example.screen.data.fetcher.entity.BrokerResearch br : existing) {
+                    if (br.getSummary() != null && !br.getSummary().isEmpty()) {
+                        log.info("Returning cached summary for {}", ticker);
+                        return br.getSummary();
+                    }
+                }
+            }
+
+            // Not found, generate logic
+            String text = extractTextFromPdf(reportLink);
+            if (text == null || text.trim().isEmpty())
+                return "Could not extract text from PDF.";
+
+            String summary = llmService.summarizePdfContent(ticker, text);
+
+            // Save to DB
+            if (!existing.isEmpty()) {
+                // Update existing record(s)
+                for (com.example.screen.data.fetcher.entity.BrokerResearch br : existing) {
+                    br.setSummary(summary);
+                }
+                brokerResearchRepository.saveAll(existing);
+                log.info("Saved new summary for {}", ticker);
+            }
+
+            return summary;
+        } catch (Exception e) {
+            log.error("Error generating summary for {}", ticker, e);
+            return "Error generating summary: " + e.getMessage();
+        }
+    }
+
+    private String extractTextFromPdf(String pdfUrl) {
+        try {
+            // Check if it's a PDF
+            if (!pdfUrl.toLowerCase().endsWith(".pdf")) {
+                // Could be a viewer link, but let's assume direct PDF for now as seen in API
+                // response
+                log.warn("Link does not look like a PDF: {}", pdfUrl);
+                // Try anyway or return null? Moneycontrol usually gives direct PDF.
+            }
+
+            java.net.URL url = new java.net.URL(pdfUrl);
+            try (java.io.InputStream is = url.openStream();
+                    org.apache.pdfbox.pdmodel.PDDocument document = org.apache.pdfbox.pdmodel.PDDocument.load(is)) {
+
+                org.apache.pdfbox.text.PDFTextStripper stripper = new org.apache.pdfbox.text.PDFTextStripper();
+                return stripper.getText(document);
+            }
+        } catch (Exception e) {
+            log.error("Failed to extract text from PDF: {}", pdfUrl, e);
+            return null;
+        }
+    }
+
+    public Map<String, Object> getBrokerResearch(String ticker, boolean forceRefresh) {
+        Map<String, Object> result = new HashMap<>();
+
+        com.example.screen.data.fetcher.entity.TickerMetadata metadata = tickerMetadataRepository.findById(ticker)
+                .orElse(null);
+        boolean fetchNeeded = forceRefresh;
+
+        if (metadata == null || metadata.getLastBrokerResearchFetch() == null) {
+            fetchNeeded = true;
+        } else {
+            java.time.LocalDateTime twoDaysAgo = java.time.LocalDateTime.now().minusDays(2);
+            if (metadata.getLastBrokerResearchFetch().isBefore(twoDaysAgo)) {
+                fetchNeeded = true;
+            }
+        }
+
+        if (fetchNeeded) {
+            try {
+                fetchAndSaveBrokerResearch(ticker);
+                if (metadata == null) {
+                    metadata = new com.example.screen.data.fetcher.entity.TickerMetadata();
+                    metadata.setTicker(ticker);
+                }
+                metadata.setLastBrokerResearchFetch(java.time.LocalDateTime.now());
+                tickerMetadataRepository.save(metadata);
+            } catch (Exception e) {
+                log.error("Failed to fetch fresh broker research for {}", ticker, e);
+                result.put("error", "Failed to fetch data: " + e.getMessage());
+            }
+        }
+
+        List<com.example.screen.data.fetcher.entity.BrokerResearch> reports = brokerResearchRepository
+                .findByTicker(ticker);
+
+        // Calculate upside
+        double currentPrice = getCurrentPrice(ticker);
+
+        List<Map<String, Object>> formattedReports = new ArrayList<>();
+        for (com.example.screen.data.fetcher.entity.BrokerResearch r : reports) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("broker", r.getOrganization());
+            map.put("reco", r.getReco());
+            map.put("target", r.getTargetPrice());
+            map.put("date", r.getRecoDate());
+            map.put("link", r.getReportLink());
+
+            if (currentPrice > 0 && r.getTargetPrice() != null) {
+                try {
+                    double target = Double.parseDouble(r.getTargetPrice().replace(",", ""));
+                    double upside = ((target - currentPrice) / currentPrice) * 100;
+                    map.put("upside", String.format("%.2f%%", upside));
+                } catch (Exception e) {
+                    map.put("upside", "-");
+                }
+            } else {
+                map.put("upside", "-");
+            }
+            formattedReports.add(map);
+        }
+
+        result.put("reports", formattedReports);
+        if (metadata != null && metadata.getLastBrokerResearchFetch() != null) {
+            result.put("lastFetched", metadata.getLastBrokerResearchFetch().toString());
+        }
+        result.put("currentPrice", currentPrice);
+
+        return result;
+    }
+
+    private void fetchAndSaveBrokerResearch(String ticker) throws IOException {
+        String scId = getScId(ticker);
+        if (scId == null)
+            throw new IOException("Could not find SC_ID for " + ticker);
+
+        // Preserve existing summaries
+        List<com.example.screen.data.fetcher.entity.BrokerResearch> existingRecords = brokerResearchRepository
+                .findByTicker(ticker);
+        Map<String, String> summaryCache = new HashMap<>();
+        for (com.example.screen.data.fetcher.entity.BrokerResearch br : existingRecords) {
+            if (br.getReportLink() != null && br.getSummary() != null) {
+                summaryCache.put(br.getReportLink(), br.getSummary());
+            }
+        }
+
+        List<com.example.screen.data.fetcher.entity.BrokerResearch> allEntities = new ArrayList<>();
+        com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+
+        // Fetch up to 5 pages
+        for (int page = 1; page <= 5; page++) {
+            try {
+                // Adding limit=50 to try and fetch more per page
+                String baseUrl = "https://api.moneycontrol.com/mcapi/v1/stock/broker-research?scId=" + scId + "&page="
+                        + page + "&limit=50";
+
+                String jsonResponse = Jsoup.connect(baseUrl)
+                        .ignoreContentType(true)
+                        .header("User-Agent", "Mozilla/5.0")
+                        .execute()
+                        .body();
+
+                com.fasterxml.jackson.databind.JsonNode root = mapper.readTree(jsonResponse);
+
+                if (root.has("data") && root.get("data").has("broker_research_data")) {
+                    com.fasterxml.jackson.databind.JsonNode list = root.get("data").get("broker_research_data");
+                    if (list.isArray() && list.size() > 0) {
+                        for (com.fasterxml.jackson.databind.JsonNode node : list) {
+                            com.example.screen.data.fetcher.entity.BrokerResearch br = new com.example.screen.data.fetcher.entity.BrokerResearch();
+                            br.setTicker(ticker);
+                            br.setOrganization(node.path("organization").asText(null));
+                            br.setReco(node.path("recommend_flag").asText(null));
+                            br.setTargetPrice(node.path("target").asText(null));
+                            br.setRecommendedPrice(node.path("recommended_price").asText(null));
+
+                            String link = node.path("attachment").asText(null);
+                            br.setReportLink(link);
+
+                            // Restore summary if exists
+                            if (link != null && summaryCache.containsKey(link)) {
+                                br.setSummary(summaryCache.get(link));
+                            }
+
+                            br.setRecoDate(node.path("recommend_date").asText(null));
+                            br.setFetchedAt(java.time.LocalDateTime.now());
+                            allEntities.add(br);
+                        }
+                    } else {
+                        // Empty list means no more data
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                log.warn("Error fetching page {} for ticker {}: {}", page, ticker, e.getMessage());
+                break; // Stop fetching on error
+            }
+        }
+
+        if (!allEntities.isEmpty()) {
+            log.info("Fetched {} broker research reports for {}", allEntities.size(), ticker);
+            deleteAndSave(ticker, allEntities);
+        }
+    }
+
+    @org.springframework.transaction.annotation.Transactional
+    protected void deleteAndSave(String ticker, List<com.example.screen.data.fetcher.entity.BrokerResearch> entities) {
+        brokerResearchRepository.deleteByTicker(ticker);
+        brokerResearchRepository.saveAll(entities);
+    }
+
+    private String getScId(String ticker) {
+        try {
+            String url = String.format(AUTOSUGGEST_URL, ticker);
+            String jsonResponse = Jsoup.connect(url)
+                    .ignoreContentType(true)
+                    .header("User-Agent", "Mozilla/5.0")
+                    .execute()
+                    .body();
+
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            com.fasterxml.jackson.databind.JsonNode root = mapper.readTree(jsonResponse);
+
+            if (root.isArray() && root.size() > 0) {
+                com.fasterxml.jackson.databind.JsonNode first = root.get(0);
+                if (first.has("sc_id")) {
+                    return first.get("sc_id").asText();
+                }
+            }
+
+            // Fallback to URL parsing if sc_id is missing (unlikely for stocks)
+            String companyUrl = getCompanyUrl(ticker);
+            if (companyUrl != null) {
+                String[] parts = companyUrl.split("/");
+                return parts[parts.length - 1];
+            }
+
+        } catch (Exception e) {
+            log.error("Error finding scId for {}", ticker, e);
+        }
+        return null;
+    }
+
+    private double getCurrentPrice(String ticker) {
+        try {
+            String scId = getScId(ticker);
+            if (scId == null)
+                return 0;
+            String url = String.format(PRICE_API, scId);
+            String json = Jsoup.connect(url).ignoreContentType(true).execute().body();
+            com.fasterxml.jackson.databind.JsonNode node = new com.fasterxml.jackson.databind.ObjectMapper()
+                    .readTree(json);
+            if (node.has("data") && node.get("data").has("pricecurrent")) {
+                return node.get("data").get("pricecurrent").asDouble();
+            }
+        } catch (Exception e) {
+            log.error("Error fetching current price for {}", ticker, e);
+        }
+        return 0;
+    }
+
+    private String getCompanyUrl(String ticker) throws IOException {
+        String url = String.format(AUTOSUGGEST_URL, ticker);
+        String jsonResponse = Jsoup.connect(url)
+                .ignoreContentType(true)
+                .header("User-Agent", "Mozilla/5.0")
+                .execute()
+                .body();
+
+        int linkSrcIndex = jsonResponse.indexOf("\"link_src\":\"");
+        if (linkSrcIndex == -1)
+            return null;
+
+        int start = linkSrcIndex + 12;
+        int end = jsonResponse.indexOf("\"", start);
+        return jsonResponse.substring(start, end).replace("\\/", "/");
     }
 
     private String toStringSafe(Object obj) {

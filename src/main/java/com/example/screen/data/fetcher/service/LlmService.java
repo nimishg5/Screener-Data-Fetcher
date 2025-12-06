@@ -58,6 +58,32 @@ public class LlmService {
         }
     }
 
+    public String summarizePdfContent(String ticker, String pdfText) {
+        if (apiKey == null || apiKey.isEmpty()) {
+            return "LLM API Key is missing. Cannot generate summary.";
+        }
+
+        // Truncate text if too long (simple protection)
+        if (pdfText.length() > 50000) {
+            pdfText = pdfText.substring(0, 50000) + "... [Truncated]";
+        }
+
+        String prompt = String.format(
+                "You are a financial analyst. Analyze the following text extracted from a broker research report for \"%s\". "
+                        +
+                        "Provide a concise summary of the key investment thesis, risks, and rationale for the recommendation/target price. "
+                        +
+                        "Limit the summary to 3-5 bullet points. Start every bullet point with a hyphen and a space: \"- \".\n\nReport Text:\n%s",
+                ticker, pdfText);
+
+        try {
+            return callLlm(prompt);
+        } catch (Exception e) {
+            log.error("Error generating PDF summary from LLM", e);
+            return "Error generating summary: " + e.getMessage();
+        }
+    }
+
     public String summarizeImpact(String ticker, Map<String, List<Map<String, String>>> newsData) {
         if (apiKey == null || apiKey.isEmpty()) {
             return "LLM API Key is missing. Cannot generate summary.";
@@ -175,8 +201,17 @@ public class LlmService {
 
         String jsonBody = objectMapper.writeValueAsString(requestBody);
 
+        // Check if API key is a placeholder (unresolved)
+        if (apiKey.startsWith("${")) {
+            throw new IllegalArgumentException(
+                    "API Key is not set. Please set the GEMINI_API_KEY environment variable.");
+        }
+
+        // Encode key to prevent illegal character errors
+        String encodedKey = java.net.URLEncoder.encode(apiKey, java.nio.charset.StandardCharsets.UTF_8);
+
         // Gemini passes API key as query param
-        String finalUrl = apiUrl + "?key=" + apiKey;
+        String finalUrl = apiUrl + "?key=" + encodedKey;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(finalUrl))

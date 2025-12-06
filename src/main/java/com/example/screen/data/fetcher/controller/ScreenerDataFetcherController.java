@@ -127,4 +127,24 @@ public class ScreenerDataFetcherController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
+    @Autowired
+    private com.example.screen.data.fetcher.service.MoneyControlService moneyControlService;
+
+    @GetMapping(value = "/broker-research")
+    public ResponseEntity<Map<String, Object>> getBrokerResearch(
+            @RequestParam(value = "ticker") String ticker,
+            @RequestParam(value = "refresh", defaultValue = "false") boolean refresh) {
+        log.info("Broker Research request received for ticker: {}, refresh: {}", ticker, refresh);
+        return new ResponseEntity<>(moneyControlService.getBrokerResearch(ticker, refresh), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/broker-research/summary")
+    public ResponseEntity<Map<String, String>> getBrokerResearchSummary(@RequestBody Map<String, String> payload) {
+        String ticker = payload.get("ticker");
+        String link = payload.get("link");
+        log.info("Generating summary for ticker: {}, link: {}", ticker, link);
+        String summary = moneyControlService.getBrokerReportSummary(ticker, link);
+        return new ResponseEntity<>(java.util.Collections.singletonMap("summary", summary), HttpStatus.OK);
+    }
+
 }
