@@ -2407,7 +2407,10 @@ async function fetchBrokerReportSummary(ticker, link, broker) {
             body: JSON.stringify({ ticker, link })
         });
 
-        if (!response.ok) throw new Error('Failed to generate summary');
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Failed to generate summary');
+        }
         const data = await response.json();
 
         // Format bullet points
@@ -2445,6 +2448,23 @@ async function fetchBrokerReportSummary(ticker, link, broker) {
 
         body.innerHTML = formattedContent;
     } catch (e) {
-        body.innerHTML = `<div class="error">Error: ${e.message}</div>`;
+        let msg = e.message;
+        // Try to make JSON error prettier if possible
+        try {
+            const jsonErr = JSON.parse(msg);
+            if (jsonErr && jsonErr.error && jsonErr.error.message) {
+                msg = jsonErr.error.message;
+            } else if (jsonErr && jsonErr.message) {
+                msg = jsonErr.message;
+            }
+        } catch (ignore) { }
+
+        const brokerClean = (broker || '').replace(/'/g, "\\'");
+        body.innerHTML = `
+            <div class="error" style="text-align:left; color:#f87171; white-space: pre-wrap;">Error: ${msg}</div>
+            <div style="text-align:center; margin-top:1rem;">
+                <button onclick="fetchBrokerReportSummary('${ticker}', '${link}', '${brokerClean}')" style="background:var(--primary-color); border:none; padding:0.5rem 1rem; color:white; border-radius:0.5rem; cursor:pointer; font-weight:600;">🔄 Retry / Refetch</button>
+            </div>
+        `;
     }
 }
