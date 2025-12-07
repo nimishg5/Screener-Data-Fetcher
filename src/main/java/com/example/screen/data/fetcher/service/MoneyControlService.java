@@ -268,11 +268,13 @@ public class MoneyControlService {
             List<com.example.screen.data.fetcher.entity.BrokerResearch> existing = brokerResearchRepository
                     .findByReportLink(reportLink);
             if (!existing.isEmpty()) {
-                // Return the first one that has a summary
+                // Return the first one that has a summary, UNLESS it's an error message
                 for (com.example.screen.data.fetcher.entity.BrokerResearch br : existing) {
-                    if (br.getSummary() != null && !br.getSummary().isEmpty()) {
+                    String sm = br.getSummary();
+                    if (sm != null && !sm.isEmpty() && !sm.startsWith("Error generating summary")
+                            && !sm.startsWith("LLM API Key is missing")) {
                         log.info("Returning cached summary for {}", ticker);
-                        return br.getSummary();
+                        return sm;
                     }
                 }
             }

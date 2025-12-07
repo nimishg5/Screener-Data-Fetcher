@@ -10,12 +10,60 @@ try {
 
     // Set default chart font color for dark theme
     if (typeof Chart !== 'undefined') {
-        Chart.defaults.color = '#cbd5e1';
-        Chart.defaults.borderColor = '#334155';
+        const isLight = localStorage.getItem('theme') === 'light';
+        updateChartTheme(isLight);
     }
 } catch (e) {
     console.error('Error initializing Chart.js settings:', e);
 }
+
+function updateChartTheme(isLight) {
+    if (typeof Chart === 'undefined') return;
+
+    if (isLight) {
+        Chart.defaults.color = '#0f172a';
+        Chart.defaults.borderColor = '#e2e8f0';
+    } else {
+        Chart.defaults.color = '#cbd5e1';
+        Chart.defaults.borderColor = '#334155';
+    }
+
+    // Update existing chart if exists
+    if (chartInstance) {
+        chartInstance.options.scales.x.grid.color = Chart.defaults.borderColor;
+        chartInstance.options.scales.y.grid.color = Chart.defaults.borderColor;
+        chartInstance.options.scales.x.ticks.color = Chart.defaults.color;
+        chartInstance.options.scales.y.ticks.color = Chart.defaults.color;
+        chartInstance.update();
+    }
+}
+
+function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('light-theme');
+    const isLight = body.classList.contains('light-theme');
+
+    // Save preference
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+    // Update button icon
+    const btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.textContent = isLight ? '☀️' : '🌙';
+
+    // Update charts
+    updateChartTheme(isLight);
+}
+
+// Load Theme on Start
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        const btn = document.getElementById('themeToggleBtn');
+        if (btn) btn.textContent = '☀️';
+        updateChartTheme(true);
+    }
+});
 
 let tickers = new Set(['TCS', 'INFY']); // Default tickers (will be overwritten by localStorage if present)
 let chartInstance = null;

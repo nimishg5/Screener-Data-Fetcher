@@ -32,6 +32,9 @@ public class ScreenerAnalysisService {
     private String userName;
     private String password;
 
+    @Autowired
+    private com.example.screen.data.fetcher.repository.ScreenerSessionRepository screenerSessionRepository;
+
     public boolean login(String username, String password) {
         this.userName = username;
         this.password = password;
@@ -278,7 +281,11 @@ public class ScreenerAnalysisService {
             String code = fetchTickerCode(doc);
             String advancedRatioUrl = "https://www.screener.in/api/company/" + code + "/quick_ratios/";
 
-            if (loginCookies == null || loginCookies.isEmpty()) {
+            // Check if token needs refresh based on DB timestamp (10 mins rule)
+            if (shouldRefreshToken()) {
+                log.info("Token is older than 10 minutes. Forcing refresh.");
+                fetchLoginCookiesAndRatios(ratiosMap, advancedRatioUrl);
+            } else if (loginCookies == null || loginCookies.isEmpty()) {
                 fetchLoginCookiesAndRatios(ratiosMap, advancedRatioUrl);
 
             } else {
@@ -356,12 +363,27 @@ public class ScreenerAnalysisService {
         }
     }
 
+    private boolean shouldRefreshToken() {
+        if (userName == null || password == null)
+            return false; // Can't refresh without credentials
+
+        return screenerSessionRepository.findById(1L)
+                .map(session -> {
+                    java.time.Duration duration = java.time.Duration.between(session.getLastTokenFetchTime(),
+                            java.time.LocalDateTime.now());
+                    return duration.toMinutes() > 10;
+                })
+                .orElse(false); // If no record, assume fresh or let standard logic handle it
+    }
+
     private void fetchLoginCookiesAndRatios(Map<String, String> ratiosMap, String advancedRatioUrl) throws IOException {
         // session is expired
         // token expired refresh token and hit api again
         loginCookies = fetchLoginResponseCookies();
-        Document doc = Jsoup.connect(advancedRatioUrl).cookies(loginCookies).get();
-        fetchRatios(ratiosMap, doc);
+        if (loginCookies != null && !loginCookies.isEmpty()) {
+            Document doc = Jsoup.connect(advancedRatioUrl).cookies(loginCookies).get();
+            fetchRatios(ratiosMap, doc);
+        }
     }
 
     private void fetchRatios(Map<String, String> ratiosMap, Document doc) {
@@ -425,6 +447,11 @@ public class ScreenerAnalysisService {
             }
 
             log.info("Login successful. Cookies obtained.");
+
+            // Save timestamp to DB
+            com.example.screen.data.fetcher.entity.ScreenerSession session = new com.example.screen.data.fetcher.entity.ScreenerSession(
+                    1L, java.time.LocalDateTime.now());
+            screenerSessionRepository.save(session);
 
             return loginResponse.cookies();
         } catch (Exception e) {

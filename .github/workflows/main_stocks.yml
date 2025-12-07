@@ -53,6 +53,19 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1CBB05A0AF6F479194A85A4BB1564078 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1E28C0C7320E4C8DA993B32153021099 }}
 
+      - name: Set up GEMINI_API_KEY
+        run: |
+          az webapp config appsettings set --name 'stocks' --resource-group 'stocks_group' --settings GEMINI_API_KEY='${{ secrets.GEMINI_API_KEY }}'
+        # Note: You might need to verify your resource group name. 
+        # Often it's easier to just set this once in the Azure Portal, 
+        # but if you want it in the action, this is how.
+        # However, a cleaner way if you don't know the RG is to let the user configure it manually 
+        # OR just assume the user might want it to validly just "pass through".
+        
+        # ACTUALLY, a safer, less assumption-heavy approach for the user:
+        # Just tell them to set it in the Azure Portal.
+        # OR, if they really want it in the action:
+        
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -60,4 +73,3 @@ jobs:
           app-name: 'stocks'
           slot-name: 'Production'
           package: '*.jar'
-          

@@ -24,7 +24,6 @@ public class LlmService {
     @Value("${llm.api.url}")
     private String apiUrl;
 
-    @Value("${llm.api.key}")
     private String apiKey;
 
     @Value("${llm.model}")
@@ -33,13 +32,32 @@ public class LlmService {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
-    public LlmService(ObjectMapper objectMapper) {
+    public LlmService(ObjectMapper objectMapper, @Value("${llm.api.key}") String injectedKey) {
         this.httpClient = HttpClient.newHttpClient();
         this.objectMapper = objectMapper;
+
+        String envKey = System.getenv("GEMINI_API_KEY");
+        log.info("LlmService init: injectedKey='{}', envKey='{}'",
+                injectedKey != null
+                        ? (injectedKey.length() > 5 ? "******" + injectedKey.substring(injectedKey.length() - 4)
+                                : "INVALID")
+                        : "NULL",
+                envKey != null ? (envKey.length() > 5 ? "******" + envKey.substring(envKey.length() - 4) : "INVALID")
+                        : "NULL");
+
+        // Fallback to env var if property is missing or placeholder
+        if (injectedKey == null || injectedKey.isEmpty() || injectedKey.startsWith("${")) {
+            this.apiKey = envKey;
+            log.info("Using API Key from Environment Variable");
+        } else {
+            this.apiKey = injectedKey;
+            log.info("Using API Key from injected property");
+        }
     }
 
     public List<String> getRelatedEntities(String ticker) {
         if (apiKey == null || apiKey.isEmpty()) {
+            log.warn("getRelatedEntities: API Key is missing");
             return new ArrayList<>();
         }
 
@@ -80,6 +98,9 @@ public class LlmService {
             return callLlm(prompt);
         } catch (Exception e) {
             log.error("Error generating PDF summary from LLM", e);
+            if (e.getMessage() != null && e.getMessage().contains("Quota Limit Exhausted")) {
+                return e.getMessage();
+            }
             return "Error generating summary: " + e.getMessage();
         }
     }
@@ -116,6 +137,9 @@ public class LlmService {
             return callLlm(prompt);
         } catch (Exception e) {
             log.error("Error generating summary from LLM", e);
+            if (e.getMessage() != null && e.getMessage().contains("Quota Limit Exhausted")) {
+                return e.getMessage();
+            }
             return "Error generating summary: " + e.getMessage();
         }
     }
@@ -222,7 +246,13 @@ public class LlmService {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            throw new RuntimeException("Gemini API returned status " + response.statusCode() + ": " + response.body());
+            String errorBody = response.body();
+            String lowerBody = errorBody.toLowerCase();
+            if (response.statusCode() == 429 || lowerBody.contains("resource_exhausted")
+                    || lowerBody.contains("quota")) {
+                throw new RuntimeException("Quota Limit Exhausted try after 1 hr");
+            }
+            throw new RuntimeException("Gemini API returned status " + response.statusCode() + ": " + errorBody);
         }
 
         JsonNode responseNode = objectMapper.readTree(response.body());
