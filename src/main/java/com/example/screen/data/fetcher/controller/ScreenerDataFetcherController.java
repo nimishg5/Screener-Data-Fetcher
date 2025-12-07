@@ -147,4 +147,13 @@ public class ScreenerDataFetcherController {
         return new ResponseEntity<>(java.util.Collections.singletonMap("summary", summary), HttpStatus.OK);
     }
 
+    @Autowired
+    private com.example.screen.data.fetcher.service.IpoService ipoService;
+
+    @GetMapping(value = "/ipo")
+    public ResponseEntity<List<com.example.screen.data.fetcher.dto.IpoDetails>> getIpoData() {
+        log.info("Fetching IPO data");
+        return new ResponseEntity<>(ipoService.fetchIpoData(), HttpStatus.OK);
+    }
+
 }

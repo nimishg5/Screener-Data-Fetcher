@@ -436,81 +436,113 @@
 
         <div id="appSection" style="display: none;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <div id="welcomeMsg" style="font-weight: 600; color: var(--primary-color); display: none;"></div>
-                <button onclick="logout()"
-                    style="background-color: var(--danger-color); width: auto; padding: 0.5rem 1rem;">Logout</button>
-            </div>
-            <div class="search-box">
-                <div class="input-group">
-                    <input type="text" id="tickerInput" placeholder="Enter ticker (e.g., TCS)">
-                    <button onclick="addTicker()" id="addBtn">Add</button>
+                <!-- Main Navigation -->
+                <div style="display: flex; gap: 1rem;">
+                    <button class="nav-btn active" onclick="showSection('compare')" id="navCompare"
+                        style="background: transparent; color: var(--text-color); padding: 0.5rem 1rem; border: none; cursor: pointer; font-weight: 600; border-bottom: 2px solid var(--primary-color);">Ticker
+                        Comparison</button>
+                    <button class="nav-btn" onclick="showSection('ipo')" id="navIpo"
+                        style="background: transparent; color: var(--text-muted); padding: 0.5rem 1rem; border: none; cursor: pointer; font-weight: 600;">IPO
+                        Dashboard</button>
                 </div>
-                <div class="ticker-chips" id="tickerChips">
-                    <!-- Chips will be added here -->
-                </div>
-                <button onclick="compareTickers()" id="compareBtn" style="width: 200px;">Compare</button>
-            </div>
 
-            <div id="loading" class="loading">
-                <div class="loader"></div>
-                <div>Fetching data... This may take a moment.</div>
-            </div>
-            <div id="error" class="error"></div>
-
-            <div class="tabs" id="tabs" style="display: none;">
-                <button class="tab-btn active" onclick="switchTab('table')">Table</button>
-                <button class="tab-btn" onclick="switchTab('chart')">Chart</button>
-                <button class="tab-btn" onclick="switchTab('geo')">Geo Analysis</button>
-                <button class="tab-btn" onclick="switchTab('marketActions')">Corporate Actions</button>
-                <button class="tab-btn" onclick="switchTab('brokerResearch')">Brokers Call</button>
-                <button class="tab-btn" onclick="switchTab('actions')">Watchlist Actions</button>
-            </div>
-
-            <div id="tableTab" class="tab-content active">
-                <div class="comparison-table-container">
-                    <table id="comparisonTable">
-                        <thead>
-                            <tr id="headerRow">
-                                <th>Metric</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                        </tbody>
-                    </table>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <div id="welcomeMsg" style="font-weight: 600; color: var(--primary-color); display: none;"></div>
+                    <button onclick="logout()"
+                        style="background-color: var(--danger-color); width: auto; padding: 0.5rem 1rem;">Logout</button>
                 </div>
             </div>
 
-            <div id="chartTab" class="tab-content">
-                <div
-                    style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem;">
-                    <label for="chartType">Chart Type:</label>
-                    <select id="chartType" onchange="updateChartType()"
-                        style="padding: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
-                        <option value="bar">Vertical Bar</option>
-                        <option value="horizontalBar">Horizontal Bar</option>
-                        <option value="radar">Radar</option>
-                        <option value="polarArea">Polar Area</option>
-                    </select>
+            <!-- COMPARISON SECTION -->
+            <div id="compareSection">
+                <div class="search-box">
+                    <div class="input-group">
+                        <input type="text" id="tickerInput" placeholder="Enter ticker (e.g., TCS)">
+                        <button onclick="addTicker()" id="addBtn">Add</button>
+                    </div>
+                    <div class="ticker-chips" id="tickerChips">
+                        <!-- Chips will be added here -->
+                    </div>
+                    <button onclick="compareTickers()" id="compareBtn" style="width: 200px;">Compare</button>
                 </div>
-                <div class="chart-container">
-                    <canvas id="comparisonChart"></canvas>
+
+                <div id="loading" class="loading">
+                    <div class="loader"></div>
+                    <div>Fetching data... This may take a moment.</div>
                 </div>
-            </div>
+                <div id="error" class="error"></div>
 
-            <div id="geoTab" class="tab-content">
-                <!-- Content will be dynamically populated by script.js -->
-            </div>
+                <div class="tabs" id="tabs" style="display: none;">
+                    <button class="tab-btn active" onclick="switchTab('table')">Table</button>
+                    <button class="tab-btn" onclick="switchTab('chart')">Chart</button>
+                    <button class="tab-btn" onclick="switchTab('geo')">Geo Analysis</button>
+                    <button class="tab-btn" onclick="switchTab('marketActions')">Corporate Actions</button>
+                    <button class="tab-btn" onclick="switchTab('brokerResearch')">Brokers Call</button>
+                    <button class="tab-btn" onclick="switchTab('actions')">Watchlist Actions</button>
+                </div>
 
-            <div id="marketActionsTab" class="tab-content">
-                <!-- Content will be dynamically populated by script.js -->
-            </div>
+                <div id="tableTab" class="tab-content active">
+                    <div class="comparison-table-container">
+                        <table id="comparisonTable">
+                            <thead>
+                                <tr id="headerRow">
+                                    <th>Metric</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            <div id="brokerResearchTab" class="tab-content">
-                <!-- Content will be dynamically populated by script.js -->
-            </div>
+                <div id="chartTab" class="tab-content">
+                    <div
+                        style="margin-bottom: 1rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem;">
+                        <label for="chartType">Chart Type:</label>
+                        <select id="chartType" onchange="updateChartType()"
+                            style="padding: 0.5rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+                            <option value="bar">Vertical Bar</option>
+                            <option value="horizontalBar">Horizontal Bar</option>
+                            <option value="radar">Radar</option>
+                            <option value="polarArea">Polar Area</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
 
-            <div id="actionsTab" class="tab-content">
-                <!-- Content will be dynamically populated by script.js -->
+                <div id="geoTab" class="tab-content">
+                    <!-- Content will be dynamically populated by script.js -->
+                </div>
+
+                <div id="marketActionsTab" class="tab-content">
+                    <!-- Content will be dynamically populated by script.js -->
+                </div>
+
+                <div id="brokerResearchTab" class="tab-content">
+                    <!-- Content will be dynamically populated by script.js -->
+                </div>
+
+                <div id="actionsTab" class="tab-content">
+                    <!-- Content will be dynamically populated by script.js -->
+                </div>
+
+            </div> <!-- End of Compare Section -->
+
+            <!-- IPO SECTION -->
+            <div id="ipoSection" style="display: none;">
+                <h2 style="margin-bottom: 1rem;">IPO Dashboard</h2>
+
+                <div class="tabs" style="justify-content: flex-start; margin-bottom: 1rem;">
+                    <button class="sub-tab-btn active" onclick="filterIpos('open')">Open</button>
+                    <button class="sub-tab-btn" onclick="filterIpos('upcoming')">Upcoming</button>
+                    <button class="sub-tab-btn" onclick="filterIpos('closed')">Closed</button>
+                </div>
+
+                <div id="ipoContent">
+                    <!-- Dynamic IPO content -->
+                </div>
             </div>
         </div>
     </div>
@@ -530,7 +562,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=3"></script>
 
 </body>
 

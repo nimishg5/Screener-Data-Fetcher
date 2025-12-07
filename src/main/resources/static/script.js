@@ -226,6 +226,41 @@ function switchTab(tabName) {
     }
 }
 
+// Global Variables for IPO
+let cachedIpoData = [];
+let currentIpoFilter = 'open';
+let currentIpoPage = 1;
+const IPO_PAGE_SIZE = 20;
+
+function showSection(sectionId) {
+    // Hide all sections
+    document.getElementById('compareSection').style.display = 'none';
+    document.getElementById('ipoSection').style.display = 'none';
+
+    // Deactive nav buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.color = "var(--text-muted)";
+        btn.style.borderBottom = "none";
+    });
+
+    // Show selected section
+    document.getElementById(sectionId + 'Section').style.display = 'block';
+
+    // Activate nav button
+    const activeBtn = sectionId === 'compare' ? document.getElementById('navCompare') : document.getElementById('navIpo');
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+        activeBtn.style.color = "var(--text-color)";
+        activeBtn.style.borderBottom = "2px solid var(--primary-color)";
+    }
+
+    if (sectionId === 'ipo') {
+        if (cachedIpoData.length === 0) fetchIpoData();
+        else renderIpoList();
+    }
+}
+
 // State for Broker Research
 let brokerResearchResults = {};
 
@@ -273,6 +308,187 @@ async function fetchMarketActions(year = null) {
     } catch (e) {
         contentDiv.innerHTML = `<div class="error">Error: ${e.message}</div>`;
     }
+}
+
+async function fetchIpoData() {
+    const container = document.getElementById('ipoContent');
+    container.innerHTML = `
+        <div class="loading" style="display: block;">
+            <div class="loader"></div>
+            <div>Fetching IPO data...</div>
+        </div>
+    `;
+
+    try {
+        const response = await fetch('/api/v1/data-fetcher/ipo');
+        if (!response.ok) throw new Error('Failed to fetch IPO data');
+        cachedIpoData = await response.json();
+        renderIpoList();
+    } catch (error) {
+        container.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+    }
+}
+
+function filterIpos(status) {
+    currentIpoFilter = status;
+    currentIpoPage = 1; // Reset to page 1
+
+    // Update sub-tabs UI
+    const buttons = document.querySelectorAll('#ipoSection .sub-tab-btn');
+    buttons.forEach(btn => {
+        if (btn.textContent.toLowerCase() === status) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    renderIpoList();
+}
+
+function changeIpoPage(pageNum) {
+    currentIpoPage = pageNum;
+    renderIpoList();
+}
+
+function renderIpoList() {
+    const container = document.getElementById('ipoContent');
+
+    function getDerivedStatus(ipo) {
+        let derivedStatus = (ipo.current_status || '').toLowerCase();
+
+        // Try to derive status from dates if available
+        if (ipo.open && ipo.close) {
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+
+            // Use generic parser
+            const openDate = parseDateGeneric(ipo.open);
+            const closeDate = parseDateGeneric(ipo.close);
+
+            if (openDate && closeDate) {
+                if (now < openDate) {
+                    derivedStatus = 'upcoming';
+                } else if (now > closeDate) {
+                    derivedStatus = 'closed';
+                } else {
+                    derivedStatus = 'open';
+                }
+            }
+        }
+        return derivedStatus;
+    }
+
+    const filteredData = cachedIpoData.filter(ipo => {
+        return getDerivedStatus(ipo) === currentIpoFilter;
+    });
+
+    // Pagination Logic
+    const totalItems = filteredData.length;
+    const totalPages = Math.ceil(totalItems / IPO_PAGE_SIZE);
+
+    // Ensure current page is valid
+    if (currentIpoPage < 1) currentIpoPage = 1;
+    if (currentIpoPage > totalPages && totalPages > 0) currentIpoPage = totalPages;
+
+    const startIndex = (currentIpoPage - 1) * IPO_PAGE_SIZE;
+    const endIndex = Math.min(startIndex + IPO_PAGE_SIZE, totalItems);
+    const pageData = filteredData.slice(startIndex, endIndex);
+
+    let html = `
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+           <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; color: var(--text-color);">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted); text-align: left;">
+                        <th style="padding: 1rem;">Name</th>
+                        <th style="padding: 1rem;">Status</th>
+                        <th style="padding: 1rem;">Open Date</th>
+                        <th style="padding: 1rem;">Close Date</th>
+                        <th style="padding: 1rem;">Price Range</th>
+                        <th style="padding: 1rem;">Lot Size</th>
+                        <th style="padding: 1rem;">GMP</th>
+                        <th style="padding: 1rem;">Lead Manager</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
+    if (pageData.length === 0) {
+        html += `<tr><td colspan="8" style="text-align: center; padding: 2rem;">No ${currentIpoFilter} IPOs found</td></tr>`;
+    } else {
+        pageData.forEach(ipo => {
+            const status = getDerivedStatus(ipo);
+            let statusColor = '#94a3b8'; // gray
+            if (status === 'open') statusColor = '#22c55e'; // green
+            else if (status === 'upcoming') statusColor = '#3b82f6'; // blue
+
+            const statusLabel = status.toUpperCase();
+
+            html += `
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 1rem; font-weight: 600;">${ipo.name || '-'}</td>
+                    <td style="padding: 1rem;"><span style="background: ${statusColor}20; color: ${statusColor}; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600;">${statusLabel}</span></td>
+                    <td style="padding: 1rem;">${ipo.open || '-'}</td>
+                    <td style="padding: 1rem;">${ipo.close || '-'}</td>
+                    <td style="padding: 1rem;">${ipo.min_price || 0} - ${ipo.max_price || 0}</td>
+                    <td style="padding: 1rem;">${ipo.lot_size || '-'}</td>
+                    <td style="padding: 1rem; color: #fbbf24; font-weight: 600;">${ipo.premium || '-'}</td>
+                    <td style="padding: 1rem; font-size: 0.9em; color: var(--text-muted);">${ipo.leadManager || '-'}</td>
+                </tr>
+            `;
+        });
+    }
+
+    html += `
+                </tbody>
+            </table>
+           </div>
+    `;
+
+    // Pagination Controls
+    if (totalItems > IPO_PAGE_SIZE) {
+        html += `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 1px solid var(--border-color);">
+                <div style="font-size: 0.9rem; color: var(--text-muted);">
+                    Showing ${startIndex + 1} - ${endIndex} of ${totalItems} IPOs
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button 
+                        onclick="changeIpoPage(${currentIpoPage - 1})" 
+                        class="nav-btn" 
+                        style="padding: 0.5rem 1rem; border: 1px solid var(--border-color); border-radius: 0.375rem; ${currentIpoPage === 1 ? 'opacity: 0.5; pointer-events: none;' : ''}"
+                    >
+                        Previous
+                    </button>
+                    
+                    <span style="display: flex; align-items: center; padding: 0 1rem; color: var(--text-color);">
+                        Page ${currentIpoPage} of ${totalPages}
+                    </span>
+
+                    <button 
+                        onclick="changeIpoPage(${currentIpoPage + 1})" 
+                        class="nav-btn" 
+                        style="padding: 0.5rem 1rem; border: 1px solid var(--border-color); border-radius: 0.375rem; ${currentIpoPage === totalPages ? 'opacity: 0.5; pointer-events: none;' : ''}"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+            <div style="padding-top: 0.5rem; font-weight: 600; text-align: right; color: var(--text-color);">
+                Total IPOs: ${totalItems}
+            </div>
+        `;
+    } else if (totalItems > 0) {
+        html += `
+            <div style="padding: 1rem 0; color: var(--text-muted); text-align: right; border-top: 1px solid var(--border-color);">
+                Total IPOs: ${totalItems}
+            </div>
+        `;
+    }
+
+    html += `</div>`; // Close wrapper
+    container.innerHTML = html;
 }
 
 function setupMarketActionsLayout() {
@@ -564,22 +780,39 @@ function renderMarketActionTable(items, category) {
 function parseDateGeneric(dateStr) {
     if (!dateStr || dateStr.trim() === '-' || dateStr.toLowerCase().includes('not')) return null;
 
-    try {
-        const ddmmyyyyRegex = /^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/;
-        const match = dateStr.trim().match(ddmmyyyyRegex);
+    const cleanStr = dateStr.trim();
 
-        if (match) {
-            const day = parseInt(match[1], 10);
-            const month = parseInt(match[2], 10) - 1;
-            const year = parseInt(match[3], 10);
-            return new Date(year, month, day);
-        } else {
-            const d = new Date(dateStr);
-            return isNaN(d.getTime()) ? null : d;
-        }
-    } catch (e) {
-        return null;
+    // 1. Try ISO/Standard Date constructor first (Handles "Dec 18, 2025" in most browsers)
+    let d = new Date(cleanStr);
+    if (!isNaN(d.getTime())) return d;
+
+    // 2. Try dd-mm-yyyy or dd/mm/yyyy
+    const ddmmyyyyRegex = /^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/;
+    let match = cleanStr.match(ddmmyyyyRegex);
+    if (match) {
+        const day = parseInt(match[1], 10);
+        const month = parseInt(match[2], 10) - 1;
+        const year = parseInt(match[3], 10);
+        return new Date(year, month, day);
     }
+
+    // 3. Try MMM dd, yyyy manually if Date() failed (e.g. some locales)
+    const mmmddyyyyRegex = /^([A-Za-z]{3})\s+(\d{1,2}),\s+(\d{4})$/;
+    match = cleanStr.match(mmmddyyyyRegex);
+    if (match) {
+        const months = {
+            'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
+            'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11
+        };
+        const monthStr = match[1].toLowerCase();
+        if (months.hasOwnProperty(monthStr)) {
+            const day = parseInt(match[2], 10);
+            const year = parseInt(match[3], 10);
+            return new Date(year, months[monthStr], day);
+        }
+    }
+
+    return null;
 }
 
 function getDateStatus(dateStr) {
