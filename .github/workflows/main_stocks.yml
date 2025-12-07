@@ -55,7 +55,7 @@ jobs:
 
       - name: Set up GEMINI_API_KEY
         run: |
-          az webapp config appsettings set --name 'stocks' --resource-group 'stocks_group' --settings GEMINI_API_KEY='${{ secrets.GEMINI_API_KEY }}'
+          az webapp config appsettings set --name 'stocks' --resource-group 'stocks_group' --settings GEMINI_LLM_API_KEY='${{ secrets.GEMINI_LLM_API_KEY }}'
         # Note: You might need to verify your resource group name. 
         # Often it's easier to just set this once in the Azure Portal, 
         # but if you want it in the action, this is how.

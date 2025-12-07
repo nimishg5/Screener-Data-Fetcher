@@ -347,3 +347,84 @@ Caused by: java.lang.UnsupportedClassVersionError: com/example/screen/data/fetch
 2025-12-07 08:36:44 [http-nio-8080-exec-5] INFO  c.e.s.d.fetcher.service.IpoService - Fetching IPO data from https://www.ipopremium.in/ipo?draw=1&start=0&length=2000&all=true&all_ipos=true
 2025-12-07 08:38:10 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Fetching IPO data
 2025-12-07 08:38:10 [http-nio-8080-exec-9] INFO  c.e.s.d.fetcher.service.IpoService - Fetching IPO data from https://www.ipopremium.in/ipo?draw=1&start=0&length=2000&all=true&all_ipos=true
+2025-12-07 12:13:40 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Starting ScreenDataFetcherApplication using Java 17 with PID 60560 (/Users/nimishgupta/Documents/Projects/screen-data-fetcher/target/classes started by nimishgupta in /Users/nimishgupta/Documents/Projects/screen-data-fetcher)
+2025-12-07 12:13:40 [main] DEBUG c.e.s.d.f.ScreenDataFetcherApplication - Running with Spring Boot v4.0.1-SNAPSHOT, Spring v7.0.1
+2025-12-07 12:13:40 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - The following 1 profile is active: "local"
+2025-12-07 12:13:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-07 12:13:40 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 4 JPA repository interfaces.
+2025-12-07 12:13:41 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-12-07 12:13:41 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-12-07 12:13:41 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-12-07 12:13:41 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-07 12:13:41 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 631 ms
+2025-12-07 12:13:41 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-07 12:13:41 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-07 12:13:41 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-07 12:13:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-07 12:13:41 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn1: url=jdbc:h2:file:./data/screen-data-fetcher-db user=SA
+2025-12-07 12:13:41 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-07 12:13:41 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-07 12:13:41 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:./data/screen-data-fetcher-db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SCREEN-DATA-FETCHER-DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-07 12:13:42 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-07 12:13:42 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-07 12:13:42 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-07 12:13:42 [main] INFO  c.e.s.d.fetcher.service.LlmService - LlmService init: injectedKey='******araE', envKey='NULL'
+2025-12-07 12:13:42 [main] INFO  c.e.s.d.fetcher.service.LlmService - Using API Key from injected property
+2025-12-07 12:13:42 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-07 12:13:42 [main] INFO  o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-12-07 12:13:42 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-12-07 12:13:42 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-12-07 12:13:42 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-12-07 12:13:42 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - Started ScreenDataFetcherApplication in 2.388 seconds (process running for 2.667)
+2025-12-07 12:13:42 [main] INFO  c.e.s.d.f.ScreenDataFetcherApplication - ScreenDataFetcherApplication started successfully.
+2025-12-07 12:13:57 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-07 12:13:57 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-12-07 12:13:57 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-12-07 12:13:59 [http-nio-8080-exec-4] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Logout request received
+2025-12-07 12:14:01 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login request received for user: nimishfaadu@gmail.com
+2025-12-07 12:14:01 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Fetching token from screener url
+2025-12-07 12:14:01 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - CSRF = dzunbusYWjjrl3vdvGVuYSjoTfx8iT2n
+2025-12-07 12:14:02 [http-nio-8080-exec-5] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Login Response URL: https://www.screener.in/dash/
+2025-12-07 12:14:02 [http-nio-8080-exec-5] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Login successful. Cookies obtained.
+2025-12-07 12:14:02 [http-nio-8080-exec-5] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Login successful for user: nimishfaadu@gmail.com
+2025-12-07 12:14:03 [http-nio-8080-exec-6] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Compare request received for tickers: TCS,INFY,VBL,WIPRO
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for TCS, trying text search
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for TCS
+2025-12-07 12:14:03 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Final Industry for TCS: Others
+2025-12-07 12:14:03 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : TCS is : {10Yrs PE=26.9, Book Value=294, Piotroski score=4.00, PEG Ratio=2.84, Chg in FII Hold 3Yr=-2.72, Net profit=49,687, Industry PE=26.5, Public holding=5.21, Industry=Others, Chg in DII Hold=0.69, Debt=10,932, Change in Prom Hold=0.00, Pledged percentage=0.00, Profit growth=4.43, Chg in FII Hold=-1.15, Face Value=1.00, Chg in DII Hold 3Yr=4.11, ROE=52.4, Return on assets=32.1, Current ratio=2.43, Current Price=3,238, Stock P/E=23.3, Dividend Yield=1.85, ROCE=64.6, Down from 52w high=28.0, Debt to equity=0.10, High / Low=4,495 / 2,867, Market Cap=11,71,609}
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for INFY, trying text search
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for INFY
+2025-12-07 12:14:03 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Final Industry for INFY: Others
+2025-12-07 12:14:03 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : INFY is : {10Yrs PE=22.7, Book Value=249, Piotroski score=6.00, PEG Ratio=3.70, Chg in FII Hold 3Yr=-6.12, Net profit=28,159, Industry PE=26.5, Public holding=13.7, Industry=Others, Chg in DII Hold=2.07, Debt=8,755, Change in Prom Hold=-0.31, Pledged percentage=0.00, Profit growth=4.36, Chg in FII Hold=-1.84, Face Value=5.00, Chg in DII Hold 3Yr=9.33, ROE=28.8, Return on assets=18.6, Current ratio=2.28, Current Price=1,616, Stock P/E=23.9, Dividend Yield=2.66, ROCE=37.5, Down from 52w high=19.5, Debt to equity=0.08, High / Low=2,007 / 1,307, Market Cap=6,71,470}
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for VBL, trying text search
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for VBL
+2025-12-07 12:14:03 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Final Industry for VBL: Others
+2025-12-07 12:14:03 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : VBL is : {10Yrs PE=59.8, Book Value=54.3, Piotroski score=6.00, PEG Ratio=0.99, Chg in FII Hold 3Yr=-3.08, Net profit=2,998, Industry PE=48.6, Public holding=6.84, Industry=Others, Chg in DII Hold=1.26, Debt=2,138, Change in Prom Hold=-0.38, Pledged percentage=0.04, Profit growth=16.9, Chg in FII Hold=0.07, Face Value=2.00, Chg in DII Hold 3Yr=7.33, ROE=22.5, Return on assets=14.0, Current ratio=1.80, Current Price=480, Stock P/E=54.7, Dividend Yield=0.21, ROCE=24.8, Down from 52w high=27.7, Debt to equity=0.12, High / Low=664 / 419, Market Cap=1,62,319}
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - #peers section not found for WIPRO, trying text search
+2025-12-07 12:14:03 [http-nio-8080-exec-6] WARN  c.e.s.d.f.s.ScreenerAnalysisService - Peers section completely missing for WIPRO
+2025-12-07 12:14:03 [http-nio-8080-exec-6] INFO  c.e.s.d.f.s.ScreenerAnalysisService - Final Industry for WIPRO: Others
+2025-12-07 12:14:03 [http-nio-8080-exec-6] DEBUG c.e.s.d.f.s.ScreenerAnalysisService - Data for Ticker : WIPRO is : {10Yrs PE=18.9, Book Value=81.6, Piotroski score=5.00, PEG Ratio=8.82, Chg in FII Hold 3Yr=1.87, Net profit=13,554, Industry PE=26.5, Public holding=10.9, Industry=Others, Chg in DII Hold=0.08, Debt=16,164, Change in Prom Hold=-0.01, Pledged percentage=0.00, Profit growth=15.0, Chg in FII Hold=0.29, Face Value=2.00, Chg in DII Hold 3Yr=-0.10, ROE=16.6, Return on assets=10.8, Current ratio=2.26, Current Price=260, Stock P/E=20.2, Dividend Yield=2.31, ROCE=19.5, Down from 52w high=19.9, Debt to equity=0.19, High / Low=325 / 225, Market Cap=2,72,535}
+2025-12-07 12:14:03 [http-nio-8080-exec-7] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Broker Research request received for ticker: TCS, refresh: false
+2025-12-07 12:14:03 [http-nio-8080-exec-9] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Broker Research request received for ticker: VBL, refresh: false
+2025-12-07 12:14:03 [http-nio-8080-exec-8] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Broker Research request received for ticker: INFY, refresh: false
+2025-12-07 12:14:03 [http-nio-8080-exec-10] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Broker Research request received for ticker: WIPRO, refresh: false
+2025-12-07 12:14:05 [http-nio-8080-exec-1] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Market actions request received for year: 2025
+2025-12-07 12:14:05 [http-nio-8080-exec-1] INFO  c.e.s.d.f.service.FivePaisaService - Returning cached data for dividends year 2025
+2025-12-07 12:14:05 [http-nio-8080-exec-1] INFO  c.e.s.d.f.service.FivePaisaService - Returning cached data for bonus year 2025
+2025-12-07 12:14:05 [http-nio-8080-exec-1] INFO  c.e.s.d.f.service.FivePaisaService - Returning cached data for splits year 2025
+2025-12-07 12:14:05 [http-nio-8080-exec-1] INFO  c.e.s.d.f.service.FivePaisaService - Returning cached data for rights year 2025
+2025-12-07 12:14:07 [http-nio-8080-exec-2] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Generating summary for ticker: TCS, link: https://images.moneycontrol.com/static-mcnews/2025/07/20250711083456_Tata-Consultancy-Services-11072025-khan.pdf
+2025-12-07 12:14:08 [http-nio-8080-exec-10] INFO  c.e.s.d.f.s.MoneyControlService - Fetched 22 broker research reports for WIPRO
+2025-12-07 12:14:08 [http-nio-8080-exec-3] INFO  c.e.s.d.f.c.ScreenerDataFetcherController - Broker Research request received for ticker: WIPRO, refresh: false
+2025-12-07 12:14:16 [http-nio-8080-exec-2] INFO  c.e.s.d.f.s.MoneyControlService - Saved new summary for TCS
